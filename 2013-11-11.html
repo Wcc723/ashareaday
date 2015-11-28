@@ -1,0 +1,48 @@
+<div class="css">2013-winter</div>
+
+<p>cubic-bezier是動畫的time-function，而他是一種貝茲曲線，我用了向量繪圖軟體很久了，但是如果要用四個數值來繪製貝茲曲線，我還沒有辦法，好在網路上有cubic-bezier的編輯器可以方便做到這樣的效果。</p>
+<p>cubic-bezier參考<a href="http://devdocs.io/css/timing-function#The_cubic-bezier()_class_of_timing-functions">http://devdocs.io/css/timing-function#The_cubic-bezier()_class_of_timing-functions</a></p>
+
+<h2>CSS Cubic-bezier</h2>
+<p>我想要有一個類似落水的效果，落水應該在速率上是先很快落下，並且在水中會有個反彈的效果，所以我就用Cubic-bezier編輯工具畫了下面這一個速率。</p>
+<pre>
+cubic-bezier(.18,1.62,.31,.69)
+</pre>
+<p><a href="http://cubic-bezier.com/#.18,1.62,.66,.64">http://cubic-bezier.com/#.18,1.62,.66,.64</a></p>
+<div class="demo d1111" data-demo="hover me">
+  <div class="demo1">
+    <div class="ball"></div>
+    <div class="wave"></div>
+  </div>  
+</div>
+
+<p>範例的sass code</p>
+
+<pre>
+.demo
+  height: 500px
+  position: relative
+  $ballSize: 5em //球寬
+  $oceanHeight: 200px //海洋深度
+  .ball //球的樣式
+    +border-radius(50%)
+    width: $ballSize
+    height: $ballSize
+    background: #e24b7c
+    position: absolute
+    left: calc(50% - (#{$ballSize}/2)) //球置中
+    top: 0
+    +transition(top 1s cubic-bezier(.18,1.62,.31,.69))
+  .wave //海的樣式
+    height: $oceanHeight
+    +background(linear-gradient(to bottom,#fff 0,#C7D7F9 2%,#6ECDED 6%,#0a89bc 20%,#02316F 100%))
+    opacity: .8
+    position: absolute
+    bottom: 0
+    right: 0
+    left: 0
+  .demo1:hover
+    .ball
+      top: calc(100% - (#{$oceanHeight} + #{$ballSize}/2))
+      //球落下的位置 
+</pre>

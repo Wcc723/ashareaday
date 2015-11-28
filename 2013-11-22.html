@@ -1,0 +1,236 @@
+<div class="css">2013-winter</div>
+<em>原來昨天沒有上傳kinetic-v4.7.4.min.js.........</em>
+<p>在先前花了很多時間學canvas的基礎教學，這樣可以在學其他framework可以更容易上手，就把先前所用到的概念慢慢地套用近來，在逐漸地強化這些功能(運氣好的話，就可以做出一套簡單的產品囉~)。</p>
+
+<script src="/js/kinetic-v4.7.4.min.js"></script>
+
+
+<script >
+  function loadImage(src){
+    scr = src.dataTransfer
+    if(!src.type.match(/image.*/)){  
+      //file.type必須是圖片格
+        if(window.console){  
+          $('.template').find('.data').html('選取的文件類型不是圖片,'+src.type)
+        } else {  
+            window.confirm("只能使用圖片");  
+        }  
+        return;  
+    } 
+    var reader = new FileReader();
+    //利用上面的render函數來完成canvas渲染
+    reader.onload = function(e){  
+      // 調用前面的 render 函数  
+      render(e.target.result);
+    }; 
+
+    reader.readAsDataURL(src);
+    //讀取文件的內容
+
+  }
+
+
+
+init();
+function init(){          
+        var target = document.getElementById("drop-target");  
+        // 取得DOM目標對象
+        target.addEventListener("dragover", function(e){e.preventDefault();}, true);  
+        // 阻止 dragover(拖到DOM元素上方) 的事件
+        target.addEventListener("drop", function(e){  
+            e.preventDefault();              
+            loadImage(e.dataTransfer.files[0]);  
+            console.log(e,e.target.files[0])
+            //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+            //e:滑鼠事件
+            //e.target.files[0] 取用滑鼠事件中的dataTransfer的files[0]
+        }, true);   
+    }
+
+initInput();  
+function initInput(){
+  var target = document.getElementById("file")
+  target.addEventListener("change", function(e){  
+      // 调用前面的加载图像 函数，参数为dataTransfer对象的第一个文件 
+      loadImage(e.target.files[0]); 
+      console.log(e,e.target.files[0])
+      //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+      //e:input變換事件
+      //e.target.files[0] 直接取用變換事件中的target的file[0]
+      //file中的[0]就是canvas所需要的圖片資訊
+  });
+ };
+
+var img = new Image();
+  function render(_src){
+     img.onload = function(){   
+      var w = img.width
+      var h = img.height    
+      //draw(this,0,0);
+      buildStage(this,w,h)
+      //整篇的重點從這邊開始
+      //只要可以送出base64，就可以讓Kinetic讀取
+    }; 
+    img.src = _src
+  }
+
+function buildStage(images,w,h) {
+    var stage = new Kinetic.Stage({
+      container: 'canvas',
+      width: w,
+      height: h
+      //場景物件，這邊可以用擷取到的圖片寬與高
+    });
+
+    var layer = new Kinetic.Layer();
+    var _img = new Kinetic.Image({
+      image: images,//圖片的路徑就是base64
+      x: 0,
+      y: 0,
+      width: w,
+      height: h,
+      draggable: true
+      //而Kinetic的canvas物件參數很多都可以交互使用
+      //像是拖曳
+    });
+
+    layer.add(_img);
+    stage.add(layer);
+    //加到場景內
+  }
+
+
+
+
+
+  var _url = ''
+  document.getElementById('save').addEventListener('click', function(){ 
+    var _savebtn = this;
+
+    stage.toDataURL({
+      callback: function(dataUrl) {
+       console.log(_savebtn)
+       _savebtn.href = dataUrl
+       _savebtn.target = '_blank'
+      }
+    });
+    //利用toDataURL() 把canvas轉成data:image    
+    //再把href載入上面的Data:image
+  });
+</script>
+<h2>Demo</h2>
+<p>和之前一樣，把圖片拖曳到下面的區塊內，就可以產生新的canvas。</p>
+<div id="canvas"></div>
+<a id="saveto" href="#" download="aShareaDay.png" class="hidden"></a>
+<!-- <a id="save" href="#" download="aShareaDay.png"  class="color-btn-green">Save Canvas</a> -->
+<div id="drop-target">請拖曳圖片到此範圍內(別用太大的圖片~ 我沒限制嘿)</div> 
+<style>
+#drop-target {
+  width:100%;height:200px;
+  border: rgba(255,255,255,.6) 1px solid;
+  background: rgba(255,255,255,.1);
+  cursor:pointer;
+}
+ input[type='range']{
+    width: 50%;
+  }
+</style>
+
+<p><input id="file" type="file" multiple="multiple" class="color-btn-blue"></p>
+<pre>
+&lt;div id="canvas"&gt;&lt;/div&gt;
+</pre>
+<pre>
+  function loadImage(src){
+    scr = src.dataTransfer
+    if(!src.type.match(/image.*/)){  
+      //file.type必須是圖片格
+        if(window.console){  
+          $('.template').find('.data').html('選取的文件類型不是圖片,'+src.type)
+        } else {  
+            window.confirm("只能使用圖片");  
+        }  
+        return;  
+    } 
+    var reader = new FileReader();
+    //利用上面的render函數來完成canvas渲染
+    reader.onload = function(e){  
+      // 調用前面的 render 函数  
+      render(e.target.result);
+    }; 
+
+    reader.readAsDataURL(src);
+    //讀取文件的內容
+
+  }
+
+
+
+init();
+function init(){          
+        var target = document.getElementById("drop-target");  
+        // 取得DOM目標對象
+        target.addEventListener("dragover", function(e){e.preventDefault();}, true);  
+        // 阻止 dragover(拖到DOM元素上方) 的事件
+        target.addEventListener("drop", function(e){  
+            e.preventDefault();              
+            loadImage(e.dataTransfer.files[0]);  
+            console.log(e,e.target.files[0])
+            //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+            //e:滑鼠事件
+            //e.target.files[0] 取用滑鼠事件中的dataTransfer的files[0]
+        }, true);   
+    }
+
+initInput();  
+function initInput(){
+  var target = document.getElementById("file")
+  target.addEventListener("change", function(e){  
+      // 调用前面的加载图像 函数，参数为dataTransfer对象的第一个文件 
+      loadImage(e.target.files[0]); 
+      console.log(e,e.target.files[0])
+      //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+      //e:input變換事件
+      //e.target.files[0] 直接取用變換事件中的target的file[0]
+      //file中的[0]就是canvas所需要的圖片資訊
+  });
+ };
+
+var img = new Image();
+  function render(_src){
+     img.onload = function(){   
+      var w = img.width
+      var h = img.height    
+      //draw(this,0,0);
+      buildStage(this,w,h)
+      //整篇的重點從這邊開始
+      //只要可以送出base64，就可以讓Kinetic讀取
+    }; 
+    img.src = _src
+  }
+
+function buildStage(images,w,h) {
+    var stage = new Kinetic.Stage({
+      container: 'canvas',
+      width: w,
+      height: h
+      //場景物件，這邊可以用擷取到的圖片寬與高
+    });
+
+    var layer = new Kinetic.Layer();
+    var _img = new Kinetic.Image({
+      image: images,//圖片的路徑就是base64
+      x: 0,
+      y: 0,
+      width: w,
+      height: h,
+      draggable: true
+      //而Kinetic的canvas物件參數很多都可以交互使用
+      //像是拖曳
+    });
+
+    layer.add(_img);
+    stage.add(layer);
+    //加到場景內
+  }
+</pre>

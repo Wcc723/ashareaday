@@ -1,0 +1,117 @@
+<div class="css">2013-winter</div>
+
+<p>Flexbox是css3的新的排版方式，過去排版主要是利用table、box、inline、float、position等等做排版，而這些都不是設計為了豐富的網頁排版使用。flex出現可以讓排版方式變得更為豐富，但它和過去的排版方式不同，所以許多設計師(我也是*.*)較難理解其運作方式。</p>
+<h2>Display: box</h2>
+<p>在設定flex box之前，我們必須先將外圍元素設定一個新的display值 box，這新的值目前還需要增加前輟詞，如以下範例。</p>
+<pre>
+//css code
+.box{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: box;
+}
+</pre>
+<pre>
+//sass code
+.box
+  +display-box
+</pre>
+<pre>
+//html code
+&lt;div class=&quot;box&quot;&gt;
+  &lt;div class=&quot;flex1&quot;&gt;box-flex: 1&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="flex1">box-flex: 1</div>
+  </div>
+</div>
+
+
+<h2>box-flex</h2>
+<p>接下來我們就可以設定內元素的flex，只要輸入屬性box-flex (目前還是要前輟詞..)，後面緊接著數值就可以了，在這邊先將兩個內元素設定box-flex。</p>
+<pre>
+//html code
+&lt;div class=&quot;display-box1&quot;&gt;
+  &lt;div class=&quot;flex1&quot;&gt;box-flex: 1&lt;/div&gt;
+  &lt;div class=&quot;flex3&quot;&gt;box-flex: 3&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<pre>
+//css code
+.flex1{
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+}
+</pre>
+<pre>
+//sass code
+.flex1
+  +box-flex(1)
+</pre>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+<p>flex的原理和過去的排版方式有相當大的不同，他並不是使用固定值或是百分比，如上範例，先將左邊的1與右邊的3相加得到4，左邊的黃色就是四分之一的大小，右邊則是四分之三的大小。</p>
+
+<h2>超乎想像的彈性</h2>
+<p>我們還可以再增加一個flex元素，系統會自動運算以下的結果，1 + 3 + 5 = 9，所以左邊的黃色是1/9，中間藍色是3/9，右邊的綠色是5/9。</p>
+<pre>
+//html code
+&lt;div class=&quot;display-box1&quot;&gt;
+  &lt;div class=&quot;flex1&quot;&gt;box-flex: 1&lt;/div&gt;
+  &lt;div class=&quot;flex3&quot;&gt;box-flex: 3&lt;/div&gt;
+  &lt;div class=&quot;flex5&quot;&gt;box-flex: 5&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+    <div class="flex5">box-flex: 5</div>
+  </div>
+</div>
+
+<h3>與百分比共用</h3>
+<p>如果再flex-box插入其他單位的盒狀元素(display: box)是沒有問題的，如下範例，左邊插入了20%淡藍色，box-flex會讓出20%空間給盒狀元素，剩下的空間再去做分攤。</p>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="n20p">20%</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+<h3>與固定值共用</h3>
+<p>接下來，我們插入一個固定值200px，那麼空間會保留200px的大小，剩於的再由flex去分攤，flex依然會在剩下的空間分為四等分(如下範例)。</p>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="n200px">200px</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+
+
+<h3>混合使用</h3>
+<p>在過去這樣的問題相當難解決，透過CSS3我們可以將許多種單位混用，如下範例，可以先切200px，在切20%，剩餘的區域在分為1/4與1/3。</p>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="n20p">20%</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+    <div class="n200px">200px</div>
+  </div>
+</div>
+
+<p>flex的設定值也不只這樣，明天會介紹更多更多~的使用方式。</p>
+
+

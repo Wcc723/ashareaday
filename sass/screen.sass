@@ -1,0 +1,340 @@
+@import compass/reset
+@import module
+@import LigatureSymbols.css
+@charset "utf-8"
+$imagePath: "/images/"
+//$darkColor: #544D47
+$darkColor: white
+$lightHeight: 1.6em
+//susy start 
+@import susyone
+$total-columns: 12
+$column-width: 4em
+$gutter-width: 2em
+$grid-padding: $gutter-width
+
++font-face("NewRocker-Regular",font-files("NewRocker-Regular.ttf"))
+
+$mobile: 767px 8
+.container,.main-header
+	padding: 12px
+	+box-sizing(border-box)
+	 
+
+html
+	font-size: 13.5px
+	width: 100% 
+	height: 100%
+body
+	font-family: '微軟正黑體','Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif
+	//background: url($imagePath+"agsquare.png")
+	line-height: 1.8em
+	background: #333
+	color: $darkColor
+	width: 100%
+	height: 100%
+	+heading
+
++Paragraphs
++colorFlatButton($prefix: color-btn)
++buttonFlat(color-btn-gold,brown)
+
+
+.fixed-nav
+	width: 100%
+	position: fixed
+	z-index: 4
+	padding: 8px
+	top: 0
+	left: 0
+	right: 0
+	text-align: right
+	+transition(all,.3s)
+	
+	.fb-like
+		position: relative
+		z-index: 5
+
+.fixed-nav-title
+	float: left
+	color: $darkColor
+	.container
+		+transition(all,.5s)
+.blur
+	+filter(blur(2px))
+	background: rgba(#333,.8)
+
+	&:hover
+		+filter(blur(0))
+		background: rgba(#333,1)
+.classify-list
+	li
+		display: inline-block
+.main-header
+	//padding-top: $lightHeight
+	min-height: 100px + 16px
+	width: 100%
+	//background: $darkColor
+	padding-top: 2.5em
+	padding-bottom: 1.5em
+	//+background-image(linear-gradient(#4B404F,#302932))
+.title	
+	position: relative
+	z-index: 2
+	cursor: pointer
+	
+	+Neon-text-shadow(gray)
+	text-align: center
+	//font-family: NewRocker-Regular
+
+	h1
+		//float: left
+		margin-top: .5em
+		span
+			margin-right: 12px
+		small
+			display: block
+			font-size: 18px
+			margin-left: 15px
+			font-style: italic
+			line-height: 1.3em
+			text-indent: 35em
+	a
+		color: white
+		//+Neon-text-shadow(lighten($defaultColorBlue,10%))
+		//+background-image(linear-gradient($darkColor,lighten($darkColor,20%)))
+		//+background-clip(text)
+
+
+.aside
+	nav
+		margin-bottom: 12px
+	h2
+		padding: 0	
+
+
+
+.menu
+	max-height: 100%
+	//overflow-y: scroll
+	+webkitScrollbar
+
+	time
+		display: block
+	time
+		text-align: right
+		color: #999	
+	a
+		margin-bottom: 0.6em
+		&:hover > span
+			border-bottom: dashed 1px $darkColor
+.more
+	display: block
+	text-align: center
+.main-content
+	//padding-top: 12px	
+	//text-shadow: 1px 1px 0 white
+.ollist
+	+ullist(decimal,lower-roman)
+.article
+	* + h2,* + h3
+		margin-top: 1em
+	word-wrap: break-word
+	code
+		+code
+	img,iframe
+		max-width: 100%
+	pre
+		padding: 12px
+		//background: #fafafa
+		background: #222
+		border: #ccc dashed 1px
+		margin-bottom: 16px
+		+paperShadow
+		position: relative
+
+	.demo
+		border: orange 1px dashed
+		margin-bottom: 16px
+		padding: 8px
+		position: relative
+		text-shadow: none
+		&:after
+			content: attr(data-demo)
+			position: absolute
+			right: -1px
+			top: -1px
+			padding: 0 2px
+			//background: white
+			background: #333
+			border: orange 1px dashed
+.qa
+	text-shadow: none
+
+	dt
+		//border: $defaultColorRed 1px solid
+		//background: lighten($defaultColorRed,50%)
+		padding: 4px
+		+border-top-left-radius(5px)
+		+border-top-right-radius(5px)
+		color: darken($defaultColorRed,15%)
+		&:before
+			content: "Q: "
+			color: $defaultColorRed
+	dd
+		border: $defaultColorGreen 1px solid
+		background: rgba(lighten($defaultColorGreen,10%),.5)
+		margin-top: 0.5em
+		padding: 4px
+		+border-radius(5px)
+		margin-bottom: 2em
+		&:before
+			content: "A: "
+			color: $defaultColorGreen
+
+	dt,dd
+		position: relative
+		padding-left: 3em
+		padding-top: 1em
+		&:before
+			font-size: 2em
+			position: absolute
+			top: 6px
+			left: 6px
+
+.article-time
+	display: block
+.article-head
+	+clearFix
+.head-right
+	float: right
+	margin-top: -65px
+.main-footer
+	margin: 12px auto
+	border-top: #ddd solid 1px
+	padding-top: 4px
+	a
+		margin-right: 8px
+.js,.css
+	background: lighten(orange,30%)
+	border: orange solid 1px
+	padding: 3px
+	+border-radius(3px)
+	display: none
+div[class*='-storage']
+	display: none
+.atableLight
+	+atableLight($Color: #222)
+.text-center
+	text-align: center
+.text-right
+	text-align: right
+img.border
+	border: #999 1px solid
+
+#menu-slider
+	display: none
+
++tpl
+
+
+//@media handheld, only screen and (max-width: 767px)
+.menubtn
+	color: $darkColor
+	float: left
+	display: block
+	cursor: pointer
+.fixed-nav-title
+	display: none
+.aside
+	height: 100%
+	background: #333
+	width: 70%
+	padding: 20px
+	+box-sizing(border-box)
+	position: fixed
+	overflow-y: auto
+	left: 0
+	top: 0
+	z-index: 10
+	+transform(translateX(-100%))
+	+transition(transform .5s)
+.main-content
+	+transition(transform .5s)
+#menu-slider:checked
+	& ~
+		.container
+			.aside	
+				+transform(translateX(0%))
+			.main-content
+				+transform(translateX(70%))
+		.fixed-nav .container
+			+transform(translateX(70%))
+
+.hidden
+	display: none
+
+
+@include at-breakpoint(30em 12)
+	.title,.container,.main-footer
+		+container
+	.aside
+		width: auto
+		+span-columns(3 ,12)
+		height: auto
+		background: none		
+		padding: 0
+		+box-sizing(border-box)
+		position: relative
+		overflow-y: auto
+		left: 0
+		top: 0
+		z-index: 10
+	.main-content
+		+span-columns(9 omega,12)
+	.container,.main-header
+		padding: 0
+		+box-sizing(border-box)
+	.title
+		font-size: 2em
+	.menubtn
+		display: none
+	.fixed-nav-title
+		display: block
+	.aside
+		+transform(translateX(0%))
+	#menu-slider:checked
+		& ~
+			.container
+				.aside	
+					+transform(translateX(0%))
+				.main-content
+					+transform(translateX(0%))
+				.fixed-nav .container
+					+transform(translateX(0%))
+//susy start end
+
+
+//webfont
++font-face("LigatureSymbols",font-files("LigatureSymbols-2.05.eot","LigatureSymbols-2.05.ttf","LigatureSymbols-2.05.woff","LigatureSymbols-2.05.svg#LigatureSymbols"),normal,normal)
+.lsf
+	font-family: 'LigatureSymbols'
+	font-size: 300%
+	-webkit-text-rendering: optimizeLegibility
+	-moz-text-rendering: optimizeLegibility
+	-ms-text-rendering: optimizeLegibility
+	-o-text-rendering: optimizeLegibility
+	text-rendering: optimizeLegibility
+	//文字的渲染方式
+	-webkit-font-smoothing: antialiased
+	-moz-font-smoothing: antialiased
+	-ms-font-smoothing: antialiased
+	-o-font-smoothing: antialiased
+	font-smoothing: antialiased
+	//文字的平滑模式
+	-webkit-font-feature-settings: "liga" 1, "dlig" 1
+	-moz-font-feature-settings: "liga=1, dlig=1"
+	-ms-font-feature-settings: "liga" 1, "dlig" 1
+	-o-font-feature-settings: "liga" 1, "dlig" 1
+	font-feature-settings: "liga" 1, "dlig" 1
+	//在OpenType 有更進階的設定，但這邊沒有特別研究

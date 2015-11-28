@@ -1,0 +1,829 @@
+@import compass
+$imagePath: "../images/"
+.d0818
+	span
+		display: block
+		margin-bottom: 8px
+		width: 50px
+		height: 50px
+		clear: both
+		position: relative
+	.old
+		background: red
+	.new
+		background: green
+.d0819
+	position: relative
+	.test1
+		padding: 4px		
+		&:before
+			content: attr(data-foo)""
+	.test2
+		background: orange
+		display: block
+		width: calc(100% - 80px)
+		margin: 0 auto
+		text-align: center
+		//width: attr(length em)
+	.test3
+		background: orange
+		display: block
+		width: calc(100% / 6)
+		margin: 0 auto
+		text-align: center
+		//width: attr(length em)
+	.test4
+		position: relative
+		height: 1.6em
+		span
+			background: orange
+			display: block
+			position: absolute
+			left: calc(10% + 20px)
+
+.d0820
+	font-size: 4em
+	line-height: 1em
+	//font-weight: bolder
+	color: white
+	background: #555
+	padding: 20px !important
+	.text-shadow0
+		text-shadow: 1px 1px 5px black
+	.text-shadow1
+		text-shadow: 1px 1px 0 black
+	.text-shadow2
+		text-shadow: -1px -1px 0 black
+	.text-shadow3
+		text-shadow: 0 0 20px orange
+	.text-shadow4
+		text-shadow: 0 0 5px white,0 0 10px white,0 0 15px white,0 0 40px #ff00de,0 0 70px #ff00de
+	.text-shadow11
+		color: #ccc
+		text-shadow: -1px -1px 0 white, 1px 1px 0 #333,1px 1px 0 #444
+	.text-shadow5
+		color: transparent
+		text-shadow: 0 0 5px red
+	.text-shadow6
+		text-shadow: 1px 1px 0 red, -1px -1px 0 red
+	.text-shadow7
+		text-shadow: 1px 1px rgba(220,220,220,.8),2px 2px rgba(220,220,220,.8),3px 3px rgba(220,220,220,.8),4px 4px rgba(220,220,220,.8),5px 5px rgba(220,220,220,.8)
+	.text-shadow8
+		text-shadow: 1px 1px rgba(220,220,220,.8),-2px -2px rgba(220,220,220,.8),-3px -3px rgba(220,220,220,.8),-4px -4px rgba(220,220,220,.8),-5px -5px rgba(220,220,220,.8)
+	.text-shadow9
+		text-shadow: 3px 3px 0 #555, 5px 5px 0 white
+	.text-shadow10
+		color: rgba(255,175,140,.5)
+		text-shadow: 3px 3px 0 rgba(180,255,0,.5)
++font-face("Kavoon-Regular",font-files("Kavoon-Regular.ttf"))
+@import url("http://fonts.googleapis.com/css?family=The+Girl+Next+Door")
+.d0823
+	line-height: 2em
+	font-size: 2em
+	.webfont1
+		font-family: Kavoon-Regular		
+	.webfont2
+		font-family: 'The Girl Next Door', cursive
+	.webfont3
+		font-family: 'Frijole', cursive
+
+.d0824
+	
+	&:hover > div
+		margin-left: calc(100% - 50px)
+	div		
+		width: 50px
+		height: 50px
+		background: red
+		+transition-property(margin-left)
+		+transition-duration(5s)
+	div + div
+		margin-top: 5px
+
+	.timing1
+		+transition-timing-function(ease)
+	.timing2
+		+transition-timing-function(ease-in)
+	.timing3
+		+transition-timing-function(ease-out)
+	.timing4
+		+transition-timing-function(ease-in-out)
+	.timing5
+		+transition-timing-function(linear)
+	.timing6
+		+transition-timing-function(cubic-bezier(0.1, 0.7, 1.0, 0.1))
+	.timing7
+		+transition-timing-function(step-start)
+	.timing8
+		+transition-timing-function(step-end)
+	.timing9
+		+transition-timing-function(steps(4, end))
+	.timing10
+		//+transition-timing-function(ease, step-start, cubic-bezier(0.1, 0.7, 1.0, 0.1))
+	.timing11
+		+transition-timing-function(inherit)
+
+@mixin text-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+	text-shadow: $all
+@mixin box-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma)	
+	+box-shadow($all)
+//$rgb: 50,34,82
+.d0825
+	font-size: 8em
+	font-weight: bold
+	line-height: 1em
+	text-shadow: none
+	color: rgb(52, 255, 255)
+	overflow: hidden
+	div
+		+text-longShadow($lenght: 40,$rgb: #11836C)
+		+box-longShadow($lenght: 40,$rgb: #ccc)
+		margin: 0 auto 
+		background: rgb(26, 188, 156)
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		+border-radius(5px)
+		overflow: hidden
+
+.d0826
+	$color: #F09671
+	color: white	
+	text-shadow: none
+	& > div
+		height: 50px
+		padding: 5px
+		+box-sizing(border-box)
+	.org
+		background: $color
+	.darken
+		background: darken($color,15%)
+	.lighten
+		background: lighten($color,15%)
+	.saturate
+		background: saturate($color,15%)
+	.desaturate
+		background: desaturate($color,15%)
+	.hue
+		background: hue($color)
+		color: #777
+	.adjust-hue
+		background: adjust-hue($color, 15deg)
+	.lightness
+		background: lightness($color)
+		color: #777
+	.lightness2		
+		background: lightness(lighten($color,15%))
+		background: lighten($color,15%)
+		color: #777
+	.grayscale
+		background: lightness(grayscale($color))
+		background: grayscale($color)
+	.complement
+		background: complement($color)
+	.invert
+		background: invert($color)
+.d0830
+	.box
+		width: 50px
+		height: 50px
+		background: white
+		+box-shadow(0 0 10px rgba(00,00,00,.6))
+
+.d0901
+	overflow-x: scroll
+	background-color: #FFF
+	.overflow
+		width: 100%
+		padding-right: 100%
+		height: 20px
+	&.scrollbar1
+		&::-webkit-scrollbar
+			height: 10px
+			background-color: #F5F5F5
+		&::-webkit-scrollbar-thumb
+			border-radius: 10px
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3)
+			background-color: #555
+		&::-webkit-scrollbar-track
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+			border-radius: 10px
+			background-color: #F5F5F5
+	&.scrollbar2
+		&::-webkit-scrollbar
+			height: 10px
+			background-color: #F5F5F5
+		&::-webkit-scrollbar-thumb
+			background-color: #000000
+			border: 2px solid #555555
+		&::-webkit-scrollbar-track
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+			background-color: #F5F5F5
+	&.scrollbar3
+		&::-webkit-scrollbar
+			height: 10px
+			background-color: #F5F5F5
+		&::-webkit-scrollbar-thumb
+			background-color: #0ae
+			background-image: -webkit-gradient(linear,0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent))
+		&::-webkit-scrollbar-track
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+			background-color: #F5F5F5
+	&.scrollbar4
+		&::-webkit-scrollbar
+			height: 10px
+			background-color: #F5F5F5
+		&::-webkit-scrollbar-thumb
+			background-color: #F90
+			background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
+		&::-webkit-scrollbar-track
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+			background-color: #F5F5F5
+
+	&.scrollbar5
+		&::-webkit-scrollbar
+			height: 10px
+			background-color: transparent
+		&::-webkit-scrollbar-thumb
+			background-color: #F90
+			+background-image(linear-gradient(45deg, rgba(243,197,189,1) 0%,rgba(232,108,87,1) 23%,rgba(234,40,3,1) 24%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%))
+		&::-webkit-scrollbar-track
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+			background-color: #FFF
+
+
+	&.scrollbar6		
+		&:hover
+			&::-webkit-scrollbar-thumb
+				background-color: #777
+		&::-webkit-scrollbar
+			height: 10px
+			width: 10px
+			background-color: transparent
+		&::-webkit-scrollbar-thumb
+			background-color: rgba(#aaa,.3)
+			+border-radius(5px)
+		&::-webkit-scrollbar-track
+			background-color: transparent
+
+
+.d0904
+	$color: #f74b48
+	padding: 20px !important
+	.arrow
+		margin: 0 auto
+		width: 0
+		height: 0
+		border-top: red 20px solid
+		border-right: orange 20px solid
+		border-bottom: blue 20px solid		
+		border-left: green 20px solid
+	.box
+		width: 10em
+		padding: 1em
+		margin: 0 auto
+		background: $color
+		color: white
+		+border-radius(5px)
+		position: relative
+	.toparrow
+		width: 0
+		height: 0
+		position: absolute
+		left: 10px
+		top: -20px
+		border: transparent 10px solid
+		border-bottom: $color 10px solid
+	.bottomArrow
+		width: 0
+		height: 0
+		position: absolute
+		left: 10px
+		bottom: -20px
+		border: transparent 10px solid
+		border-top: $color 10px solid
+	.box-withArrow
+		width: 10em
+		padding: 1em
+		margin: 0 auto
+		background: $color
+		color: white
+		+border-radius(5px)
+		position: relative
+		&:after
+			content: ""
+			width: 0
+			height: 0
+			position: absolute
+			left: 10px
+			bottom: -20px
+			border: transparent 10px solid
+			border-top: $color 10px solid
+
+
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 20%
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+.d0905
+	padding: 10px
+	min-height: 1em
+	background: rgba(255,255,255,.5)
+	margin-bottom: 10px
+	&.test1
+		+paperShadow
+
+	&.test2
+		position: relative
+		&:after
+			content: ""
+			position: absolute
+			background: rgba(00,00,00,0.2)
+			opacity: 0.9
+			bottom: 6px
+			width: 50%
+			height: 20%			
+	&.test3
+		position: relative
+		&:after
+			content: ""
+			position: absolute
+			background: rgba(00,00,00,0.2)
+			opacity: 0.9
+			bottom: 6px
+			width: 50%
+			height: 20%
+			z-index: -1
+			right: 5px
+			left: auto
+			+rotate(2deg)
+			+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&.test4
+		position: relative
+		background: white
+		&:after
+			content: ""
+			position: absolute
+			background: rgba(00,00,00,0.2)
+			opacity: 0.9
+			bottom: 6px
+			width: 50%
+			height: 20%
+			z-index: -1
+			right: 5px
+			left: auto
+			+rotate(2deg)
+			+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+@mixin text-cubicStyle($lenght: 15,$rgb: #dfdfdf)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,darken($rgb,$i/1.6)),comma)	
+	text-shadow: $all,$lenght+1px $lenght+1px 1px rgba(0,0,0,.3),$lenght+2px $lenght+2px 10px rgba(0,0,0,.6)
+.d0906
+	line-height: 1.5em
+	font-size: 5em
+	font-weight: bold
+	color: white
+	.text-cubicStyle1
+		$all: ()
+		$lenght: 20
+		$rgb: #000
+		@for $i from 1 through $lenght
+			$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+		text-shadow: $all
+	.text-cubicStyle2
+		$all: ()
+		$lenght: 20
+		$rgb: #dfdfdf
+		@for $i from 1 through $lenght
+			$all: append($all, append(#{$i}px #{$i}px 0 ,darken($rgb,$i/1.6)),comma)	
+		text-shadow: $all
+	.text-cubicStyle3
+		+text-cubicStyle
+
+//.d0907
+//	text-align: center
+//	div
+//		background-color: #555
+//		display: inline-block
+//		height: 200px
+//		width: 200px
+//		position: relative
+//		margin: 0 auto
+//		+box-shadow(0 10px 55px(rgba(0,0,0,.3)inset))
+//		&:after
+//			content: ""
+//			position: absolute
+//			height: 20%
+//			bottom: 0
+//			left: 10%
+//			right: 10%
+//			z-index: -1
+//			+box-shadow(0 0 15px(rgba(0,0,0,.6)))
+//			+border-radius(30%)
+
+.d0909
+	text-align: center
+	.test1
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+	.test2
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+		.coverflow-list
+			+perspective(900px)
+			+transform-style(preserve-3d)
+			+perspective-origin(100% 30%)
+			.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(45deg))
+	.test3
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+
+		.coverflow-list
+			+perspective(900px)
+			+transform-style(preserve-3d)
+			+perspective-origin(100% 30%)
+			.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(45deg))
+		input[type="checkbox"]
+			display: none
+			&:checked
+				&+.coverflow-item
+					+transition(all .3s ease)
+					+transform(rotateY(0.1deg))
+					margin: 0 auto
+					img
+						opacity: 1
+					.album-name
+						color: #333
+		.controllor
+			margin-top: 10px
+
+.d0910
+	text-align: center
+	.coverflow-item
+		display: inline-block
+		position: relative
+		margin: 0 auto
+		text-align: center
+		margin: 0 -45px
+		background-color: white
+		.album-cover
+			height: 150px
+			width: 150px
+			-webkit-box-reflect: below 22px -webkit-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+			-moz-box-reflect: below 22px -moz-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+			-o-box-reflect: below 22px -o-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+			-ms-box-reflect: below 22px -ms-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+			box-reflect: below 22px linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+			img
+				opacity: 0.5
+		.album-name
+			text-align: center
+			display: block
+			color: #777
+		label		
+			display: block
+			
+	.coverflow-list
+		+perspective(900px)
+		+transform-style(preserve-3d)
+		+perspective-origin(100% 30%)
+		.coverflow-item
+			+transition(all .3s ease)
+			+transform(rotateY(45deg))
+	input[type="radio"]
+		display: none
+		&:checked
+			&+.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(0.1deg))
+				margin: 0 auto
+				img
+					opacity: 1
+				.album-name
+					color: #555
+				&~.coverflow-item
+					+transform(rotateY(-45deg))
+	.controllor
+		margin-top: 40px
+		label
+			cursor: pointer
+			color: #999
+			padding: 8px
+			border: 1px solid #ccc
+			background-color: #fafafa
+			+transition(all .3s)
+			&:hover
+				color: #555
+				border: 1px solid #555
+
+.d0911-2
+	$baseColor: #0e83cd
+	background-color: $baseColor
+	text-align: center
+	font-size: 1.5em
+	li
+		display: inline-block
+		margin: 15px 20px 
+		
+	a		
+		color: white
+		padding: 4px 8px
+		position: relative
+		+box-sizing(border-box)
+	.test1
+		a
+			&:after,&:before
+				display: inline-block
+				//+box-sizing(border-box)
+				+transition(all .3s)
+				opacity: 0
+			&:after			
+				content: "]"
+				+transform(translateX(-10px))
+			&:before
+				content: "["
+				+transform(translateX(0px))
+			&:hover
+				&:after,&:before
+					opacity: 1
+				&:after			
+					content: "]"
+					+transform(translateX(10px))
+				&:before
+					content: "["
+					+transform(translateX(-10px))
+	.test2
+		a
+			&:after
+				content: ""
+				opacity: 0
+				bottom: -15px
+				left: 0
+				right: 0
+				height: 4px
+				
+				position: absolute
+				background: rgba(0,0,0,.1)
+				+transition(all .3s)
+			&:hover:after
+				bottom: -5px
+				opacity: 1
+	.test3
+		a
+			&:after,&:before
+				content: ""
+				display: inline-block
+				//+box-sizing(border-box)
+				+transition(all .3s)
+				background: white
+				position: absolute
+			&:after			
+				width: 2px
+				height: 2px
+				left: 0
+				top: 0
+			&:before
+				left: 0
+				top: 0
+				right: 0
+				height: 2px
+			&:hover
+				&:after,&:before
+				&:after	
+					bottom: 0
+					height: 100%		
+				&:before
+					top: 100%
+
+.d0911
+	div
+		text-shadow: 1px 1px 0 #aaa	
+	.test1	
+
+		&::-moz-selection
+			background: black 
+			color: white
+		&::selection  
+			background: black 
+			color: white
+	.test2
+		&::-moz-selection
+			background: red 
+			color: white
+			text-shadow: none
+		&::selection  
+			background: red 
+			color: white
+			text-shadow: none
+	.test3
+		
+		background: url($imagePath+"mayday/mayday1.JPEG") no-repeat center center
+		p
+			background: white
+			&::-moz-selection
+				background: transparent
+				color: red
+				text-shadow: none
+			&::selection  
+				background: transparent
+				color: red
+				text-shadow: none
+
+.d0912
+	div
+		margin: 4px
+		border: #ccc solid 1px
+		padding: 4px
+		&:hover
+			border: red solid 1px
+	.f12px
+		font-size: 12px
+	.f13px
+		font-size: 13px
+	.f14px
+		font-size: 14px
+	.f15px
+		font-size: 15px
+	.fLarge
+		font-size: large
+	.f1em
+		font-size: 1.1em
+	.f2em
+		font-size: 1.2em
+	.f3em
+		font-size: 1.3em
+	.f4em
+		font-size: 1.4em
+	.f1rem
+		font-size: 1.1rem
+	.f2rem
+		font-size: 1.2rem
+	.f3rem
+		font-size: 1.3rem
+	.f4rem
+		font-size: 1.4rem
+.d0913
+	text-align: center
+	div
+		display: inline-block
+		background: orange
+	img
+		border: #ccc 1px solid
+	.px		
+		margin: 0 8px  
+		width: 100px
+		height: 100px
+	.vw
+		width: 10vw
+		height: 10vw
+		margin: 0 8px
+		
+.d0914
+	text-align: center
+	.box
+		display: inline-block
+		background: orange
+		width: 100px
+		height: 100px
+		position: relative
+		+transition(all 1s)
+	.dot
+		position: absolute
+		+border-radius(100%)
+		background: red
+		height: 5px
+		width: 5px
+		left: 50px
+		top: 100px - 2px
+	.rotate	
+		@extend .box	
+		+transform(rotate(30deg))
+		&:hover
+			+transform(rotate(0deg))
+		.dot
+			left: 50%
+			top: 50%
+			left: calc(50% - 2px)
+			top: calc(50% - 2px)
+	.rotate2
+		@extend .box
+		+transform(rotate(30deg))
+		+transform-origin(0,0)
+		&:hover
+			+transform(rotate(0deg))
+		.dot
+			left: calc(0% - 2px)
+			top: calc(0% - 2px)
+
+	.scale
+		@extend .box
+		+transform(scale(1.5, 1.5))
+		&:hover
+			+transform(scale(1, 1))
+		.dot
+			left: 50%
+			top: 50%
+			left: calc(50% - 2px)
+			top: calc(50% - 2px)
+	.scale2
+		@extend .box
+		+transform(scale(1.5, 1.5))
+		+transform-origin(0,0)
+		&:hover
+			+transform(scale(1, 1))
+		.dot
+			left: calc(0% - 2px)
+			top: calc(0% - 2px)
+	.relative
+		position: relative
+		height: 100px
+	%line
+		position: absolute
+		left: 0
+		right: 0
+		height: 1px		
+	.topLine
+		@extend %line
+		top: 0
+		background: rgba(red,.6)
+	.middleLine
+		@extend %line
+		top: 50%
+		top: calc(50% - 1px)
+		background: rgba(blue,.6)
+	.bottomLine
+		@extend %line
+		bottom: 0
+		background: rgba(green,.6)
+
+

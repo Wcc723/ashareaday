@@ -1,0 +1,9 @@
+<div class="js">first-Day</div>
+<p>一大早看到這一篇文章，真的是太感動了，輕輕鬆鬆兩個步驟，安裝Package Control</p>
+<ol class="ollist">
+	<li>Ctrl + ~</li>
+	<li>貼下以下code</li>
+</ol>
+<pre>import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())	
+</pre>
+<p>相關網站:<a href="https://sublime.wbond.net/installation" target="_blank">https://sublime.wbond.net/installation</a></p>

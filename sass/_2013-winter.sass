@@ -1,0 +1,699 @@
+@import compass
+@import module
+$imagePath: "/images/"
+
+=keyframes($name)
+	@-webkit-keyframes #{$name}
+		@content
+	@-moz-keyframes #{$name}
+		@content
+	@-ms-keyframes #{$name}
+		@content
+	@keyframes #{$name}
+		@content
+
+=animation($content)
+	-webkit-animation: $content
+	-moz-animation: $content
+	-o-animation: $content
+	animation: $content
+
+=checked($class)
+	[type="checkbox"]:checked ~ .#{$class}
+		@content
+=flex-direction($content) //error
+	-webkit-flex-direction: $content
+	-moz-flex-direction: $content
+	-o-flex-direction: $content
+	flex-direction: $content
+
+
++keyframes(ifinityCircles)
+	from
+		+transform(rotate(0))
+	to
+		+transform(rotate(360deg))
+
++keyframes(rotateY) //planet used
+	from
+		+transform(rotateX(-90deg) rotateY(0))
+	to
+		+transform(rotateX(-90deg) rotateY(360deg))
+
++keyframes(ifinityCircles2)
+	0%
+		+transform(rotate(0))
+	50%
+		+transform(translateX(-100%) rotate(180deg))
+	100%
+		+transform(translateX(100%) rotate(360deg))
+
+%box
+	height: 100px
+	width: 100px
+	margin: 0 auto
+	display: block
+	background: orange
+
+=display-box
+	
+
+.d1016
+	div
+		@extend %box
+		+animation(ifinityCircles 3s infinite linear)
+
+.d1017
+	div
+		@extend %box
+	.box
+		+animation(ifinityCircles 3s infinite linear)
+	.box1
+		+animation(ifinityCircles2 3s infinite linear alternate)
+
+.d1018
+	div,label
+		@extend %box
+	label
+		cursor: pointer
+
+	+checked(box1)
+		+animation(ifinityCircles 3s)
+		
+	+checked(box2)
+		+animation(ifinityCircles 8s)
+
+	+checked(box3)
+		+animation(ifinityCircles 3s ease)
+
+	+checked(box4)
+		+animation(ifinityCircles 3s linear)
+
+	+checked(box5)
+		+animation(ifinityCircles 3s)
+	+checked(box6)
+		+animation(ifinityCircles 3s 1.5s)
+
+	+checked(box7)
+		+animation(ifinityCircles 1.5s 2)
+	+checked(box8)
+		+animation(ifinityCircles 1.5s infinite)
+
+	+checked(box9)
+		+animation(ifinityCircles 1.5s reverse infinite)
+	+checked(box10)
+		+animation(ifinityCircles 1.5s alternate-reverse infinite)
+	+checked(box11)
+		+animation(ifinityCircles 1.5s alternate infinite)
+
+			
+.d1020
+	font-size: 2em
+	line-height: 1.6em
+	.demo2
+		-webkit-writing-mode: vertical-lr
+		writing-mode: vertical-lr
+
+	.demo3
+		-webkit-writing-mode: vertical-rl
+		writing-mode: vertical-rl
+
+	//.demo4
+	//	-webkit-writing-mode: lr-tb
+	//	writing-mode: lr-tb
+//
+	//.demo5
+	//	-webkit-writing-mode: lr
+	//	writing-mode: lr
+	//.demo6
+	//	-webkit-writing-mode: tb-rl
+	//	writing-mode: tb-rl
+.fluidGridDemo
+	+fluidGrid($maxWidth:1200px,$wrapWidth:100%,$wrapMargin:2%)
+	[class*='col']
+		background: gray
+		text-align: center
+		+border-radius(2px)
+		+transition(background .3s)
+		&:hover
+			background: #555
+
+
+.d1022
+	%display-box
+		+display-box	
+		+box-align(stretch)
+		width: 100%
+	.display-box1	
+		@extend %display-box
+		height: 200px
+		
+	.n200px
+		width: 200px
+		background: #A10854
+	.n20p
+		width: 20%
+		background: DeepSkyBlue
+	.flex1
+		+box-flex(1)
+		background: orange
+	.flex3
+		+box-flex(3)
+		background: #375F99
+	.flex5
+		+box-flex(5)
+		background: #20B87B
+	.n60p
+		height: 60%
+		background: DeepSkyBlue
+
+	.display-box2
+		@extend %display-box
+		+box-direction(reverse)
+		height: 200px
+	.display-box3
+		@extend %display-box
+		+box-orient(vertical)
+		height: 200px
+
+	.display-box4
+		@extend %display-box
+		+box-orient(vertical)
+		+box-direction(reverse)
+		height: 200px
+		
+
+	.display-box5
+		+display-box
+		height: 400px
+		.flex3
+			flex: 3
+		.flex1
+			flex: 1
+		.box-col
+			
+			display: flex
+			width: 200px
+			height: 100%
+			+box-sizing(border-box)
+			border: darkgreen 5px solid
+			flex-direction: column
+		.box-row
+			display: flex
+			flex: 1
+
+.d1024
+	%display-box
+		//display: -webkit-flex
+		display: flex		
+		width: 100%
+	.display-box1	
+		@extend %display-box
+		height: 200px
+	.flex1		
+		//-webkt-flex: 1
+		flex: 1
+		background: orange
+	.flex3		
+		//-webkt-flex: 3
+		flex: 3
+		background: #375F99
+	.flex5		
+		//-webkt-flex: 5
+		flex: 5
+		background: #20B87B
+	.h50
+		height: 50%
+		background: DeepSkyBlue
+	.n200px
+		width: 200px
+		background: #A10854
+	.wh100px
+		width: 100px
+		height: 100px
+		background: DeepSkyBlue
+	.wh200px
+		width: 200px
+		height: 200px
+		background: #A10854
+	.n20p
+		width: 20%
+		background: DeepSkyBlue
+	.display-box2
+		@extend %display-box
+		flex-direction: row-reverse
+		height: 200px
+	.display-box3
+		@extend %display-box
+		flex-direction: column
+		height: 300px
+	
+	.display-box4
+		@extend %display-box
+		height: 200px
+		justify-content: center
+		&.start
+			justify-content: flex-start
+		&.end
+			justify-content: flex-end
+		&.space
+			justify-content: space-between
+		&.aspace
+			justify-content: space-around
+
+	.display-box5
+		align-items: stretch
+		@extend %display-box
+		.wh100px
+			line-height: 100px
+		.wh200px
+			line-height: 80px
+		&.flex-start
+			align-items: flex-start
+		&.flex-end
+			align-items: flex-end
+		&.center
+			align-items: center
+		&.baseline
+			align-items: baseline
+		
+.d1026
+	.flex
+		display: flex
+	header
+		background: orange
+		width: 100%
+		padding: 8px
+	menu
+		width: 100%
+		margin: 8px 0
+		background: DeepSkyBlue
+		padding: 8px
+	nav
+		width: 120px
+		margin-right: 8px
+		background: #20B87B
+		padding: 8px
+	article
+		flex: 1
+		background: #A10854
+		padding: 8px
+	footer
+		margin-top: 8px
+		padding: 8px
+		width: 100%	
+		background: darkgreen
+	.container
+		display: flex
+		flex-wrap: wrap
+		&.center1
+			height: 300px
+			div
+				margin: auto
+				width: 100px
+				height: 100px
+				background: #20B87B
+		&.center2
+			height: 300px
+			align-items: center
+			justify-content: center
+			div
+				width: 100px
+				height: 100px
+				background: #20B87B
+
+	.nav
+		background: #A10854
+	
+	.order
+		display: flex
+		input
+			display: none
+		label
+			width: 10%
+			background: #20B87B
+			padding: 8px
+			margin-right: 12px
+			cursor: pointer
+			+transition(all .5s)
+		input:checked
+			& + label
+				order: -1
+				background: #375F99
+
+.d1027
+	.gutter
+		margin-left: -1em
+
+	.box
+		display: flex
+		flex-wrap: wrap
+	.flexbox
+		flex: 1
+		display: flex
+		margin-bottom: 1em
+		padding-left: 1em
+	label,span,a
+		color: #555
+		padding: .6em .75em
+		background: #dfdfdf
+		border: #777 solid 1px		
+		line-height: 1
+		margin: 0
+		+box-sizing(border-box)
+	label
+		border-right: #aaa solid 1px
+		+border-left-radius(3px)		
+	span,a
+		border-left: none
+		+border-right-radius(3px)	
+	input
+		flex: 1
+		padding: .6em .75em
+		border: #777 solid 1px
+		border-left: none
+		+box-sizing(border-box)
+		line-height: 1
+		margin: 0
+		outline: none
+		background: #efefef
+		+transition(all .5s)
+		&:focus
+			+box-shadow(0 0 8px orange)
+			background: white
+
+
+
+.d1028
+	+buttonFlat($className: btn-demo,$color: orange)
+	.gradient
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		background-repeat: no-repeat
+		background-size: 50% 50%
+		+border-radius(50%)
+		margin: 0 auto
+		width: 150px
+		height: 150px
+		border: 1em solid tomato
+		&.current
+			+animation(ifinityCircles 2s infinite linear)
+
+
+.solar-system
+	font-size: 20px
+	height: 100%
+	width: 100%
+	+display-box
+	+box-align(center)
+	
+
+%planet
+	$planetSize: .25em
+	width: $planetSize
+	height: $planetSize
+	margin: 0 auto
+	margin-top: - $planetSize/2	
+	//margin-left: - $planetSize/2	
+	//position: absolute
+	+border-radius(50%)
+
+%orbit
+	font-size: 40px
+	position: absolute
+	top: 50%
+	left: 50%
+	border: 1px solid rgba(white ,.1)
+	+border-radius(50%)
+	+transition(border-color .5s)
+	&:hover
+		border-color: rgba(white ,.8)
+=orbit($thisOrbit)
+	$thisOrbit : $thisOrbit + 4em
+	width: $thisOrbit
+	height: $thisOrbit
+	margin-top: - $thisOrbit/2	
+	margin-left: - $thisOrbit/2	
+
+.sun
+	//font-size: 6540px
+	font-size: 250px
+	$planetSize: .35em
+	width: $planetSize
+	height: $planetSize
+	margin: auto
+	+border-radius(50%)	
+	+background(radial-gradient(35% 15%, circle,#fff, #FFEAB6, #E86E00))
+	+box-shadow(0 0 50px #E86E00,0 0 8px red)
+	z-index: 11
+
+
+.earth
+	@extend %orbit
+	+orbit(6em)	
+	+animation(ifinityCircles 24s infinite linear)		
+	z-index: 8
+	.planet
+		font-size: 120px
+		@extend %planet		
+		+background(radial-gradient(35% 15%, circle,#5A9CF7, #467AC2, #203859))
+
+.d0929
+	height: 400px
+	+perspective-origin(center 0%)
+	+perspective(1500px)
+	position: relative
+	.threeD
+		+transform-style(preserve-3d)
+		
+		&.solar-system
+			+transform(rotateX(90deg)) 
+			+transform-style(preserve-3d)
+		.sun
+			+transform(rotateX(-90deg)) 
+		.earth
+			+transform-style(preserve-3d)
+			.planet
+				//+animation(rotateY 24s infinite linear)
+				+transform(rotateX(-90deg)) 
+	
+	.sun.eggs
+		+transform(rotateX(0)) 
+	.planet.eggs
+		+animation(rotateY 24s infinite linear)
+
+.d1031
+	.turn180
+		margin: 0 auto
+		+turn180
+		&.visible
+			.flipper > div
+				+backface-visibility(visible)
+
+.d1102
+	$color: #40CB90
+	$on: 6px
+	$press: 1px
+	text-align: center
+	%btn
+		padding: .6em 1.2em
+		background: $color
+		color: white		
+		display: block
+		+border-radius(3px)
+	.demo0
+		@extend %btn
+	.demo1
+		@extend %btn
+		border: 1px solid darken($color, 35%)
+		border-bottom: $on solid darken($color, 20%)
+		margin: $press auto $on auto
+		+transition(all .5s)
+		&:hover
+			margin: $on auto 
+			border-bottom: $press solid darken($color, 15%)
+			+box-shadow(0 0 1em darken($color, 15%) inset)
+		
+	.demo2
+		@extend %btn
+		border: 1px solid darken($color, 15%)
+		border-bottom: 1px solid lighten($color, 5%)
+		margin: $press auto $on auto
+		+box-shadow(0 0 1em darken($color, 10%) inset,0 $on 0 darken($color, 25%))
+		+transition(all .5s)
+		&:hover
+			margin: $on auto $press auto
+			+box-shadow(0 0 1em darken($color, 25%) inset,0 $press 0 darken($color, 25%))
+
+.d1111
+	height: 500px
+	position: relative
+	$ballSize: 5em
+	$oceanHeight: 200px
+	.ball
+		+border-radius(50%)
+		width: $ballSize
+		height: $ballSize
+		background: #e24b7c
+		position: absolute
+		left: calc(50% - (#{$ballSize}/2))
+		top: 0
+		+transition(top 1s cubic-bezier(.18,1.62,.31,.69))
+	.demo4 .ball
+		+transition(top 1s cubic-bezier(.07,1.91,.51,.8))
+	.wave
+		height: $oceanHeight
+		+background(linear-gradient(to bottom,#fff 0,#C7D7F9 2%,#6ECDED 6%,#0a89bc 20%,#02316F 100%))
+		opacity: .8
+		position: absolute
+		bottom: 0
+		right: 0
+		left: 0
+	.demo1:hover,.demo4:hover
+		.ball
+			top: calc(100% - (#{$oceanHeight} + #{$ballSize}/2))
+
+@mixin svgbg($icon: reload) 
+	display: inline-block
+	background-image: inline-image("#{$icon}.png")
+	width: image-width("#{$icon}.png")
+	height: image-height("#{$icon}.png")
+	&.svg
+		background-image: inline-image("#{$icon}.svg")
+		background-image: image-url("#{$icon}.png")\9
+		+background-size(cover)
+.d1125
+	.reload
+		+svgbg(reload)
+		&.x2
+			width: 64px
+			height: 64px
+.d1127
+	.em
+		padding: .35em .7em .4em
+		vertical-align: middle
+	.ll
+		font-size: 24px
+	.xl
+		font-size: 42px
+
+.d1128
+	text-align: center
+	div
+		@extend %box
+		display: inline-block
+		margin: 1em
+	.transition
+		+transition(all .5s)
+	.scale
+		&:hover
+			+transform(scale(1.5))
+	.rotate
+		&:hover
+			+transform(rotate(360deg))
+	.filter
+		&:hover
+			+filter(blur(5px))
+
+=shapeCircle($size: 140px,$padding: 20px)
+	width: $size
+	height: $size
+	padding: $padding
+	+box-sizing(border-box)
+	+border-radius(50%)
+
+.d1218
+	.circle
+		+shapeCircle
+		background: red
+
+.d1223
+	
+	position: relative	
+	.transform3d
+		height: 500px
+
+		+transform-style(preserve-3d)
+		&:hover
+			.ez	
+				+transform(translate3d(50%,0,0))
+				
+			.ziggs
+				+transform(translate3d(-50%,0,0))
+	span
+		width: 40%
+		display: block
+		position: absolute
+		bottom: 0
+		//+transform3d(translate(0,0,0))
+		+transition(transform 1s ease-in-out)			
+		img
+			+filter(blur(5px))
+			width: 100%
+			&:hover
+				+filter(blur(0))
+	.ez		
+		left: 0	
+		
+	.ziggs
+		right: 0
+
+	.transformjs
+		height: 500px
+		+transform-style(preserve-3d)
+
+	.transform3d2
+		height: 500px
+		+transform-style(preserve-3d)
+		span
+			+transition(all 1s ease-in-out)
+		.ez
+			+filter(drop-shadow(-5px 0 0 rgba(black ,.5)))
+		.ziggs
+			+filter(drop-shadow(5px 0 0 rgba(black ,.5)))
+		&:hover
+			.ez	
+				+transform(translate3d(50%,0,0))
+				+filter(drop-shadow(5px 0 0 rgba(black ,.5)))
+			.ziggs
+				+transform(translate3d(-50%,0,0))
+				+filter(drop-shadow(-5px 0 0 rgba(black ,.5)))
+		
+
+
+.d0101
+	font-size: 1.2em
+	.serif
+		font-family: serif
+	.sans-serif
+		font-family: sans-serif
+
+	.cursive
+		font-family: cursive
+
+	.fantasy
+		font-family: fantasy
+
+	.monospace
+		font-family: monospace
+
+
+	.Microsoft-JhengHei2
+		font-family: "Microsoft JhengHei"
+	.Microsoft-JhengHei2
+		font-family: "微軟正黑體"
+	.Segoe-UI
+		font-family: "Segoe UI"
+	.verdana
+		font-family: verdana
+	.Segoe-UI2
+		font-family: "Segoe UI","微軟正黑體",sans-serif
+
+	.Apple
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif
+
+	.Microsoft
+		font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif
+	.Yahoo
+		font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif
+	.Google
+		font-family: arial,sans-serif

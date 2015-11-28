@@ -1,0 +1,73 @@
+<div class="css">2013-winter</div>
+
+<p>假日來點簡單的~，canvas是一種點陣繪圖技術，所以來複製或是繪製一張影像檔不會有什麼問題。</p>
+<h2>繪製外部Jpg</h2>
+<p>首先當然要有一張圖，然後指定一個路徑去擷取他。</p>
+<pre>
+  var _canvas = document.getElementById('canvas');
+  
+  if (_canvas.getContext) {
+    var ctx = _canvas.getContext('2d');
+    draw();
+  }
+
+  function draw(){
+  	var img = new Image(); //建立一個Image物件
+  	img.src = 'images/2013-winter/cd2.jpg';  //圖片路徑
+  	img.onload = function(){  //img物件載入  		
+  		ctx.canvas.width = img.width;  //取得來源的寬
+  		ctx.canvas.height = img.height;  //取得來源的高
+  		ctx.drawImage(img,0,0);  //繪製
+  	};
+ 	
+  }
+</pre>
+<script>
+  var _canvas = document.getElementById('canvas');
+  
+  if (_canvas.getContext) {
+    var ctx = _canvas.getContext('2d');
+    draw();
+  }
+
+  function draw(){
+  	var img = new Image(); 
+  	img.src = 'images/2013-winter/cd2.jpg';
+  	img.onload = function(){  	  		
+  		ctx.canvas.width = img.width;
+  		ctx.canvas.height = img.height;
+  		ctx.drawImage(img,0,0);
+  	};
+  
+  }
+</script>
+
+<canvas id="canvas" width="30" height="30">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+
+<h2>也可以試試看其他網域的圖片~</h2>
+<p>圖片來源：<a href="http://content.yieldmanager.edgesuite.net/atoms/97/94/b3/08/9794b308aa8b6053ba47d92f0f0293a7.jpg">http://content.yieldmanager.edgesuite.net/atoms/97/94/b3/08/9794b308aa8b6053ba47d92f0f0293a7.jpg</a></p>
+<script>
+  var _canvas2 = document.getElementById('canvas2');
+  
+  if (_canvas2.getContext) {
+    var ctx2 = _canvas2.getContext('2d');
+    draw2();
+  }
+
+  function draw2(){
+  	var imgb = new Image(); 
+  	imgb.src = 'http://content.yieldmanager.edgesuite.net/atoms/97/94/b3/08/9794b308aa8b6053ba47d92f0f0293a7.jpg';
+  	imgb.onload = function(){  	  		
+  		ctx2.canvas.width = imgb.width;
+  		ctx2.canvas.height = imgb.height;
+  		ctx2.drawImage(imgb,0,0);
+  	};  
+  }
+</script>
+
+<canvas id="canvas2" width="30" height="30">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+

@@ -1,0 +1,90 @@
+<div class="css">2013-autumn</div>
+<p>本篇CSS效果發表於<a href="http://ashareaday.wcc.tw/#2013-10-13">http://ashareaday.wcc.tw/#2013-10-13</a> (建議使用Chrome瀏覽器)</p>
+
+<p>這篇要介紹的是noscript的CSS3自適應選單，用的技巧也是先前所介紹的那些，而今天的篇幅看似很長，請別擔心，都只是範例圖而已...。而下面的範例圖就是今天的目標。</p>
+<img src="images/Screenshot_2013-10-13-12-05-58.png" alt="">
+<em>Android,Htc one,Browser:Chrome</em>
+
+
+<h2>製作</h2>
+<p>參考來源: <a href="http://valdelama.com/static/demo/responav/css-only/index.html">http://valdelama.com/static/demo/responav/css-only/index.html</a> </p>
+<p>本站已經有實作此效果，範例就是此網站。這個效果只要是利用checkbox配合<code>~</code>的selector，並且利用transform的<code>translateX</code>位移調整，所以此效果必須是支援以上屬性的瀏覽器才能正常顯示。</p>
+<pre>
+//Html
+&lt;input type=&quot;checkbox&quot; id=&quot;menuSlider&quot;&gt;
+
+&lt;div class=&quot;fixed-nav&quot;&gt;
+  &lt;label for=&quot;menuSlider&quot; class=&quot;menubtn lsf&quot;&gt;tilemenu&lt;/label&gt;
+  //這是固定的導行列，控制checkbox的label也是在這。
+  ...
+&lt;/div&gt; 
+
+&lt;div class=&quot;container&quot;&gt;
+  &lt;aside id=&quot;leftmenu&quot; class=&quot;aside&quot;&gt; 
+  &lt;/aside&gt; 
+  //主選單
+
+  &lt;div class=&quot;main-content&quot;&gt;
+  &lt;/div&gt; 
+  //主要內容
+  ...
+&lt;/div&gt;
+</pre>
+
+<pre>
+//Sass
+html,body
+  width: 100%
+  height: 100%
+  //這兩個屬性都要設定100%
+
+.aside
+  height: 100% //頂天
+  width: 70%  //展開時所要的寬度
+  position: fixed //固定位置
+  overflow-y: auto //如果選單太長就會有bar
+  left: 0 //靠左
+  top: 0 //靠上
+  z-index: 10 //放在最頂層
+  +transform(translateX(-100%)) //先向左位移100%，藏在可視範圍外
+  +transition(all .5s) //動畫般的推移效果
+
+.main-content
+  +transition(all .5s) //主要的內容也想要有動畫般的推移
+
+#menu-slider:checked //就是那一個checkbox被選取時
+  & ~          //在他被選取時，與他同層級的後方...
+    .container
+      .aside  
+        +transform(translateX(0%))
+        //.aside從可是範圍外被調整回原本的位置
+      .main-content
+        +transform(translateX(70%))
+        //主要內容被向右推移70%的距離
+</pre>
+<p>由於全部的程式碼過於攏長，所以在此重要的屬性設定的原因及觀念，如果想要實作練習，建議可以參考剛剛所提供的相關連結。</p>
+
+<h2>範例圖片</h2>
+<h3>Desktop Chrome</h3>
+<h4>正常的情況下，左上方的選單是回首頁。</h4>
+<img src="images/2013-10-13_120408.png" alt="" class="border">
+<br><br>
+<h4>縮小視窗後，利用Media Query將回首頁換成web font icon。</h4>
+<img src="images/2013-10-13_120423.png" alt="" class="border">
+<br><br>
+<h4>只要點擊icon就會執行<code>:checked</code>的效果，把左邊的選單拉出來，並且將主要的內容向右推移。</h4>
+<img src="images/2013-10-13_120435.png" alt="" class="border">
+<br><br>
+
+<h3>Mobile Chrome</h3>
+<h4>行動版的Chrome也是能夠正常運作，顯示基本上和桌上型的差不多。<h4>
+<img src="images/Screenshot_2013-10-13-12-05-53.png" alt="" class="border">
+<br><br>
+<h4>用起來還順順的，不錯...</h4>
+<img src="images/Screenshot_2013-10-13-12-05-58.png" alt="" class="border">
+<br><br>
+<h3>Mobile Firefox</h3>
+<h4>行動版firefox就有一點卡卡的。</h4>
+<img src="images/Screenshot_2013-10-13-12-08-15.png" alt="" class="border">
+
+<p>android的內建browser就不行囉...。</p>

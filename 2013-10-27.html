@@ -1,0 +1,80 @@
+<div class="css">2013-winter</div>
+
+<script>
+$(document).ready(function() {
+  $('.btn-demo').click(function(_evt){
+  _evt.preventDefault();
+  $(this).toggleClass('current');
+  });
+});
+</script>
+
+<p>CSS是專門處理網頁的樣式，在互動的部分都會使用javascript，雖然本網站之前的許多互動範例是純CSS，但會有相容性上的問題，而要簡易方式去寫互動的元件，會建議使用jqeury。</p>
+<p>而本篇會簡單的介紹如何使用jQuery，寫一個點擊後套用另一個Class的javascript。</p>
+
+<h2>jQuery</h2>
+<p>jQuery是javascript的函示庫，標榜著寫得少，做的多，並且可以解決許多跨瀏覽器的問題。</p>
+<p>jQuery: <a href="http://jquery.com/">http://jquery.com/</a></p>
+<p>jQuery由許多的版本，目前建議會使用1.8~1.9版；如果不需要支援IE8以下，或是只支援行動裝置的情況就可以考慮使用2.0版以上。</p>
+
+<pre>
+//本網站就是掛載1.8的jquery，可以參考看看本站的Jquery位置，放在head內部，CSS的後方
+&lt;script src=&quot;js/jquery-1.8.3.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</pre>
+
+<h2>對自己套用額外的Class</h2>
+<p>首先我們先做一個簡單的按鈕樣式後，再新增一個<code>Current</code>的Class，而在使用者點擊後的樣式，就做在Current的class內，以下的sass範例。</p>
+<div class="demo d1028" data-demo="點這個按鈕><">
+ <a href="#" class="btn-demo">Demo btn</a>
+</div>
+<pre>
+//sass code
+.btn-demo
+  //預設的樣式
+  ...
+
+.current
+  //js互動後的樣式
+  +box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.60),0 1px 2px rgba(0, 0, 0, 0.05))        
+  background-color: $darkenColor
+  border: 1px solid darken($darkenColor,10%) 
+  
+</pre>
+<p>接下來我們把下面的script寫在掛載的jquery後方(確保以載入jQuery函式庫)，再試試看預期的效果有沒有出來~。</p>
+<pre>
+&lt;script&gt;
+$(document).ready(function() {
+  $('.btn-demo').click(function(_evt){
+  _evt.preventDefault();
+  $(this).toggleClass('current');
+  });
+});
+&lt;/script&gt;
+</pre>
+<div class="demo d1028"  data-demo="點這個按鈕><">
+ <a href="#" class="btn-demo">Demo btn</a>
+</div>
+
+<h2>Script說明</h2>
+<pre>
+&lt;script&gt;
+//javascript需要放在script標籤內才會被執行
+
+$(document).ready(function() {
+//在文件完全載入後，執行這內部的function
+
+  $('.btn-demo').click(function(_evt){
+  //$('.btn-demo'):這是一個選取器，而裡面的值就直接用Css選取器的寫法即可，如.class或是#id
+  //.click : 這是一個點擊事件，只要這個按鈕被點擊，就會執行這內部的Function
+
+  _evt.preventDefault();
+  //不執行a這個標籤內的預設動作(href="#")
+
+  $(this).toggleClass('current');
+  //$(this): 觸發事件的選取器
+  //.toggleClass('current') : 切換current這一個Class
+
+  });
+});
+&lt;/script&gt;
+</pre>

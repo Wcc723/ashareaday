@@ -1,0 +1,45 @@
+<div class="css">2013-summer</div>
+<p>來源 : <a href="http://cssdeck.com/labs/css3-webkit-vertical-scrollbars">http://cssdeck.com/labs/css3-webkit-vertical-scrollbars</a></p>
+<div class="d0901 demo">
+	<div class="overflow"></div>
+</div>
+<p>上面這是內建webkit的scroll bar，有些時候因為需要配合版面，這樣式並不合適，而Webkit的瀏覽器可以透過以下CSS來做調整。</p>
+<pre>
+&::-webkit-scrollbar
+//"&"是必須與上一層同層級
+//-webkit-scrollbar : 整體的scrollbar樣式
+
+&::-webkit-scrollbar-thumb
+//bar的樣式
+
+&::-webkit-scrollbar-track
+//軌道的樣式
+
+::-webkit-scrollbar-thumb:window-inactive 
+//頁面是在被啟用的情況下(非必要)
+</pre>
+<h2>scrollbar範例</h2>
+<p>來源再貼一次 : <a href="http://cssdeck.com/labs/css3-webkit-vertical-scrollbars">http://cssdeck.com/labs/css3-webkit-vertical-scrollbars</a></p>
+<div class="d0901 demo scrollbar1">
+	<div class="overflow">style1</div>
+</div>
+<div class="d0901 demo scrollbar2">
+	<div class="overflow">style2</div>
+</div>
+<div class="d0901 demo scrollbar3">
+	<div class="overflow">style3</div>
+</div>
+<div class="d0901 demo scrollbar4">
+	<div class="overflow">style4</div>
+</div>
+<div class="d0901 demo scrollbar5">
+	<div class="overflow">style5</div>
+</div>
+<br>
+<div class="d0901 demo scrollbar6">
+	<div class="overflow">style6</div>
+</div>
+<p>就決定了，本網站要用這種樣式!</p>
+
+
+

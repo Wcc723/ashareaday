@@ -1,0 +1,63 @@
+/*
+Error: It's not clear which file to import for '@import "module.sass"'.
+       Candidates:
+         _module.sass
+         module.sass
+       Please delete or rename all but one of these files.
+        on line 2 of /Users/oushimakoto/Dropbox/AshareAday/sass/2013-test.sass
+
+1: @import compass
+2: @import module.sass
+3: @charset "utf-8"
+4: $imagePath: "../images/"
+5: $darkColor: #544D47
+6: $lightHeight: 1.6em
+7: //susy start
+
+Backtrace:
+/Users/oushimakoto/Dropbox/AshareAday/sass/2013-test.sass:2
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/import_node.rb:66:in `import'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/import_node.rb:64:in `import'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/import_node.rb:36:in `css_import?'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:295:in `visit_import'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:152:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/stack.rb:79:in `with_base'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/stack.rb:115:in `with_frame'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/stack.rb:79:in `with_base'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:152:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+org/jruby/RubyArray.java:2412:in `map'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:161:in `visit_children'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:173:in `with_environment'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:160:in `visit_children'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:180:in `visit_root'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:151:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/tree/root_node.rb:20:in `render'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/engine.rb:268:in `render'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+org/jruby/RubyMethod.java:136:in `call'
+file:/Applications/Fire.app/Contents/Java/fire-app.jar!/hook/compass_patch.rb:131:in `update_stylesheet'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/plugin/compiler.rb:215:in `update_stylesheets'
+org/jruby/RubyArray.java:1613:in `each'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/plugin/compiler.rb:470:in `on_file_changed'
+/Applications/Fire.app/Contents/Resources/lib/ruby/compass_1.0/sass-3.4.1/lib/sass/plugin/compiler.rb:329:in `watch'
+org/jruby/RubyProc.java:271:in `call'
+/Applications/Fire.app/Contents/Resources/lib/ruby/jruby/listen-1.1.6/lib/listen/listener.rb:236:in `on_change'
+/Applications/Fire.app/Contents/Resources/lib/ruby/jruby/listen-1.1.6/lib/listen/listener.rb:271:in `initialize_adapter'
+org/jruby/RubyProc.java:271:in `call'
+/Applications/Fire.app/Contents/Resources/lib/ruby/jruby/listen-1.1.6/lib/listen/adapter.rb:244:in `report_changes'
+/Applications/Fire.app/Contents/Resources/lib/ruby/jruby/listen-1.1.6/lib/listen/adapter.rb:313:in `poll_changed_directories'
+/Applications/Fire.app/Contents/Resources/lib/ruby/jruby/listen-1.1.6/lib/listen/adapter.rb:289:in `start_poller'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: It's not clear which file to import for '@import \"module.sass\"'.\A        Candidates:\A          _module.sass\A          module.sass\A        Please delete or rename all but one of these files.\A         on line 2 of /Users/oushimakoto/Dropbox/AshareAday/sass/2013-test.sass\A \A 1: @import compass\A 2: @import module.sass\A 3: @charset \"utf-8\"\A 4: $imagePath: \"../images/\"\A 5: $darkColor: #544D47\A 6: $lightHeight: 1.6em\A 7: //susy start"; }

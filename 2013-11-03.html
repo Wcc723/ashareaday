@@ -1,0 +1,77 @@
+<div class="css">2013-winter</div>
+
+
+<p></p>
+<iframe src="http://slid.es/wangchih-cheng/browser-developer-tools/embed" width="100%" height="400" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p>這是要在高雄前端社群用的簡報，而主要是介紹Chrome的開發者工具以及其中常用的功能。</p>
+
+<h3>本次 Demo範例</h3>
+<p>這部分是本日要用的DEMO~，主要是介紹CSS、CSS panel、console.log的功能。</p>
+<script>
+$(document).ready(function(){
+	$('.demo2').click(function(_evt){
+		_evt.preventDefault();
+
+		aa = $('#test').val();
+		localStorage.val = aa
+		//alert(aa);
+		console.log(aa);
+	})
+})
+</script>
+<div class="demo d1102">
+	<div class="tpl">
+		<input id="test" type="date" value="2013-11-03">
+	</div>
+</div>
+<div class="demo d1102">
+	<a href="#" class="demo2"> 深度按鈕</a>	
+</div>
+
+
+
+<h3>延伸參考內容閱讀</h3>
+<p><a href="http://discover-devtools.codeschool.com/">http://discover-devtools.codeschool.com/</a></p>
+<p><a href="http://www.w3cplus.com/tools/devtoolsecrets.html">http://www.w3cplus.com/tools/devtoolsecrets.html</a></p>
+<p><a href="https://developers.google.com/chrome-developer-tools/">https://developers.google.com/chrome-developer-tools/</a></p>
+
+<br><br>
+<h3>今日的 廖ㄍㄍ 之 Sublime 介紹</h3>
+<p>簡報 <a href="http://slid.es/gonsakon/5">http://slid.es/gonsakon/5</a></p>
+<p>Sublime 插件查詢<a href="https://sublime.wbond.net/">https://sublime.wbond.net/</a></p>
+<h4>Sublime的GO TO EVERYTHING</h4>
+<ul class="ollist">
+	<li>Ctrl + N  (開新檔案)、Ctrl + W (關閉檔案)</li>
+	<li>Alt+數字 (移動檔案位置)、<br>
+Alt+Shift+數字 (開啟視窗數量)、<br>
+Ctrl+數字(移動視窗)</li>
+	<li>Ctrl+P  (搜尋檔案)</li>
+	<li>Ctrl+R  (快速到達命名:Class、function)</li>
+	<li>PageUP(向上瀏覽)、PageDOWN(向下瀏覽)</li>
+	<li>Ctrl+F2 (標記書籤)、F2(快速定位各書籤位置)</li>
+	<li>Ctrl+Shift+P (搜尋快捷指令)</li>
+</ul>
+
+
+<h4>Sublime的常用熱鍵</h4>
+<ul class="ollist">
+	<li>Ctrl+L (選取單行)</li>
+	<li>Ctrl + D  (選擇下個相同程式碼)、Alt+ F3 (全選相同)</li>
+	<li>Ctrl+X (刪除單行)</li>
+	<li>Ctrl+Enter (下一行)、Ctrl+Shift+Enter (上一行)</li>
+	<li>Ctrl+Enter+往上、往下 (該行程式碼往上、往下跑)</li>
+	<li>Ctrl+Shift+a  (全選下一層區塊)</li>
+	<li>Ctrl+[、Ctrl+]  (向右、向左推進)</li>
+	<li>Ctrl+k+數字 (程式碼折疊，按0便全展開)</li>
+</ul>
+
+
+<h4>Sublime的常用插件</h4>
+<ul class="ollist">
+	<li>Emmet  (HTML、CSS快速輸入語法)</li>
+	<li>HTMLPrettify (HTML、CSS、JS排版)</li>
+	<li>Trailing Spaces (檢測是否有多餘空白)</li>
+	<li>Emmet LiveStyle (同步新增CSS內容)</li>
+	<li>Goto-CSS-Declaration (追蹤CSS，熱鍵：微軟+.)</li>
+	<li>ColorPicker (CSS色盤，熱鍵：Ctrl+Shift+C。) </li>
+</ul>

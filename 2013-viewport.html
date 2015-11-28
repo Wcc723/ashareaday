@@ -1,0 +1,33 @@
+<div class="css">2013-autumn</div>
+<p>本篇內容同步發表於<a href="http://ashareaday.wcc.tw/#2013-09-28">http://ashareaday.wcc.tw/#2013-09-28</a> (建議使用Chrome瀏覽器)</p>
+
+<p>番外篇 Viewport</p>
+<p>viewport是屬於html的meta屬性，它的功能是決定網頁在裝置上所呈現的大小，可以調整行動裝置的顯示能夠符合各種大小。</p>
+<pre>
+&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+</pre>
+<p>meta是放在html頁面的程式碼<code>head</code>的內部，<code>name="viewport"</code>後開始設定各項的屬性值，而相關屬性如下。</p>
+<em>參考：<a href="http://devdocs.io/html/meta">http://devdocs.io/html/meta</a></em>
+<table class="atableLight">
+<thead><tr>
+<th scope="col">Value</th> <th scope="col">Possible values</th> <th scope="col">Description</th> </tr></thead>
+<tbody>
+<tr>
+<td><code>width</code></td> <td>一個整數值或是設定<code>device-width</code>(裝置寬度)
+</td> <td>定義網頁所呈現的寬度值</td> </tr>
+<tr>
+<td><code>height</code></td> <td>一個整數值或是設定 <code>device-height</code>(裝置高度)
+</td> <td>定義網頁所呈現的高度值</td> </tr>
+<tr>
+<td><code>initial-scale</code></td> <td>一個數值從<code>0.0</code> 到 <code>10.0</code> 之間
+</td> <td>定義縮放百分比 </tr>
+<tr>
+<td><code>maximum-scale</code></td> <td>一個數值從<code>0.0</code> 到 <code>10.0</code> 之間
+</td> <td>定義縮放百分比 最大值</td> </tr>
+<tr>
+<td><code>minimum-scale</code></td> <td>一個數值從<code>0.0</code> 到 <code>10.0</code> 之間
+</td> <td>定義縮放百分比 最小值</td> </tr>
+<tr>
+<td><code>user-scalable</code></td> <td>a boolean value (<code>yes</code> or <code>no</code>)</td> <td>If set to <code>no</code>, the user is not able to zoom or in the webpage. Default value is <code>yes</code>.</td> </tr>
+</tbody>
+</table>

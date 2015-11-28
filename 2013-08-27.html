@@ -1,0 +1,31 @@
+<p>Coffee Script 反向編譯 無痛學習</p>
+<p>來源 : <a href="http://js2coffee.org/">http://js2coffee.org/</a></p>
+<pre>
+Scope.prototype.find = function(name, options) {
+    if (this.check(name, options)) {
+        return true;
+    }
+    
+    this.add(name, 'var');
+    return false;
+}
+//這是一打開的預設js
+</pre>
+<pre>
+# Type here! 
+Scope::find = (name, options) ->
+  return true  if @check(name, options)
+  @add name, "var"
+  false
+
+#這是編譯成coffee後的
+</pre>
+<p>再透過這樣的編譯，我們可以簡單理解一些事情，並且嘗試學習coffee script。</p>
+<ol class="ollist">
+	<li>巢狀結構代替大括號<code>{}</code></li>
+	<li>function 在 coffee寫作 <code>-></code></li>
+	<li>註解 在 coffee寫作 <code>#</code></li>
+	<li><code>this.</code> 在 coffee寫作 <code>@</code></li>
+	<li>小括號 在coffee不一定要打，只要空格隔開就可以了</li>
+	<li>可以先不定義變數(建議還是先定義)</li>
+</ol>

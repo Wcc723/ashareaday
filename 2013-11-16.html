@@ -1,0 +1,98 @@
+<div class="css">2013-winter</div>
+<p>Canvas還可以把檔案另存出來。</p>
+
+<h2>Canvas 另存檔案範例</h2>
+<div class="color">
+  調整灰階<input type="range" min="0" max="255" value="255"> 
+</div>
+<script>
+  var _canvas = document.getElementById('canvas');
+  var ctx = _canvas.getContext('2d');  
+  
+  var _color = 255;
+  
+  $('.color').on('change','input',function(){
+    _color = $(this).val();
+  })
+  var x = 0;
+  var y = 0;
+
+    function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    //getBoundingClientRect 取得物件完整座標資訊，包含寬高等
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };   
+    //這個function將會傳回滑鼠在 _canvas上的座標
+  };
+
+  function mouseMove(evt) {
+    var mousePos = getMousePos(_canvas, evt);
+    //透過getMousePos function 去取得滑鼠座標
+    //mousePos 是一個物件，包含x和y的值
+    ctx.lineTo(mousePos.x, mousePos.y);
+    //利用取回的值畫線
+    ctx.strokeStyle = "rgb("+_color+","+_color+","+_color+")";
+    //畫線的顏色是白色 
+    ctx.stroke();
+    //畫!
+  };
+
+  canvas.addEventListener('mousedown', function(evt) {
+    var mousePos = getMousePos(_canvas, evt);
+    //從按下去就會執行第一次的座標取得
+    evt.preventDefault();
+    ctx.beginPath();
+    //建立path物件
+    ctx.moveTo(mousePos.x, mousePos.y);  
+    //每次的點用moveTo去區別開，如果用lineTo會連在一起  
+    canvas.addEventListener('mousemove', mouseMove, false);
+    //mousemove的偵聽也在按下去的同時開啟 
+  });
+
+  canvas.addEventListener('mouseup', function() {
+    canvas.removeEventListener('mousemove', mouseMove, false);
+  }, false);
+  //如果滑鼠放開，將會停止mouseup的偵聽
+
+  $('#save').on('click', function(){
+    var _url = _canvas.toDataURL();
+    //利用toDataURL() 把canvas轉成data:image
+    this.href = _url;
+    //再把href載入上面的Data:image
+  });
+</script>
+<style>
+  input[type='range']{
+    width: 50%;
+  }
+  canvas{
+    margin: 20px auto;
+    border: 1px solid #E80C7A;
+  }
+</style>
+<canvas id="canvas" width="400" height="400">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+<p>請先在上面隨便畫兩筆</p>
+<a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a>
+
+
+<h2>轉存的語法</h2>
+<p>參考：<a href="http://devdocs.io/html/a">http://devdocs.io/html/a</a></p>
+<p>html5 的<code> a </code>有新的屬性<code>download</code>，可以將此標籤預設為下載的功能，並且預設檔名。</p>
+<pre>
+//html 主要新增download，可以用來預設下載檔名
+&lt;a id="save" href="#" download="dl.png" &gt;Save Canvas&lt;/a&gt;
+</pre>
+<p>另外在canvas可以利用toDataURL()把canvas轉成data:image。</p>
+<p>data:image：<a href="http://rritw.com/a/bianchengyuyan/C__/20131018/434112.html">http://rritw.com/a/bianchengyuyan/C__/20131018/434112.html</a></p>
+<pre>
+$('#save').on('click', function(){
+  var _url = _canvas.toDataURL();
+  //利用toDataURL() 把canvas轉成data:image
+  this.href = _url;
+  //再把href載入上面的Data:image
+});
+</pre>

@@ -1,0 +1,54 @@
+<div class="css">2013-winter</div>
+<p>參考：<a href="https://gist.github.com/ericam/1607696">https://gist.github.com/ericam/1607696</a></p>
+
+
+<h2>Keyframe , Animation的@mixin</h2> 
+<p>Compass目前版本似乎沒有支援animation，首先要先準備兩個<code>mixin</code>，一個是keyframe，另一個是animation。</p>
+<pre>
+//@mixin for keyframe
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+//@mixin for animation
+=animation($content)
+  -webkit-animation: $content
+  -moz-animation: $content
+  -o-animation: $content
+  animation: $content
+</pre>
+
+
+
+<p>如果沒有意外，這些sass就可以對應各種瀏覽器的前輟詞，現在就立馬做一個簡單的demo吧！</p>
+
+
+<h2>Demo</h2>
+<div class="demo d1016">
+  <div></div>
+</div>
+<pre>
+%box
+  height: 100px
+  width: 100px
+  margin: 0 auto
+  background: orange
+
++keyframes(ifinityCircles)
+  from
+    +transform(rotate(0))
+  to
+    +transform(rotate(360deg))
+
+div
+    @extend %box
+    +animation(ifinityCircles 3s infinite linear)
+</pre>
+
+<p>就這樣馬上就能完成animation，輕鬆愜意～</p>

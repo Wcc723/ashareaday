@@ -1,0 +1,80 @@
+<div class="css">2013-winter</div>
+
+<p>從上一篇可以了解到，flex和過去的比較起來，是相當具有彈性的，不只能像百分比一樣，還可以與固定像素配合，有效提升排版的豐富性。今天要介紹它更多樣的屬性值。</p>
+
+<h2>reverse 反向排列</h2>
+<p>CSS3許多屬性都可以反向排序，大多是使用<code>direction</code>，這邊就是用box-direction反轉容器內的元素。</p>
+<h3>正常版</h3>
+<pre>
+&lt;div class=&quot;display-box&quot;&gt;
+  &lt;div class=&quot;n200px&quot;&gt;200px&lt;/div&gt; //最左邊的固定200px
+  &lt;div class=&quot;flex1&quot;&gt;box-flex: 1&lt;/div&gt; //中間的flex: 1
+  &lt;div class=&quot;flex3&quot;&gt;box-flex: 3&lt;/div&gt; //右邊的flex: 3
+&lt;/div&gt;
+</pre>
+<p>這是上一篇有介紹到的排列方式，固定像素加上兩個flex彈性元素。</p>
+<div class="demo d1022">
+  <div class="display-box1">
+    <div class="n200px">200px</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+<h3>Reverse</h3>
+<pre>
+//css code
+.display-box{
+  -webkit-box-direction: reverse;
+  -moz-box-direction: reverse;
+  -ms-box-direction: reverse;
+  box-direction: reverse;
+}
+</pre>
+<pre>
+//sass code
+.display-box
+  +box-direction(reverse)
+</pre>
+<p>只要透過box-direction，就可以轉換排列的順序。</p>
+<div class="demo d1022">
+  <div class="display-box2">
+    <div class="n200px">200px</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+
+<h2>垂直排列</h2>
+<p>flex的效果不只是用在水平的排版上，包含垂直的編排也是能夠使用。</p>
+<pre>
+.display-box{
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+}
+</pre>
+<pre>
+.display-box
+  +box-orient(vertical)
+</pre>
+<p>只要套用<code>box-orient: vertical</code>，就能夠把水平的排版，轉換為垂直的排版。</p>
+<div class="demo d1022">
+  <div class="display-box3">
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+<p>當然百分比也能繼續使用，只要設定高就可以了。</p>
+<div class="demo d1022">
+  <div class="display-box4">
+    <div class="n60p">60%</div>
+    <div class="flex1">box-flex: 1</div>
+    <div class="flex3">box-flex: 3</div>
+  </div>
+</div>
+
+

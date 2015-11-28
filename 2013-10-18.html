@@ -1,0 +1,67 @@
+<div class="css">2013-winter</div>
+
+<p>和其他屬性一樣，animation有許多屬性可以設定，當然也可以用一個animation涵蓋全部，以下幾張會分別介紹以下屬性的用途。</p>
+
+<em>來源：<a href="http://css.doyoe.com/">http://css.doyoe.com/</a></em>
+<ol class="ollist">
+  <li>[ animation-name ]：設置物件所應用的動畫名稱(必填)</li>
+  <li>[ animation-duration ]：檢索或設置對象動畫的持續時間(必填)</li>
+  <li>[ animation-timing-function ]：檢索或設置物件動畫的過渡類型</li>
+  <li>[ animation-delay ]：檢索或設置對象動畫延遲的時間</li>
+  <li>[ animation-iteration-count ]：檢索或設置物件動畫的迴圈次數</li>
+  <li>[ animation-direction ]：檢索或設置物件動畫在迴圈中是否反向運動</li>
+</ol>
+
+<p>以下範例都是用相同的keyframes作介紹，僅調整animation的屬性。</p>
+<pre>
++keyframes(ifinityCircles)
+  from
+    +transform(rotate(0))
+  to
+    +transform(rotate(360deg))
+</pre>
+
+
+<h2>Name 及 Duration</h2>
+<p>就像上面所說的，就算是每個屬性可以分開設定，但其實也是可以用一個<code>animation</code>寫一起，以下的範例都是寫一起，就不分開設定了。</p>
+<p>Name和Duration都是必填屬性，所以必須一起介紹，在這邊都是引用上面的那一組keyframe。</p>
+<pre>
++animation(ifinityCircles 3s)
+//ifinityCircles 是 keyframe的name
+//3s 是duration
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a1">
+  <label class="box1" for="a1"></label>
+</div>
+<p>除了name相同外，我們改變時間，動畫時間會明顯的變長。</p>
+<pre>
++animation(ifinityCircles 8s)
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a2">
+  <label class="box2" for="a2"></label>
+</div>
+
+
+<h2>Timing-function</h2>
+<p>速率的timing-function可以參考: <a href="http://ashareaday.wcc.tw/#2013-08-24">http://ashareaday.wcc.tw/#2013-08-24</a></p>
+<p>建議可以參考上面的範例，animation和transition所使用的timing-function是相同的，所以可以先把常用的記起來~。</p>
+<pre>
++animation(ifinityCircles 3s ease)
+//ease就是 timing-function的預設值
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a3">
+  <label class="box3" for="a3"></label>
+</div>
+<p>在這種旋轉的動畫，我喜歡設定線性(linear)的timing-function。</p>
+<pre>
++animation(ifinityCircles 3s linear)
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a4">
+  <label class="box4" for="a4"></label>
+</div>
+
+<p>明天的章節，在介紹剩下的animation屬性~</p>

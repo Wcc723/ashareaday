@@ -1,0 +1,33 @@
+<div class="css">2013-summer</div>
+<p>	參考 : <a href="http://thepetedesign.com/demos/jquery_flat_shadow_demo.html">http://thepetedesign.com/demos/jquery_flat_shadow_demo.html</a></p>
+<p>聽說很夯的long-shadow，我把它sass <code>@mixin</code>~</p>
+<div class="demo d0825">
+	<div class="timing1">
+		B
+	</div>
+</div>
+<p>上方的<code>sass</code>code.</p>
+<pre>
+font-size: 8em
+font-weight: bold
+line-height: 1em
+text-shadow: none
+color: rgb(52, 255, 255)
+div
+	+longShadow($lenght: 30,$rgb: #11836C)
+	margin: 0 auto 
+	background: rgb(26, 188, 156)
+	width: 1em
+	height: 1em
+	padding: 0.1em
+	text-align: center
+	+border-radius(5px)
+</pre>
+<p>精心準備的<code>@mixin</code>，long shadow不求人~。</p>
+<pre>
+@mixin longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+	text-shadow: $all
+</pre>

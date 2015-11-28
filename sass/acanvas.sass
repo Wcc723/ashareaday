@@ -1,0 +1,59 @@
+@import compass/reset
+@import module.sass
+@import LigatureSymbols.css
+@charset "utf-8"
+$imagePath: "../images/"
+$fontColor: #777
+$red: #E60044
+$ironGray: #646464
+html,body
+	font-family: 'microsoft jhenghei','Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif
+	//background: url($imagePath+"agsquare.png")
+	line-height: 1.8em
+	background: white
+	color: $fontColor
+	width: 100%
+	height: 100%
+	+heading
+.wrap
+	margin: 0 auto
+	max-width: 1200px
+.header
+	text-align: center
+	padding: 1em 0
+.controller
+	background: $ironGray
+	padding: .5em
+	+clearFix
+.colorBar
+	$size: 2em
+	float: left
+	+clearFix
+	a			
+		display: block
+		float: left
+		margin-right: 4px		
+		width: $size
+		height: $size
+		background: red
+		border: 3px solid $ironGray
+		cursor: pointer
+		&:hover
+			border: rgba(255,255,255,.4) 3px dashed
+		&.current
+			border-color: rgba(255,255,255,.8)
+.tools
+	float: right
+#pen
+	border: 3px solid $ironGray
+	&.current
+		border-color: rgba(255,255,255,.8)
+.canvas
+	height: 640px
+	+box-shadow(0 0 3px rgba($fontColor, .3))
+
++colorfullButton
+
+
+.contentFooter
+	margin: 1em 0

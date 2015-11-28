@@ -1,0 +1,398 @@
+@import compass
+@import module.sass
+@charset "utf-8"
+$imagePath: "../images/"
+$darkColor: #544D47
+$lightHeight: 1.6em
+//susy start
+$bgColor: #D140AC
+$lighten: lighten($bgColor,20%)
+$darkbgColor: darken($bgColor,20%)
++font-face("LigatureSymbols",font-files("LigatureSymbols-2.05.eot","LigatureSymbols-2.05.ttf","LigatureSymbols-2.05.woff","LigatureSymbols-2.05.svg#LigatureSymbols","svg"),normal,normal)
+.lsf
+	font-family: 'LigatureSymbols'
+	font-size: 300%
+	-webkit-text-rendering: optimizeLegibility
+	-moz-text-rendering: optimizeLegibility
+	-ms-text-rendering: optimizeLegibility
+	-o-text-rendering: optimizeLegibility
+	text-rendering: optimizeLegibility
+	//文字的渲染方式
+	-webkit-font-smoothing: antialiased
+	-moz-font-smoothing: antialiased
+	-ms-font-smoothing: antialiased
+	-o-font-smoothing: antialiased
+	font-smoothing: antialiased
+	//文字的平滑模式
+	-webkit-font-feature-settings: "liga" 1, "dlig" 1
+	-moz-font-feature-settings: "liga=1, dlig=1"
+	-ms-font-feature-settings: "liga" 1, "dlig" 1
+	-o-font-feature-settings: "liga" 1, "dlig" 1
+	font-feature-settings: "liga" 1, "dlig" 1
+	//在OpenType 有更進階的設定，但這邊沒有特別研究
+.menubox
+	background: #555
+	$boxColor: white
+	$boxWidth: 50px
+	$borderWidth: 2px
+	text-align: center
+	input[type="checkbox"]
+		display: none
+		&:checked + label
+			span
+				background: transparent
+			&:after	
+				+transform(rotate(50deg) translateY($boxWidth/5)  translateX($boxWidth/4))
+			&:before	
+				+transform(rotate(-50deg) translateY(- $boxWidth/5)  translateX($boxWidth/4))				
+	label
+		display: inline-block
+		width: $boxWidth
+		height: $boxWidth/1.5
+		margin: $boxWidth/2 auto
+		cursor: pointer
+		position: relative
+		+background(bottom)
+		span
+			display: inline-block
+			height: $borderWidth
+			width: $boxWidth
+			line-height: $boxWidth/1.5
+			background: $boxColor
+			+transition(background .5s)
+		&:after,&:before
+			content: " "
+			height: $borderWidth
+			width: $boxWidth
+			background: $boxColor
+			position: absolute
+			left: 0
+		&:after	
+			top: 0
+			+transition(all .5s)
+			+transform-origin(0% 50%)
+		&:before
+			bottom: 0
+			+transition(all .5s)
+@-webkit-keyframes clockRotate
+	from
+		+transform(rotate(0deg))
+	to
+		+transform(rotate(360deg))
+.clocks
+	text-align: center
+	$pointerWidth: 8px 
+	.clock
+		display: inline-block
+		background: #C45575
+		position: relative
+		height: 200px
+		width: 200px
+		border: #A64863 5px solid
+		+border-radius(50%)	
+		div
+			width: $pointerWidth
+			position: absolute
+	.hours
+		background: #EDB95B
+		height: 80px
+		top: 100px - 60px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,60px)
+		//+transition(all 30s linear)
+		-webkit-animation: clockRotate 72s infinite linear
+
+	.minutes
+		background: #676BED
+		height: 100px
+		top: 100px - 80px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,80px)
+		//+transition(all 5s linear)
+		-webkit-animation: clockRotate 6s infinite linear
+
+	.seconds
+		background: #F78C5F
+		height: 120px
+		top: 100px - 100px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,100px)
+		//+transition(all 5s linear)
+		-webkit-animation: clockRotate 1s infinite linear
+
+
+@mixin text-cubicStyle($lenght: 15,$rgb: #dfdfdf)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,darken($rgb,$i/1.6)),comma)	
+	text-shadow: $all,$lenght+1px $lenght+1px 1px rgba(0,0,0,.3),$lenght+2px $lenght+2px 10px rgba(0,0,0,.6)
+.webfont
+	+perspective(1000px)
+	%box
+		line-height: 120px
+		height: 120px
+	.demo1
+		@extend %box
+		font-size: 50px
+	.demo2
+		@extend %box
+		font-size: 50px
+		color: #00ACEE
+	.demo3
+		@extend %box
+		font-size: 50px
+		font-style: italic
+		color: #00ACEE
+	.demo4
+		@extend %box
+		font-size: 50px
+		color: white
+		text-shadow: 1px 1px 5px rgba(black,.5)
+
+	.demo5
+		background: gray
+		@extend %box
+		font-size: 50px
+		color: white
+		+text-cubicStyle
+
+	.demo6
+		@extend %box
+		font-size: 40px
+		+transition(all .5s)
+		color: #00ACEE
+		&:hover
+			font-size: 50px
+
++font-face("drangon",font-files("icomoon.eot","icomoon.ttf","icomoon.woff","icomoon.svg","svg"),normal,normal)
+.drangon-icon
+	font-family: 'drangon'
+	-webkit-font-smoothing: antialiased
+	font-smoothing: antialiased
+	speak: none
+	font-style: normal
+	font-weight: normal
+	font-variant: normal
+	text-transform: none
+	line-height: 1
+	-webkit-font-smoothing: antialiased
+[data-drangon]:before
+	font-family: 'drangon'
+	content: attr(data-drangon)
+	speak: none
+	font-weight: normal
+	font-variant: normal
+	text-transform: none
+	line-height: 1
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+.drangon-icon-drangonball 
+	font-family: 'drangon'
+	speak: none
+	font-style: normal
+	font-weight: normal
+	font-variant: normal
+	text-transform: none
+	line-height: 1
+	-webkit-font-smoothing: antialiased
+	&:before 
+		content: "\67"
+
+=keyframes($name)
+	@-webkit-keyframes #{$name}
+		@content
+	@-moz-keyframes #{$name}
+		@content
+	@-ms-keyframes #{$name}
+		@content
+	@keyframes #{$name}
+		@content
+
+=animation($content)
+	-webkit-animation: $content
+	-moz-animation: $content
+	-o-animation: $content
+	animation: $content
+
++keyframes(ifinityCircles)
+	from
+		+transform(rotate(0))
+	to
+		+transform(rotate(360deg))
+
++keyframes(rotateY) //planet used
+	from
+		+transform(rotateX(-90deg) rotateY(0))
+	to
+		+transform(rotateX(-90deg) rotateY(360deg))
+
+%w100
+	height: 100%
+	width: 100%
+%preserve-3d
+	+transform-style(preserve-3d)
+.galaxy
+	@extend %w100
+	+perspective-origin(20% -20%)
+	+perspective(4000px)
+	background: rgba(black,.2) 
+	+background-size(cover)
+
+.solar-system
+	font-size: 20px
+	@extend %w100
+	@extend %preserve-3d
+	+transform(rotateX(90deg) rotateY(10deg)) 	
+	//display: -webkit-box
+	//+box-align(center)
+	position: relative
+
+
+
+
+%planet
+	$planetSize: .25em
+	width: $planetSize
+	height: $planetSize
+	margin: 0 auto
+	margin-top: - $planetSize/2	
+	//margin-left: - $planetSize/2	
+	//position: absolute
+	+border-radius(50%)
+
+
+
+%orbit
+	font-size: 40px
+	position: absolute
+	top: 50%
+	left: 50%
+	border: 2px solid rgba(white ,.3)
+	+border-radius(50%)
+	+transition(border-color .5s)
+	@extend %preserve-3d
+	//&:hover
+	//	border-color: rgba(white ,.8)
+=orbit($thisOrbit)
+	$thisOrbit : $thisOrbit + 4em
+	width: $thisOrbit
+	height: $thisOrbit
+	margin-top: - $thisOrbit/2	
+	margin-left: - $thisOrbit/2	
+
+.sun
+	//font-size: 6540px
+	+transform(rotateX(-90deg)) 
+	font-size: 24em
+	$planetSize: .35em
+	width: $planetSize
+	height: $planetSize
+	margin-left: -$planetSize/2
+	margin-top: -$planetSize/2
+	position: absolute
+	+border-radius(50%)	
+	top: 50%
+	left: 50%	
+	+background(radial-gradient(35% 15%, circle,#fff, #FFEAB6, #E86E00))
+	+box-shadow(0 0 50px #E86E00,0 0 8px red)
+	//z-index: 11
+.mercury
+	$thisSecond: 11s
+	@extend %orbit
+	+orbit(4.6em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	//z-index: 10
+	.planet
+		//font-size: 24px
+		font-size: .6em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#fff, #ccc, #555))
+.venus
+	$thisSecond: 22s
+	@extend %orbit
+	+orbit(7.2em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	//z-index: 9
+	.planet
+		//font-size: 60px
+		font-size: 1.8em		
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#DCD7D3, #817C68, #514C38))
+.earth
+	$thisSecond: 36.5s
+	@extend %orbit
+	+orbit(10em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	//z-index: 8
+	.planet
+		//font-size: 63px
+		font-size: 2em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#5A9CF7, #467AC2, #203859))
+.mars
+	$thisSecond: 72s
+	@extend %orbit
+	+orbit(15.2em)
+	+animation(ifinityCircles $thisSecond infinite linear)
+	.planet
+		//font-size: 33px
+		font-size: 1.2em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#FEB15F, #FE6A44, #913D27))
+
+.jupiter
+	$thisSecond: 433.1s
+	@extend %orbit
+	+orbit(19.5em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	.planet
+		//font-size: 71.4px
+		font-size: 8.5em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#eee, #FEB15F, #BA8246))
+.saturnus
+	$thisSecond: 1083.2s
+	@extend %orbit
+	+orbit(29.6em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	.planet
+		//font-size: 60.2px
+		font-size: 4em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#E9D3AA, #A8987B, #786554))
+.uranus
+	$thisSecond: 3079.9s
+	@extend %orbit
+	+orbit(40em)	
+	+animation(ifinityCircles $thisSecond infinite linear)
+	.planet
+		//font-size: 25.5px
+		font-size: 1.2em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#C5EBF5, #7CB7D1, #5C7E9C))
+.neptunus
+	$thisSecond: 6032.7s
+	@extend %orbit
+	+orbit(45em)
+	+animation(ifinityCircles $thisSecond infinite linear)	
+	.planet
+		//font-size: 247px
+		font-size: 1.3em
+		@extend %planet
+		+animation(rotateY $thisSecond infinite linear)
+		+background(radial-gradient(35% 15%, circle,#558BE0, #3B61B8, #273F78))
+.saturnus-rings		
+	font-size: 125px
+	@extend %planet
+	border: 40px #A8987B solid
+	position: absolute
+	left: -50%
+	top: 50%
+	+transform(rotateX(85deg))

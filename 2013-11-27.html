@@ -1,0 +1,24 @@
+<div class="css">2013-winter</div>
+<p>我有一組經常使用的自製sass mixin，裡面包含了許多各式各樣的物件，像是按鈕、表單、表格等等，而除了自己開發的以外，還有許多是參考現有的framework，像是bootstrap。</p>
+<p>最近有打算把部份px的部分改成em，讓使用上更為自由。</p>
+<h2>Demo</h2>
+<p>左邊紫色的是傳統的按鈕，padding的值爲 4px 8px；而右邊的是預計要修改成的模組，padding的值爲 .35em .7em .4em，而目的就是為了更下面的實驗。</p>
+<div class="demo d1127">
+	<a href="#" class="color-btn-purple">px button</a>
+	<a href="#" class="color-btn-blue em">em button</a>
+</div>
+<p>雖然bootstrap等framework都有提供更大size的button，但如果可以一組size就可以套用到各種地方是不是更靈活些，這邊就先在外圍的元素設定style="font-size: 35px"，因為繼承的原因，所以裡面的文字也會被套用35px，左邊按鈕就會如期表現padding不足，右邊的padding運氣很好有等比的放大。</p>
+<div class="demo d1127" style="font-size: 35px">
+	<a href="#" class="color-btn-purple">px button</a>
+	<a href="#" class="color-btn-blue em">em button</a>
+</div>
+<p>接下來連續兩個套用font-size: 24px、font-size: 42px</p>
+<div class="demo d1127">
+	<a href="#" class="color-btn-purple ll">px button</a>
+	<a href="#" class="color-btn-blue em ll">em button</a>
+</div>
+<div class="demo d1127">
+	<a href="#" class="color-btn-purple xl">px button</a>
+	<a href="#" class="color-btn-blue em xl">em button</a>
+</div>
+<p>而其實各家的framework所用單位是不同，之前在做網頁的時候也都是使用px，但到了現在認為px越來越不靈活，所以現在要考慮將所有mixin改成em。</p>

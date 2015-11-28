@@ -1,0 +1,41 @@
+<div class="css">2013-summer</div>
+<p>皮毛技術 ::selection</p>
+<p>這是一個很簡單的技術，就是可以改變文字反選後的樣式，而支援的樣式並不多，目前僅有<code>Color</code>、<code>background</code>、<code>background-color</code>、<code>text-shadow</code>在內。</p>
+<div class="demo d0911" data-demo="請反選這段文字">
+	<div>這是一段文章，知情人士已透露，除了價格的競爭，蘋果將推出低價iPhone，以及iPhone 5升級版。</div>
+	
+</div>
+<p>上面這一段，是正常版本的，只是做個陰影，沒有任何效果，只是要做個對照。</p>
+
+<h2>正式開始</h2>
+
+<div class="demo d0911" data-demo="請反選這段文字">
+	<div class="test1">這是一段文章，知情人士已透露，除了價格的競爭，蘋果將推出低價iPhone，以及iPhone 5升級版。</div>	
+</div>
+<p>上面這一段讓底色可以變黑，文字變成白色，但是我們可以注意到陰影在反白後，會影響閱讀。</p>
+<pre>
+div
+	&::-moz-selection
+		background: black 
+		color: white
+	&::selection  
+		background: black 
+		color: white
+</pre>
+<h3>建議移除text-shadow效果</h3>
+<div class="demo d0911" data-demo="請反選這段文字">
+	<div class="test2">這是一段文章，知情人士已透露，除了價格的競爭，蘋果將推出低價iPhone，以及iPhone 5升級版。</div>	
+</div>
+<p>像是這一段，另外再把text-shadow移除，是不是更好閱讀呢?</p>
+<pre>
+div
+	&::-moz-selection
+		background: red 
+		color: white
+		text-shadow: none
+	&::selection  
+		background: red 
+		color: white
+		text-shadow: none
+</pre>
+

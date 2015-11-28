@@ -1,0 +1,1855 @@
+@import compass
+$imagePath: "/images/"
+@import url("http://fonts.googleapis.com/css?family=The+Girl+Next+Door")
+
+
+
+
+
+
+.d0917
+	//boxShadow
+	.boxShadow
+		width: 100px
+		height: 100px
+		background: white
+		margin: 0 auto
+		+box-shadow(0 0 5px rgba(#000,.5))
+		+border-radius(20%)
+		+transform2d(rotate(10deg))
+	//webfont
+	.webfont
+		font-family: 'The Girl Next Door', cursive
+		font-size: 2em
+	//transition
+	&:hover > .transition
+		margin-left: 80%
+		margin-left: calc(100% - 50px)
+	.transition	
+		width: 50px
+		height: 50px
+		background: red
+		+transition-property(margin-left)
+		+transition-duration(5s)
+	.transition + .transition
+		margin-top: 5px
+
+	.timing1
+		+transition-timing-function(ease)
+
+	//3D
+	.container
+		+perspective(1000px)
+		position: relative
+		width: 150px
+		height: 150px
+		margin: 0 auto
+	.cube
+		+transform-style(preserve-3d)
+		width: 100%
+		height: 100%
+		position: absolute
+		+transform(rotateY(-15deg))	
+		div
+			width: 146px
+			height: 146px
+			border: 2px solid #555
+			position: absolute
+			+transition(all .5s)
+		+transition(all .5s)
+		&:hover
+			+transform(rotateY(0deg))
+			div
+				+transform(rotateY(0deg) translateZ( 1px ))
+	.front
+		background: hsla( 0, 100%, 50%, 0.5 )
+		+transform(rotateY(0deg) translateZ( 75px ))
+	.back
+		background: hsla( 60, 100%, 50%, 0.5 )
+		+transform(rotateX(180deg) translateZ(75px))
+	.right
+		background: hsla( 120, 100%, 50%, 0.5 )
+		+transform(rotateY(90deg) translateZ( 75px ))
+	.left
+		background: hsla( 180, 100%, 50%, 0.5 )
+		+transform(rotateY(-90deg) translateZ( 75px ))
+	.top
+		background: hsla( 240, 100%, 50%, 0.5 )
+		+transform(rotateX(90deg) translateZ( 75px ))
+	.bottom
+		background: hsla( 300, 100%, 50%, 0.5 )
+		+transform(rotateX(-90deg) translateZ( 75px ))
+.d0918
+	text-align: center
+	color: white
+	line-height: 100px
+	div
+		display: inline-block
+		width: 45%
+		height: 100px
+	.color1
+		background: #BF2C73
+	.color2
+		background: #BF2C73
+		+background-image(linear-gradient(#FF3B99,#7F1D4D))
+
+.d0919
+	.test
+		+border-radius(5px)
+		width: 100px
+		height: 100px
+		border: #333 solid 3px
+		margin: 0 auto
+
+.d0920
+	$color: #E80C7A
+	$boxSize: 150px
+	$boxBorder: 10px
+	.nest
+
+		ul
+			color: $color
+			li				
+				border-bottom: #ccc solid 1px
+	.math
+		text-align: center
+		color: #fff
+		div
+			background: orange
+			border: $color solid $boxBorder
+			display: inline-block
+			vertical-align: middle
+		.box1
+			width: $boxSize
+			height: $boxSize
+		.box2
+			width: $boxSize - $boxBorder*2
+			height: $boxSize - $boxBorder*2
+
+	.color
+		text-align: center
+		color: #fff
+		div			
+			display: inline-block
+			width: $boxSize
+			height: $boxSize
+		.box1
+			background: $color
+		.box2
+			background: darken($color,10%)
+	@mixin table-base($color: #E80C7A)
+		border-collapse: collapse
+		width: 100%
+		th
+			text-align: center
+			background: $color
+			color: white
+
+		td,th
+			padding: 6px
+			border: 1px solid #ccc
+	.mixin
+		table.table1
+			+table-base
+		table.table2
+			+table-base($color: #9d6bda)
+
+	.compass
+		margin: 0 auto
+		width: $boxSize
+		height: $boxSize
+		+background-image(linear-gradient($color,darken($color,20%)))
+
+	@mixin table-base2($color: #E80C7A)
+		border-collapse: collapse
+		width: 100%
+		th
+			text-align: center
+			background: $color
+			+background-image(linear-gradient($color,darken($color,20%)))
+			color: white
+
+		td,th
+			padding: 6px
+			border: 1px solid #ccc
+	.sass
+		table.table3
+			+table-base2
+		
+
+.d0921
+	text-align: center
+	div
+		width: 100px
+		height: 100px
+		display: inline-block
+
+	@for $i from 1 through 5
+		.rgba#{$i}
+			background: rgba(232,12,122,.2 * $i)
+
+	@for $i from 1 through 6
+		.h#{$i}
+			background: hsla(60 * $i,100%,50%,1)
+
+	@for $i from 1 through 6
+		.s#{$i}
+			background: hsla(120,(20% * $i - 20),50%,1)
+	@for $i from 1 through 6
+		.l#{$i}
+			background: hsla(120,100%,(20% * $i - 20),1)
+
+	.hsla
+		background: hsla(175,80%,50%,1)
+
+				
+.d0922
+	text-align: center
+	.naruto
+		display: inline-block
+		background-image: url($imagePath+"naruto.png")
+		height: 404px
+		width: 156px
+		position: relative
+		z-index: 3
+		&:after,&:before
+			content: ""
+			position: absolute			
+			z-index: -1			
+			top: -15px			
+			opacity: 0
+			+transition(all, 0.5s)
+		&:after			
+			height: 414px
+			width: 214px
+			left: 0
+			background-image: url($imagePath+"narutoR.png")
+		&:before
+			height: 413px
+			width: 231px
+			right: 0
+			background-image: url($imagePath+"narutoL.png")
+		&:hover:after
+			opacity: 1
+			left: 150px
+		&:hover:before
+			opacity: 1
+			right: 150px
+	.mayday
+		font-size: 2em
+		line-height: 1em
+		color: red
+		&:before
+			content: "淚未乾 "
+			opacity: 0
+			+transition(all, 0.5s)
+		&:after
+			content: " 是什麼依然在滾燙"
+			opacity: 0
+			+transition(all, 0.5s)
+		&:hover:before,&:hover:after
+			opacity: 1
+	$color: #f74b48
+	.box-withArrow
+		font-size: 1.5em
+		width: 15em
+		padding: .5em
+		margin: 10px auto 
+		background: $color
+		color: white
+		+border-radius(5px)
+		position: relative
+		&:after
+			content: ""
+			width: 0
+			height: 0
+			position: absolute
+			left: 10px
+			bottom: -20px
+			border: transparent 10px solid
+			border-top: $color 10px solid
+
+
+.d0923
+	font-size: 2.5em
+	line-height: 1.5em
+	text-align: center
+	&.dark
+		background: #555
+	&.gray
+		background: #ddd
+	.text1
+		color: red
+		text-shadow: 4em 0 0 gray
+	.text
+		font-weight: bolder
+		color: black 
+	.normal
+		text-shadow: 1px 1px 5px gray
+	.texture
+		background: url($imagePath+"agsquare.png")
+	.text-shadow1
+		text-shadow: 1px 1px 0 white
+	.text-shadow2
+		text-shadow: -1px -1px 0 white
+	.text-shadow11
+		color: #ccc
+		text-shadow: -1px -1px 0 white, 1px 1px 0 #333,1px 1px 0 #444
+	.text-shadow3
+		text-shadow: 0 0 20px orange
+		color: white 
+	.text-shadow4
+		color: white 
+		//text-shadow: 0 0 5px white,0 0 10px white,0 0 15px white,0 0 40px #ff00de,0 0 70px #ff00de
+		text-shadow: 0 0 5px white,0 0 10px white,0 0 15px white,0 0 40px #ff00de,0 0 70px #ff00de
+		line-height: 3em
+	.text-shadow9
+		font-size: 1.5em
+		line-height: 1.5em
+		text-shadow: 3px 3px 0 #555, 5px 5px 0 white
+		color: white
+
+.d0924
+	[class*="gradient"]
+		width: 100%
+		height: 100px
+	.gradient1
+		+background-image(linear-gradient(left, #E80C7A,rgba(#E80C7A,.5), #E85D2D))
+	.gradient2
+		+background-image(linear-gradient(bottom, #E80C7A,rgba(#E80C7A,.5), #E85D2D))
+	.gradient3
+		+background-image(linear-gradient(-35deg, #E80C7A,rgba(#E80C7A,.5), #E85D2D))
+	.gradient4
+		+background-image(radial-gradient(#E80C7A,rgba(#E80C7A,.5), #E85D2D))	
+	.gradient7
+		+background-image(linear-gradient(top, #E80C7A 10%, #E85D2D 20%, #E80C7A 30%, #E85D2D 40%, #E80C7A 50%, #E85D2D 60%))
+
+	
+
+
+	.gradient8
+		+background-image(linear-gradient(left, rgba(#E80C7A,.5) 20%, transparent 50%))
+	.gradient9
+		+background-image(linear-gradient(top, rgba(#E80C7A,.5), transparent 70%))
+	.gradient10
+		+background(linear-gradient(left, rgba(#E80C7A,.5) 20%, transparent 50%),linear-gradient(top, rgba(#E80C7A,.5), transparent 70%))
+
+	.gradient11
+		+background-image(linear-gradient(-45deg, #000 5px, transparent 50px))
+		background-size: 50px 50px
+
+	.gradient12
+		+background-image(radial-gradient(#fff 3px, transparent 5px, #fff 7px, transparent 9px, #fff 11px, transparent 13px, #fff 15px, transparent 17px, #fff 19px, transparent 21px, #fff 23px, transparent 25px, #fff 27px, transparent 29px, #fff 31px, transparent 33px))
+		background-color: #111
+		background-size: 30px 30px
+	.gradient13
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		background-repeat: no-repeat
+		background-size: 50% 50%
+		+border-radius(50%)
+		margin: 0 auto
+		width: 150px
+		height: 150px
+		border: 1em solid tomato
+		+transition(all, 3s)
+		&:hover
+			+transform(rotate(3600deg))
+	.gradient14
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		background-repeat: no-repeat
+		background-size: 50% 50%
+	.gradient15
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		background-repeat: no-repeat
+		//background-size: 50% 50%
+		
+
+.d0925
+	.frame
+		margin: 0 auto
+		max-width: 450px
+		max-height: 300px
+		overflow-y: scroll
+		&:before
+			font-size: 2em
+			content: attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title) "\A" attr(data-title)	
+				
+		&:hover
+			&::-webkit-scrollbar-thumb
+				background-color: #777
+		&::-webkit-scrollbar
+			height: 10px
+			width: 10px
+			background-color: transparent
+		&::-webkit-scrollbar-thumb
+			background-color: rgba(#aaa,.3)
+			+border-radius(5px)
+		&::-webkit-scrollbar-track
+			background-color: transparent
+	.pic
+		background-image: url($imagePath+"IMAG0645.jpg")		
+		+background-size(cover)	
+		
+	.scroll		
+		background-attachment: scroll
+	.fixed
+		background-attachment: fixed
+	.local
+		background-attachment: local
+
+	.new
+		//+background(linear-gradient(white 20%, rgba(#fff,0)),linear-gradient(rgba(#fff,0), white 80%),radial-gradient(at top, rgba(0,0,0,.2), transparent),radial-gradient(at bottom, rgba(0,0,0,.2), transparent 200px) bottom)
+		//+background(radial-gradient(at bottom, rgba(0,0,0,.2), transparent 200px) bottom)
+		font-size: 1.5em
+		line-height: 1.5
+		&:before
+			font-size: 1.5em
+		background: linear-gradient(white 30%, rgba(#fff,0)), linear-gradient(rgba(#fff,0), white 70%) bottom, radial-gradient(at top, rgba(0,0,0,.2), transparent 70%), radial-gradient(at bottom, rgba(0,0,0,.2), transparent 70%) bottom
+		background-repeat: no-repeat
+		background-size: 100% 40px, 100% 40px, 100% 18px, 100% 18px
+		background-attachment: local, local, scroll, scroll
+	.new1
+		&:before
+			font-size: 1.5em
+		background: linear-gradient(black 30%, rgba(black,0)), linear-gradient(rgba(black,0), black 70%) bottom
+		background-repeat: no-repeat
+		background-size: 100% 40px, 100% 40px
+		background-attachment: local, local
+	.new2
+		&:before
+			font-size: 1.5em
+		background: radial-gradient(at top, rgba(0,0,0,.2), transparent 70%), radial-gradient(at bottom, rgba(0,0,0,.2), transparent 70%) bottom
+		background-repeat: no-repeat
+		background-size: 100% 18px, 100% 18px
+		background-attachment: scroll, scroll
+
+@-webkit-keyframes keyborder
+	0%
+		+border-top-right-radius(0)
+	15%
+		+border-top-radius(0)
+	30%
+		+border-top-radius(0)
+		+border-bottom-right-radius(0)
+	45%
+		+border-radius(0)
+	60%
+		+border-top-radius(0)
+		+border-bottom-right-radius(0)
+	75%
+		+border-top-radius(0)
+	100%
+		+border-top-right-radius(0)
+.d0926
+	position: relative
+	.test1
+		padding: 4px		
+		&:before
+			content: attr(data-foo)""
+	.test2
+		background: orange
+		display: block
+		width: calc(100% - 80px)
+		margin: 0 auto
+		text-align: center
+		//width: attr(length em)
+	.test3
+		background: orange
+		display: block
+		width: calc(100% / 6)
+		margin: 0 auto
+		text-align: center
+		//width: attr(length em)
+	.test4
+		position: relative
+		height: 1.6em
+		span
+			background: orange
+			display: block
+			position: absolute
+			left: calc(10% + 20px)
+	.test5
+		width: 300px
+		height: 300px
+		margin: auto
+		div
+			width: calc(100% - 4em) 
+			height: calc(100% - 4em)
+			+border-radius(50%)
+			border: 1em solid #4387fd
+			display: flex
+			margin: auto
+			+box-shadow(0 0 5px #515151 inset)
+			&:hover
+				//+border-radius(0)
+		& > div
+			//transition: all 2000ms cubic-bezier(0.17, 0.67, 0, 1.45)	
+			animation: keyborder 2s
+			-webkit-animation: keyborder 2s
+			animation-delay: 0.5s
+			-webkit-animation-delay: 0.5s
+			&:hover
+				animation: keyborder 2s
+				-webkit-animation: keyborder 2s
+				
+		& div>div
+			border-color: #f44a3f
+			//transition: all 1000ms cubic-bezier(0.17, 0.67, 0, 1.45)
+			animation: keyborder 1s
+			-webkit-animation: keyborder 1s
+			animation-delay: 0.5s
+			-webkit-animation-delay: 0.5s
+			&:hover
+				animation: keyborder 1s
+				-webkit-animation: keyborder 1s
+		
+		& div>div>div
+			border-color: #ffd14d
+			//transition: all 500ms cubic-bezier(0.17, 0.67, 0, 1.45)
+			animation: keyborder .5s
+			-webkit-animation: keyborder .5s
+			animation-delay: 0.5s
+			-webkit-animation-delay: 0.5s
+			&:hover
+				animation: keyborder .5s
+				-webkit-animation: keyborder .5s
+		
+		& div>div>div>div
+			border-color: #0da861
+			//transition: all 250ms cubic-bezier(0.17, 0.67, 0, 1.45)
+			animation: keyborder .25s
+			-webkit-animation: keyborder .25s
+			animation-delay: 0.5s
+			-webkit-animation-delay: 0.5s
+			&:hover
+				animation: keyborder .25s
+				-webkit-animation: keyborder .25s
+
+
+
+
+	.test6
+		background: #ACDBC8
+		padding: 1em
+		+clearfix
+		div
+			padding: 1em
+			background: #FFA1A1
+			+box-sizing(border-box)
+			float: left
+		.all1
+			width: calc(100% - 200px - 1em)
+		.w200
+			width: 200px
+			float: right
+		.wr100
+			float: right
+			width: 100px
+		.wl100
+			float: left
+			width: 100px
+		.all2
+			width: calc(100% - 200px - 2em)
+			margin: 0 1em
+	
+.d0927
+	div
+		margin: 4px
+		border: #ccc solid 1px
+		padding: 4px
+		&:hover
+			border: red solid 1px
+	.f12px
+		font-size: 12px
+	.f13px
+		font-size: 13px
+	.f14px
+		font-size: 14px
+	.f15px
+		font-size: 15px
+	.fLarge
+		font-size: large
+	.f1em
+		font-size: 1.1em
+	.f2em
+		font-size: 1.2em
+	.f3em
+		font-size: 1.3em
+	.f4em
+		font-size: 1.4em
+	.f1rem
+		font-size: 1.1rem
+	.f2rem
+		font-size: 1.2rem
+	.f3rem
+		font-size: 1.3rem
+	.f4rem
+		font-size: 1.4rem
+
+	text-align: center
+	section
+		display: inline-block
+		background: orange
+	img
+		border: #ccc 1px solid
+	.px		
+		margin: 0 8px  
+		width: 100px
+		height: 100px
+	.vw
+		width: 10vw
+		height: 10vw
+		margin: 0 8px
+		
+
+.d0928
+	div
+		text-shadow: 1px 1px 0 #aaa	
+	.test1	
+
+		&::-moz-selection
+			background: black 
+			color: white
+		&::selection  
+			background: black 
+			color: white
+	.test2
+		&::-moz-selection
+			background: red 
+			color: white
+			text-shadow: none
+		&::selection  
+			background: red 
+			color: white
+			text-shadow: none
+	.test3
+		//background: url($imagePath+"mayday/mayday1.JPEG") no-repeat center center
+		text-shadow: none
+		font-size: 1.5em
+		line-height: 1.8em
+		//background: white
+		&::-moz-selection
+			background: transparent
+			color: transparent
+			text-shadow: none
+		&::selection  
+			background: transparent
+			color: transparent
+			text-shadow: none
+		span
+			&::-moz-selection
+				background: transparent
+				color: red
+				text-shadow: none
+			&::selection  
+				background: transparent
+				color: red
+				text-shadow: none
+
+
+.d0929
+	&.lightbox:target
+		display: table
+	&.lightbox
+		position: fixed
+		left: 0
+		top: 0
+		width: 100%
+		height: 100%
+		z-index: 20
+		background: rgba(00,00,00,.8)
+		//opacity: 0
+		display: none
+		
+		figure			
+			display: table-cell
+			vertical-align: middle
+			text-align: center
+			figcaption
+				display: inline-block
+				margin: auto 
+				padding: 15px
+				background: rgba(00,00,00,.6)
+				+border-radius(5px)
+	+clearfix
+	.circles:target
+		animation: ifinityCircles 3s linear infinite
+		-webkit-animation: ifinityCircles 3s linear infinite
+	.circles
+		display: block
+		float: right
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		width: 150px
+		height: 150px
+		background-size: 50% 50%
+		background-repeat: no-repeat
+		+border-radius(50%)
+		line-height: 150px
+		color: white
+		text-align: center
+		outline: none
+		
+		//+transform(rotate(25deg))
+		//-webkit-transform: rotate(7deg)
+
+@-webkit-keyframes ifinityCircles
+	from
+		+transform(rotate(0))
+	to
+		+transform(rotate(360deg))
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		bottom: 6px
+		width: 50%
+		height: 20%
+		max-height: 20px
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+.d0930
+	%box
+		height: 100px
+		width: 100px
+		margin: 0 auto
+		background: orange
+		border: solid 1px #ddd
+		+transition(all .5s)
+		+border-radius(10px)
+	%boxL
+		height: 150px
+		width: 100%
+		margin: 20px auto
+		position: relative
+		line-height: 150px
+		text-align: center
+		font-size: 2em
+		color: #555
+		+transition(all .5s)
+	.demo1
+		@extend %box		
+		&:hover
+			+box-shadow(120px 0 0 rgba(orange ,.8),-120px 0 0 rgba(orange ,.5))
+	.demo2
+		@extend %box	
+		
+		&:hover
+			+box-shadow(120px 0 8px 10px rgba(orange ,.8),-120px 0 8px 10px rgba(orange ,.5))
+	
+
+	.demo3
+		@extend %box
+		background: white
+		&:hover
+			+box-shadow(0 0 10px rgba(black,.6))
+
+	.demo4
+		@extend %box
+		background: white
+		&:hover
+			+box-shadow(0 10px 20px rgba(black,.3) inset)
+		
+
+	.demo5
+		@extend %boxL
+		background: white
+		&:hover
+			background: rgba(white,.3)
+		&:after
+			content: ""
+			position: absolute
+			bottom: 0
+			left: 10px
+			right: 10px
+			height: 20px
+			z-index: -1
+			+box-shadow(0 0 15px rgba(black,.3))
+			+border-radius(50%)
+	.demo6
+		@extend %boxL
+		background: white
+		&:hover
+			background: rgba(white,.3)
+		&:after
+			content: ""
+			position: absolute
+			bottom: 0
+			left: 10px
+			right: 10px
+			top: 0
+			z-index: -1
+			+box-shadow(0 0 15px rgba(black,.3))
+			+border-radius(30%)
+
+	.demo7
+		@extend %boxL
+		background: white
+		&:hover
+			background: rgba(white,.3)
+		+paperShadow
+
+@mixin text-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+	text-shadow: $all
+@mixin box-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma)	
+	+box-shadow($all)
+//$rgb: 50,34,82
+.d1001
+	font-size: 8em
+	font-weight: bold
+	line-height: 1em
+	text-shadow: none
+	color: rgb(52, 255, 255)
+	color: white
+	overflow: hidden
+	background: #eb775d
+	div.test
+		+text-longShadow($lenght: 40,$rgb: #578199)
+		+box-longShadow($lenght: 80,$rgb: #ef5936)
+		margin: 25px auto 
+		background: #25aae2
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		+border-radius(5px)
+		overflow: hidden
+	.test1
+		margin: 25px auto 
+		//background: #25aae2
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		//+border-radius(5px)
+		//overflow: hidden
+		+text-longShadow($lenght: 40,$rgb: #ef5936)
+	.test2
+		+box-longShadow($lenght: 80,$rgb: #ef5936)
+		margin: 25px auto 
+		background: #25aae2
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		+border-radius(5px)
+		overflow: hidden
+	.test3
+		+text-longShadow($lenght: 40,$rgb: #578199)
+		margin: 25px auto 
+		background: #25aae2
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		+border-radius(5px)
+		overflow: hidden
+	.test4
+		+transition(all 3s)
+		&:hover
+			+text-longShadow($lenght: 40,$rgb: #578199)
+			+box-longShadow($lenght: 80,$rgb: #ef5936)
+		margin: 25px auto 
+		background: #25aae2
+		width: 1em
+		height: 1em
+		padding: 0.1em
+		text-align: center
+		+border-radius(5px)
+		overflow: hidden
+
+$planet-names: mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
+$planet-diameter: 0.4878, 1.2104, 1.2760, 0.6787, 3.8400 , 1.9500, 1.8120, 1.7530
+$orbit-time: 0.88, 2.25, 3.6525, 6.87, 43.46475, 107.74875, 306.81, 602.6625
+//days devided by 100
+$planet-colors: #a1a1a1, #f5cc96, #495391,#b95730, #d5ba8e, #dab37a, #c4eaed, #6393e5
+
+.solar-system
+	background: black
+	.system
+		width: 670px
+		height: 670px
+		max-width: 100%
+		display: flex
+		margin: auto
+		article
+			width: calc(100% - 5em)
+			height: calc(100% - 5em)
+			+border-radius(50%)
+			border: 1px solid #ccc
+			display: flex
+			margin: auto
+		.solar
+
+.d1002
+	.demo1
+		width: 150px
+		height: 150px
+		margin: 0 auto
+		background: red
+		+transition(background 1s)
+		&:hover
+			background: blue
+	&:hover > div
+		margin-left: calc(100% - 50px)
+
+	div		
+		width: 50px
+		height: 50px
+		background: red
+		+transition-property(margin-left)
+		+transition-duration(5s)
+	div + div
+		margin-top: 5px
+
+	.timing1
+		+transition-timing-function(ease)
+	.timing2
+		+transition-timing-function(ease-in)
+	.timing3
+		+transition-timing-function(ease-out)
+	.timing4
+		+transition-timing-function(ease-in-out)
+	.timing5
+		+transition-timing-function(linear)
+	.timing6
+		+transition-timing-function(cubic-bezier(0.1, 0.7, 1.0, 0.1))
+	.timing7
+		+transition-timing-function(step-start)
+	.timing8
+		+transition-timing-function(step-end)
+	.timing9
+		+transition-timing-function(steps(4, end))
+	.timing10
+		//+transition-timing-function(ease, step-start, cubic-bezier(0.1, 0.7, 1.0, 0.1))
+	.timing11
+		+transition-timing-function(inherit)
+	.ryu
+		width: 131px
+		height: 100px
+		background: url($imagePath+"20131002.png") left bottom no-repeat
+		+transition(background 1s)
+		+transition-timing-function(steps(13, end))
+		&:hover
+			background-position: right bottom
+	.ryu2	
+		width: 131px
+		height: 100px
+		background: url($imagePath+"20131002.png") no-repeat	
+		animation: ryu 1s infinite alternate
+		-webkit-animation: ryu 1s infinite alternate
+		animation-timing-function: steps(13, end)
+		-webkit-animation-timing-function: steps(13, end)
+@-webkit-keyframes ryu
+	from
+		background-position: left bottom
+	to
+		background-position: right bottom
+
++font-face("Kavoon-Regular",font-files("Kavoon-Regular.ttf"))
+@import url("http://fonts.googleapis.com/css?family=The+Girl+Next+Door")
+.d1003
+	line-height: 2em
+	font-size: 2em
+	.webfont1
+		font-family: Kavoon-Regular		
+	.webfont2
+		font-family: 'The Girl Next Door', cursive
+	.webfont3
+		font-family: 'Frijole', cursive
+@mixin text-cubicStyle($lenght: 15,$rgb: #dfdfdf)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,darken($rgb,$i/1.6)),comma)	
+	text-shadow: $all,$lenght+1px $lenght+1px 1px rgba(0,0,0,.3),$lenght+2px $lenght+2px 10px rgba(0,0,0,.6)
+.d1004
+	//+perspective(1000px)
+	%box
+		line-height: 120px
+		height: 120px
+	.demo1
+		@extend %box
+		font-size: 50px
+	.demo2
+		@extend %box
+		font-size: 50px
+		color: #00ACEE
+	.demo3
+		@extend %box
+		font-size: 50px
+		font-style: italic
+		color: #00ACEE
+	.demo4
+		@extend %box
+		font-size: 50px
+		color: white
+		text-shadow: 1px 1px 5px rgba(black,.5)
+
+	.demo5
+		background: gray
+		@extend %box
+		font-size: 50px
+		color: white
+		padding: 20px
+		+text-cubicStyle
+
+	.demo6
+		@extend %box
+		font-size: 40px
+
+		+transition(all .5s)
+		color: #00ACEE
+		&:hover
+			font-size: 50px
+
+	.demo7
+		@extend %box
+		font-size: 50px
+		.lsf
+			-webkit-font-smoothing: none
+			-moz-font-smoothing: none
+			-ms-font-smoothing: none
+			-o-font-smoothing: none
+			font-smoothing: none	
+
++font-face("drangon",font-files("icomoon.eot","icomoon.ttf","icomoon.woff","icomoon.svg","svg"),normal,normal)
+.d1005
+	font-size: 5em
+	-webkit-font-smoothing: antialiased
+	-moz-font-smoothing: antialiased
+	-ms-font-smoothing: antialiased
+	-o-font-smoothing: antialiased
+	font-smoothing: antialiased
+	.drangon-icon
+		font-family: 'drangon'
+		//speak: none
+		font-style: normal
+		font-weight: normal
+		font-variant: normal
+		text-transform: none
+		line-height: 1
+		+transition(color .6s)
+		&:hover
+			color: #00ACEE
+	[data-drangon]:before
+		font-family: 'drangon'
+		content: attr(data-drangon)
+		speak: none
+		font-weight: normal
+		font-variant: normal
+		text-transform: none
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	.drangon-icon-drangonball 
+		font-family: 'drangon'
+		speak: none
+		font-style: normal
+		font-weight: normal
+		font-variant: normal
+		text-transform: none
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		&:before 
+			content: "\67"
+
+.d1006
+	div
+		text-align: center
+	.demo1	
+		img
+			+box-shadow(5px 5px 5px rgba(black,.5))
+	.demo2
+		img
+			+filter(drop-shadow(5px 5px 5px rgba(black,.5)))
+
+	.demo3
+		img
+			+filter(contrast(300%))
+
+	.demo4
+		img
+			+filter(grayscale(100%))
+			+transition(all .5s)
+			&:hover
+				+filter(grayscale(0))
+
+	.demo5
+		img
+			+filter(hue-rotate(180deg))
+
+	.demo6
+		img
+			+filter(blur(10px))
+			+transition(all .5s)
+			//+backface-visibility(hidden)
+			&:hover
+				+filter(blur(0))
+
+	
+.d1007
+	.demo1
+		div
+			height: 22px
+			line-height: 22px
+			padding: 8px
+			border: 1px dashed orange
+			margin-bottom: 8px
+			color: white
+			text-align: center
+			+transition(background .3s)
+			&:last-child
+				margin-bottom: 0
+			&:hover
+				background: orange
+				&:before
+					content: "Present"
+			&:hover ~ div
+				background: #B0095C
+				&:before
+					content: "After"
+	%thisbox
+		width: 100px
+		height: 100px
+		text-align: center
+		color: white
+		display: block
+	.demo2
+		+clearfix
+		[type="checkbox"]
+			&:checked ~ label
+				background: #B0095C
+				&:before					
+					content: "Checkbox is checked."
+		label
+			@extend %thisbox
+			float: right
+			background: orange
+			cursor: pointer
+			+transition(background .3s)
+			&:before
+				content: "Click me"
+	.demo3
+		+clearfix
+		[type="checkbox"]
+			display: none
+			&:checked + label
+				background: #B0095C
+				&:before					
+					content: "Checkbox is checked."
+				& ~ .circles
+					animation: ifinityCircles 3s linear infinite
+					-webkit-animation: ifinityCircles 3s linear infinite
+		label
+			@extend %thisbox
+			float: left
+			background: orange
+			cursor: pointer
+			+transition(background .3s)
+			&:before
+				content: "Click me"
+		.circles
+			float: right
+			display: block
+			+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+			width: 150px
+			height: 150px
+			background-size: 50% 50%
+			background-repeat: no-repeat
+			+border-radius(50%)
+			line-height: 150px
+			color: white
+			text-align: center
+			outline: none
+
+
+@-webkit-keyframes ifinityCube
+	from
+		+transform(rotateY(0))
+	to
+		+transform(rotateY(360deg))
+
+.d1008
+	$thisColor: #B0095C
+	label
+		cursor: pointer
+	%thisbox
+		width: 150px
+		height: 150px
+		text-align: center
+		color: white
+		display: block
+		background: $thisColor
+		margin: 0 auto
+		white-space: pre
+		+transition(all .5s)
+	.circles
+		display: block
+		float: left
+		+background(linear-gradient(45deg, #557777 50%, transparent 50%),linear-gradient(90deg, #ee6655 100%, transparent 100%),linear-gradient(135deg, #ffeebb 50%, transparent 50%) 100% 0%,linear-gradient(180deg, #ffcc55 100%, transparent 100%) 100% 0%,linear-gradient(225deg, #ffaa22 50%, transparent 50%) 100% 100%,linear-gradient(270deg, #ccddaa 100%, transparent 100%) 100% 100%,linear-gradient(315deg, #77aa88 50%, transparent 50%) 0% 100%,linear-gradient(360deg, #99cc99 100%, transparent 100%) 0% 100%)
+		width: 150px
+		height: 150px
+		background-size: 50% 50%
+		background-repeat: no-repeat
+		+border-radius(50%)
+		line-height: 150px
+		color: white
+		text-align: center
+		outline: none
+	.demo1
+		@extend %thisbox
+		&:hover
+			+transform(rotate(360deg))
+	.demo2
+		@extend %thisbox
+		&:hover
+			+transform(scale(2,2))
+
+	.demo3
+		//@extend %thisbox
+		//+transition(all .5s)
+		[type="checkbox"]
+			display: none
+			&:checked ~ .cube
+				animation: ifinityCube 10s linear infinite
+				-webkit-animation: ifinityCube 10s linear infinite
+		+perspective(1000px)
+		position: relative
+		width: 150px
+		height: 150px
+		margin: 0 auto
+		.cube
+			+transform-style(preserve-3d)
+			width: 100%
+			height: 100%
+			position: absolute
+			//+transform(rotateY(-15deg))	
+			div
+				width: 146px
+				height: 146px
+				border: 2px solid #555
+				position: absolute
+		//&:hover
+		//	+transform(rotate(720deg))
+
+	.demo4
+		//@extend %thisbox
+		//+transition(all .5s)
+		[type="radio"]
+			//&:checked ~ .cube
+			//	animation: ifinityCube 10s linear infinite
+			//	-webkit-animation: ifinityCube 10s linear infinite
+		position: relative
+		+perspective(1000px)
+		position: relative
+		width: 150px
+		height: 150px
+		margin: 0 auto
+		#b1:checked ~ .cube
+			+transform(rotateX(0deg))
+		#b2:checked ~ .cube
+			+transform(rotateX(90deg))
+		#b3:checked ~ .cube
+			+transform(rotateX(180deg))
+		#b4:checked ~ .cube
+			+transform(rotateX(270deg))
+		#b5:checked ~ .cube
+			+transform(rotateX(0deg) rotateY(270deg))
+		#b6:checked ~ .cube
+			+transform(rotateX(0deg) rotateY(90deg))
+
+		.cube
+			+transform-style(preserve-3d)
+			width: 100%
+			height: 100%
+			position: absolute
+			+transition(all 1s)
+			//+transform(rotateY(-15deg))
+			color: white
+			font-size: 40px
+			line-height: 150px	
+			text-align: center
+			div
+				width: 146px
+				height: 146px
+				border: 2px solid #555
+				position: absolute
+	.front
+		background: hsla( 0, 100%, 50%, 0.5 )
+		+transform(rotateY(0deg) translateZ( 75px ))
+	.back
+		background: hsla( 60, 100%, 50%, 0.5 )
+		+transform(rotateX(180deg) translateZ(75px))
+	.right
+		background: hsla( 120, 100%, 50%, 0.5 )
+		+transform(rotateY(90deg) translateZ( 75px ))
+	.left
+		background: hsla( 180, 100%, 50%, 0.5 )
+		+transform(rotateY(-90deg) translateZ( 75px ))
+	.top
+		background: hsla( 240, 100%, 50%, 0.5 )
+		+transform(rotateX(90deg) translateZ( 75px ))
+	.bottom
+		background: hsla( 300, 100%, 50%, 0.5 )
+		+transform(rotateX(-90deg) translateZ( 75px ))
+	.control
+		text-align: center
+		margin-top: 40px
+
+	.demo5	
+		
+		position: relative
+		
+		ul			
+			+clearfix			
+			background: $thisColor	
+						
+			li
+				float: left	
+				+perspective(500px)
+				+transform-style(preserve-3d)		
+				a
+					height: 40px
+					line-height: 40px
+					padding: 0 15px
+					text-align: center
+					display: inline-block
+					color: white
+					position: relative
+					+transition(all .5s)
+					+transform-style(preserve-3d)
+					//+transform(rotateX(0deg),translateZ(20px))
+					+transform-origin(0,50%)
+					+backface-visibility(hidden)
+					&:after
+						content: attr(data-menu)
+						top: 100%
+						left: 0
+						width: 100%
+						height: 100%
+						background: darken($thisColor, 20%)
+						position: absolute
+						+transform(rotateX(-90deg))
+						+transform-origin(0,0)
+						+transform-style(preserve-3d)
+
+					&:hover
+						+transform(rotateX(90deg) translateZ(20px))
+						
+@-webkit-keyframes Rline
+	0%		
+	30%
+		+transform(rotate(30deg))
+	100%
+		+transform(rotate(30deg) translateX(200px))
+@-webkit-keyframes Zline
+	0%		
+	30%
+		+transform(rotateY(90deg) rotateX(-10deg))
+	100%
+		+transform(rotateY(90deg) rotateX(-10deg) translateZ(500px))
+.d1009
+	padding: 80px !important
+	$thisColor: #B0095C
+	%thisbox
+		width: 150px
+		height: 150px
+		text-align: center
+		position: relative
+		color: white
+		display: block
+		background: $thisColor
+		margin: 0 auto
+		white-space: pre
+		+transition(all 2s)
+	%line
+		border-top: orange solid 1px
+		position: absolute
+		color: black
+		top: 50%
+		left: 50%
+		width: 60%
+		text-align: right
+		z-index: 5
+		&:before
+			content: attr(data-line)	
+
+		
+	.xline
+		@extend %line
+		
+		
+	.yline
+		@extend %line
+		+transform-origin(0,0)
+		+transform(rotate(90deg))
+	.zline
+		@extend %line
+		+transform-origin(0,0)
+		+transform-style(preserve-3d)
+		+transform(rotateY(-90deg))
+
+	.demo0
+		.box
+			@extend %thisbox
+	.demo1
+		.box
+			@extend %thisbox
+	
+	.demo2	
+		+perspective(300px)	
+		+transform-style(preserve-3d)
+		.box
+			@extend %thisbox
+			+transform-style(preserve-3d)			
+			+transform(rotateY(60deg))
+	.demo3
+		.box
+			@extend %thisbox
+		&:hover .box
+			+transform(translateX(100%))
+
+	.demo3
+		.box
+			@extend %thisbox
+		&:hover .box
+			+transform(translateX(100%))
+
+	.demo4
+		.box
+			@extend %thisbox
+		&:hover .box
+			+transform(translateX(100%) rotate(30deg))
+	.demo5
+		.box
+			@extend %thisbox
+			animation-delay: 0.5s
+			-webkit-animation-delay: 0.5s		
+			animation: Rline 2s alternate infinite
+			-webkit-animation: Rline 2s alternate infinite
+
+	.demo6	
+		+perspective(500px)	
+		.box
+			margin: 0
+			@extend %thisbox
+			+transform-style(preserve-3d)			
+			+transform(rotateY(90deg))
+		&:hover .box
+			+transform(rotateY(90deg) translateZ(500px))
+
+	.demo7	
+		+perspective(500px)	
+		.box
+			margin: 0
+			@extend %thisbox
+			+transform-style(preserve-3d)			
+			+transform(rotateY(90deg))	
+			animation: Zline 2s alternate infinite
+			-webkit-animation: Zline 2s alternate infinite
+			
+
+.d1010
+	text-align: center
+	padding: 80px !important
+	.box
+		display: inline-block
+		background: orange
+		width: 100px
+		height: 100px
+		position: relative
+		+transition(all 1s)
+		z-index: 5
+	.dot
+		position: absolute
+		+border-radius(100%)
+		background: red
+		height: 5px
+		width: 5px
+		left: 50px
+		top: 100px - 2px
+	.rotate	
+		@extend .box
+
+		+transform(rotate(30deg))
+		&:hover
+			+transform(rotate(0deg))
+		.dot
+			left: 50%
+			top: 50%
+			left: calc(50% - 2px)
+			top: calc(50% - 2px)
+	.rotate2
+		@extend .box
+		+transform(rotate(30deg))
+		+transform-origin(0,0)
+		&:hover
+			+transform(rotate(0deg))
+		.dot
+			left: calc(0% - 2px)
+			top: calc(0% - 2px)
+	.perspective
+		+perspective(500px)	
+		+transform-style(preserve-3d)
+		&:hover .rotate3
+			+transform(rotateY(90deg))
+		&:hover .rotate4
+			+transform(rotateY(-90deg))
+
+	.rotate3
+		@extend .box
+		+transform-style(preserve-3d)
+		+transform(rotateY(0deg))
+		+transform-origin(0,0)
+		//&:hover
+		//	+transform(rotateY(90deg))
+		.dot
+			left: calc(0% - 2px)
+			top: calc(0% - 2px)
+	.rotate4
+		@extend .box
+		+transform-style(preserve-3d)
+		+transform(rotateY(0deg))
+		+transform-origin(100%,0)
+		//&:hover
+		//	+transform(rotateY(-90deg))
+		.dot
+			left: calc(100% - 2px)
+			top: calc(0% - 2px)
+
+	.scale
+		@extend .box
+		+transform(scale(1.5, 1.5))
+		&:hover
+			+transform(scale(1, 1))
+		.dot
+			left: 50%
+			top: 50%
+			left: calc(50% - 2px)
+			top: calc(50% - 2px)
+	.scale2
+		@extend .box
+		+transform(scale(1.5, 1.5))
+		+transform-origin(0,0)
+		&:hover
+			+transform(scale(1, 1))
+		.dot
+			left: calc(0% - 2px)
+			top: calc(0% - 2px)
+	.relative
+		position: relative
+		height: 100px
+		z-index: 1
+	%line
+		position: absolute
+		left: 0
+		right: 0
+		height: 1px		
+	.topLine
+		@extend %line
+		top: 0
+		background: rgba(red,.6)
+	.middleLine
+		@extend %line
+		top: 50%
+		top: calc(50% - 1px)
+		background: rgba(blue,.6)
+	.bottomLine
+		@extend %line
+		bottom: 0
+		background: rgba(green,.6)
+
+@-webkit-keyframes clockRotate
+	from
+		+transform(rotate(0deg))
+	to
+		+transform(rotate(360deg))
+.clocks
+	text-align: center
+	$pointerWidth: 8px 
+	.clock
+		display: inline-block
+		background: #C45575
+		position: relative
+		height: 200px
+		width: 200px
+		border: #A64863 5px solid
+		+border-radius(50%)	
+		div
+			width: $pointerWidth
+			position: absolute
+	.hours
+		background: #EDB95B
+		height: 80px
+		top: 100px - 60px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,60px)
+		//+transition(all 30s linear)
+		-webkit-animation: clockRotate 72s infinite linear
+
+	.minutes
+		background: #676BED
+		height: 100px
+		top: 100px - 80px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,80px)
+		//+transition(all 5s linear)
+		-webkit-animation: clockRotate 6s infinite linear
+
+	.seconds
+		background: #F78C5F
+		height: 120px
+		top: 100px - 100px
+		left: 100px - $pointerWidth/2
+		+transform-origin(50%,100px)
+		//+transition(all 5s linear)
+		-webkit-animation: clockRotate 1s infinite linear
+
+.d1011	
+	padding: 80px !important
+	label
+		cursor: pointer
+	%box
+		width: 150px
+		height: 150px
+		color: white
+		display: block
+		+transition(all .5s)
+		position: relative
+	.viewpoint
+		position: absolute
+		background: red
+		padding: 5px
+		+border-radius(50%)
+		&:after
+			//content: "View"
+	.demo0
+		@extend %box
+		+perspective(500px)
+
+	.demo1
+		@extend %box
+		+perspective(1500px)
+	.demo2
+		@extend %box
+		+perspective(250px)
+	.demo3
+		@extend %box
+		+perspective(500px)
+		+perspective-origin(center 0%)
+		.viewpoint
+			top: 0
+			left: calc(50% - 2.5px)
+	.demo4
+		@extend %box
+		+perspective(500px)
+		+perspective-origin(right bottom)
+		.viewpoint
+			top: calc(100% - 2.5px)
+			left: calc(100% - 2.5px)
+	.demo5
+		@extend %box
+	.rotate
+		//@extend %thisbox
+		//+transition(all .5s)
+		[type="checkbox"]
+			display: none
+			&:checked ~ .cube
+				animation: ifinityCube 10s linear infinite
+				-webkit-animation: ifinityCube 10s linear infinite
+		width: 150px
+		height: 150px
+		margin: 0 auto
+	.cube
+		+transform-style(preserve-3d)
+		width: 100%
+		height: 100%
+		position: absolute
+		//+transform(rotateY(-15deg))	
+		div
+			width: 146px
+			height: 146px
+			border: 2px solid #555
+			position: absolute
+	//&:hover
+	//	+transform(rotate(720deg))
+
+	
+	.front
+		background: hsla( 0, 100%, 50%, 0.5 )
+		+transform(rotateY(0deg) translateZ( 75px ))
+	.back
+		background: hsla( 60, 100%, 50%, 0.5 )
+		+transform(rotateX(180deg) translateZ(75px))
+	.right
+		background: hsla( 120, 100%, 50%, 0.5 )
+		+transform(rotateY(90deg) translateZ( 75px ))
+	.left
+		background: hsla( 180, 100%, 50%, 0.5 )
+		+transform(rotateY(-90deg) translateZ( 75px ))
+	.top
+		background: hsla( 240, 100%, 50%, 0.5 )
+		+transform(rotateX(90deg) translateZ( 75px ))
+	.bottom
+		background: hsla( 300, 100%, 50%, 0.5 )
+		+transform(rotateX(-90deg) translateZ( 75px ))
+	.control
+		text-align: center
+		margin-top: 40px
+
+.d1012
+	text-align: center
+	.test1
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+	.test2
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+		.coverflow-list
+			+perspective(900px)
+			+transform-style(preserve-3d)
+			+perspective-origin(100% 30%)
+			.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(45deg))
+	.test3
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			.album-cover
+				height: 150px
+				width: 150px
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label
+				display: block
+	
+		text-align: center
+		.coverflow-list
+			+perspective(900px)
+			+transform-style(preserve-3d)
+			+perspective-origin(100% 30%)
+			.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(45deg))
+		input[type="checkbox"]
+			display: none
+			&:checked
+				&+.coverflow-item
+					+transition(all .3s ease)
+					+transform(rotateY(0.1deg))
+					margin: 0 auto
+					img
+						opacity: 1
+					.album-name
+						color: #333
+
+	.complete					
+		.controllor
+			margin-top: 10px
+		text-align: center
+		.coverflow-item
+			display: inline-block
+			position: relative
+			margin: 0 auto
+			text-align: center
+			margin: 0 -45px
+			background-color: white
+			.album-cover
+				height: 150px
+				width: 150px
+				-webkit-box-reflect: below 22px -webkit-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+				-moz-box-reflect: below 22px -moz-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+				-o-box-reflect: below 22px -o-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+				-ms-box-reflect: below 22px -ms-linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+				box-reflect: below 22px linear-gradient(rgba(255,255,255,0) 85%, white 150%)
+				img
+					opacity: 0.5
+			.album-name
+				text-align: center
+				display: block
+				color: #777
+			label		
+				display: block
+				
+		.coverflow-list
+			+perspective(900px)
+			+transform-style(preserve-3d)
+			+perspective-origin(100% 30%)
+			.coverflow-item
+				+transition(all .3s ease)
+				+transform(rotateY(45deg))
+		input[type="radio"]
+			display: none
+			&:checked
+				&+.coverflow-item
+					+transition(all .3s ease)
+					+transform(rotateY(0.1deg))
+					margin: 0 auto
+					img
+						opacity: 1
+					.album-name
+						color: #555
+					&~.coverflow-item
+						+transform(rotateY(-45deg))
+		.controllor
+			margin-top: 40px
+			label
+				cursor: pointer
+				color: #999
+				padding: 8px
+				border: 1px solid #ccc
+				background-color: #fafafa
+				+transition(all .3s)
+				&:hover
+					color: #555
+					border: 1px solid

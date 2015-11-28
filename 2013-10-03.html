@@ -1,0 +1,197 @@
+<div class="css">2013-autumn</div>
+<p>本篇CSS效果發表於<a href="http://ashareaday.wcc.tw/#2013-10-03">http://ashareaday.wcc.tw/#2013-10-03</a> (建議使用Chrome瀏覽器)</p>
+
+<p>接下來會連接3篇文章都介紹web-font，而第一篇是基本的web-font的置入，第二篇開始會是web-font icon，並且了解web-font icon的優缺點，第三篇就會進入自己製作web-font icons，讓會手癢的設計師自行設計web font icon。</p>
+
+
+
+<h2>@font-face </h2>
+<p>首先我們先用本機連線的方式來套用webfont。</p>
+<p>參考 : <a href="http://devdocs.io/css/@font-face">http://devdocs.io/css/@font-face</a><br>
+<a href="http://compass-style.org/reference/compass/css3/font_face/">http://compass-style.org/reference/compass/css3/font_face/</a></p>
+<pre>
+CSS3的設定
+@font-face {
+[font-family: &lt;family-name&gt;;]?
+	//font-face的名稱 <必填
+[src: [ &lt;uri&gt; [format(&lt;string&gt;#)]? | &lt;font-face-name&gt; ]#;]?
+	//檔案路徑 以及檔案格式(sass不用填檔案格式~) <必填
+[unicode-range: &lt;urange&gt;#;]?
+[font-variant: &lt;font-variant&gt;;]?
+[font-feature-settings: normal|&lt;feature-tag-value&gt;#;]?
+[font-stretch: &lt;font-stretch&gt;;]?
+[font-weight: &lt;weight&gt;];
+[font-style: &lt;style&gt;];
+}
+</pre>
+<pre>
+sass 的設定
++font-face($name, $font-files, $eot, $weight, $style)
+//font-face(自訂義名稱，檔案路徑，format，文字粗，樣式(might be also italic))
+</pre>
+<p>本範例是用sass載入web font，在sass中字型檔是放在css資料夾的fonts資料夾。而首先要先定義一個@font-face，font-face中的font-family，就是這個web font的名稱，在之後設定CSS時只要將class的font-family和@font-face的font-family相同就會套用。簡單來說font-family就像是變數的名稱。</p>
+
+<pre>
+//字型檔路徑
+/stylesheets/fonts/Kavoon-Regular.ttf
+
+//sass code
++font-face("Kavoon-Regular",font-files("Kavoon-Regular.ttf"))
+.webfont1
+	font-family: Kavoon-Regular	
+</pre>
+<p>接下來class只要和@font-face對應就會運作了，如果沒有，就要檢查檔案路徑是否正確、src的路徑是否有對應到檔案等等問題。</p>
+<div class="demo d1003">
+	<div class="webfont1">This is Kavoon-Regular.</div>	
+</div>
+
+
+
+
+<h2>google Web fonts</h2>
+<p>Google 有提供線上的版本，按照他們的方式操作並不會很難，只要先搜尋到想要的字體就可以開始了~</p>
+<img src="/images/2013-10-03_104121.png" alt="">
+<p>參考 : <a href="http://www.google.com/fonts/">http://www.google.com/fonts/</a></p>
+<h5>CSS版</h5>
+<p>而只要按照他們提供的方式，二選一很快就可以完成了。</p>
+<pre>
+//插入 link
+&lt;link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'&gt;
+//或是import
+@import url(&quot;http://fonts.googleapis.com/css?family=The+Girl+Next+Door&quot;)</pre>
+<pre>
+//另外再設定本地CSS
+.class{
+	font-family: 'The Girl Next Door', cursive;}
+</pre>
+<div class="demo d1003">
+	<div class="webfont2">This is The Girl Next Door.</div>	
+</div>
+
+<h5>javascript版</h5>
+<p>google會提供，只要插入在網頁裡即可，font-family也是依提供的設定即可。</p>
+<pre>
+//js
+ WebFontConfig = {
+    google: { families: [ 'The+Girl+Next+Door::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })()
+</pre>
+<div class="demo d1003">
+	<div class="webfont3">This is Frijole.</div>	
+</div>
+<hr>
+<h2>現實的來了</h2>
+<p>在使用web-font的時候，一樣需要考慮到瀏覽器的版本，如果專案的客群不需要符合ie，那就可以大方使用囉~。</p>
+<h3>desktop</h3>
+<table class="atableLight">
+<thead>
+<tr>
+<th>Feature</th>
+        <th>Firefox (Gecko)</th>
+        <th>Chrome</th>
+        <th>Internet Explorer</th>
+        <th>Opera</th>
+        <th>Safari</th>
+      </tr>
+<tr>
+</thead>
+<tbody>
+<td>Basic support</td>
+        <td>3.5 (1.9.1)</td>
+        <td>4.0</td>
+        <td>4.0</td>
+        <td>10.0</td>
+        <td>3.1</td>
+      </tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/WOFF" title="About_WOFF">WOFF</a></td>
+        <td>3.5 (1.9.1)</td>
+        <td>6.0</td>
+        <td>9.0</td>
+        <td>11.10</td>
+        <td>5.1</td>
+      </tr>
+<tr>
+<td>SVG Font</td>
+        <td>
+<span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span><br><span class="inlineIndicator unimplemented unimplementedInline">Unimplemented (see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=119490" rel="external" title="">bug&nbsp;119490</a>)</span>
+</td>
+        <td>yes</td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>yes</td>
+        <td>yes</td>
+      </tr>
+<tr>
+<td><code>unicode-range</code></td>
+        <td>
+          <p>yes&nbsp;<span style="line-height: 1.572;">(<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=443976" rel="external" title="">bug&nbsp;443976</a>)</span></p>
+        </td>
+        <td>yes</td>
+        <td>9.0</td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+      </tr>
+</tbody></table>
+<h3>mobile</h3>
+<table class="atableLight">
+<thead>
+<tr>
+<th>Feature</th>
+        <th>Android</th>
+        <th>Firefox Mobile (Gecko)</th>
+        <th>IE Mobile</th>
+        <th>Opera Mini</th>
+        <th>Opera Mobile</th>
+        <th>Safari Mobile</th>
+      </tr>
+      </thead>
+      <tbody>
+<tr>
+<td>Basic support</td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+        <td>1.0 (1.9.1)</td>
+        <td><span style="color: rgb(255, 153, 0);" title="Compatibility unknown; please update this.">?</span></td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>10.0</td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+      </tr>
+<tr>
+<td>WOFF</td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>5.0 (5.0)</td>
+        <td><span style="color: rgb(255, 153, 0);" title="Compatibility unknown; please update this.">?</span></td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>11.0</td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+      </tr>
+<tr>
+<td>SVG fonts</td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>
+<span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span><br><span class="inlineIndicator unimplemented unimplementedInline">Unimplemented (see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=119490" rel="external" title="">bug&nbsp;119490</a>)</span>
+</td>
+        <td><span style="color: rgb(255, 153, 0);" title="Compatibility unknown; please update this.">?</span></td>
+        <td><span style="color: #f00;" title="Not&nbsp;supported"> Not&nbsp;supported </span></td>
+        <td>10.0</td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+      </tr>
+<tr>
+<td><code>unicode-range</code></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><span style="color: #888;" title="Please update this with the earliest version of support.">(Yes)</span></td>
+      </tr>
+</tbody></table>
+

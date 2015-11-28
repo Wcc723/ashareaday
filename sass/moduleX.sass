@@ -1,0 +1,436 @@
+@import compass/css3
+
+
+$fontSize: 13px
+$lineheight: 22px
+$fontColor: #3a3a3a
+$defaultColorRed: #E60044
+$defaultColorBlue: #00A0E9
+$defaultColorGreen: #8FC31F
+$imagePath: "../images/"
+
+@mixin atransition($type,$duration: 0.5s)
+	+transition-property($type)
+	+transition-duration($duration)
+
+@mixin fontFace ($fontName: Muli-Regular)
+	$fontsPath: "fonts/"
+	@font-face
+		font-family: $fontName
+		src: url($fontsPath+$fontName+".ttf") 
+
+$fontFamily: "Muli-Regular","Tw Cen MT"
+
+@mixin sizeRelative($size: 10, $unit: vw) //vw(idth), vh(eight), vmin and vmax. 
+	width: $size#{$unit}
+	height: $size#{$unit}
+
+@mixin heading()
+	$fontSize: 13px
+	h1,h2,h3,h4,h5,h6
+		line-height: 100%
+	h1
+		font-size: 300%
+		font-weight: bolder
+		margin-bottom: $lineheight*1
+	h2
+		font-size: 240%
+		font-weight: bold
+		margin-bottom: $lineheight*1
+	h3
+		font-size: 200%
+		margin-bottom: $lineheight*0.8
+	h4
+		font-size: 150%
+		margin-bottom: $lineheight*0.8
+	h5
+		font-size: 120%
+		margin-bottom: $lineheight*0.4
+	h6
+		font-size: 100%	
+		margin-bottom: $lineheight*0.4
+
+@mixin fluidGrid($maxWidth:1200px,$wrapWidth:100%,$wrapMargin:3%)
+	$wrapWidth: $wrapWidth + $wrapMargin
+	@for $i from 1 through 12	
+		.col#{$i}
+			width: ($wrapWidth*($i/12))-$wrapMargin
+			max-width: ($wrapWidth*($i/12))-$wrapMargin
+			margin-left: $wrapMargin
+			*margin-bottom: $wrapMargin //IE7			
+		img.col#{$i}
+			&.polaroid
+				width: ($wrapWidth*($i/12))-$wrapMargin - 20
+		.offset#{$i}
+			margin-left: ($wrapWidth*($i/12))
+	.row
+		width: $maxWidth
+		max-width: 100%	
+		margin-bottom: 15px		
+		[class*='col']
+			float: left
+			min-height: 1px
+			margin-bottom: 8px
+			zoom: 1
+			&:first-child
+				margin-left: 0
+		input[class*='col'],img[class*='col']
+			float: none
+			margin-left: 0
+		img[class*='col']	
+			height: auto			
+	.container
+		width: $maxWidth
+		max-width: 100%		
+		margin: 0 auto
+	.row
+		margin-bottom: $wrapMargin
+		//display: table
+		overflow: hidden
+		clear: both
+		zoom: 1 //IE 7
+
+@mixin grid($wrapWidth:1200px,$wrapMargin:25px)
+	@for $i from 1 through 12	
+		.col#{$i}
+			width: ($wrapWidth*($i/12))-$wrapMargin
+			max-width: ($wrapWidth*($i/12))-$wrapMargin
+			margin-left: $wrapMargin
+			*margin-bottom: $wrapMargin //IE7			
+		img.col#{$i}
+			&.polaroid
+				width: ($wrapWidth*($i/12))-$wrapMargin - 20
+		.offset#{$i}
+			margin-left: ($wrapWidth*($i/12))
+	.row	
+		margin-left: -$wrapMargin		
+		[class*="col"]
+			float: left
+			min-height: 1px
+			min-height: 20px //test
+			margin-bottom: 8px
+			background: #ccc //test
+			zoom: 1
+		input[class*="col"],img[class*="col"]
+			float: none
+			margin-left: 0
+		img[class*="col"]	
+			height: auto			
+	.container
+		width: $wrapWidth - $wrapMargin
+		max-width: 100%		
+		margin: 0 auto
+	.row
+		margin-bottom: $wrapMargin
+		display: table
+		clear: both
+		zoom: 1 //IE 7
+
+@mixin container($marginTop: 20px)
+	margin: $marginTop auto
+
+@mixin clearFix()
+	*zoom: 1
+	*overflow: hidden
+	&:after
+		content: " "
+		display: table
+		clear: both
+		visibility: hidden
+
+@mixin example ($content: "Example")
+	position: relative
+	margin: 15px 0
+	padding: 39px 19px 16px
+	background-color: #fff
+	border: 1px solid #ddd
+	+border-radius(5px)
+	&:before
+		content: "Example"
+		position: absolute
+		top: -1px
+		left: -1px
+		padding: 1px 7px
+		font-size: 90%
+		background-color: #f5f5f5
+		border: 1px solid #ddd
+		color: #9da0a4
+		+border-corner-radius(top, left, 5px)
+		+border-corner-radius(bottom, right, 5px)
+	& + pre
+		margin-top: -20px
+		padding: 8px 18px 8px 18px 
+		margin-bottom: 30px
+		background-color: #f7f7f9
+		border: 1px solid #e1e1e8
+		color: #777
+		+border-radius(5px)
+
+@mixin sassCode($content: "sassCode")
+	position: relative
+	color: #d14 !important
+	background-color: #f5f5f5
+	padding-right: 40px
+	&:before
+		content: $content
+		position: absolute
+		top: -1px
+		right: -1px
+		padding: 1px 7px
+		font-size: 90%
+		background-color: #f5f5f5
+		border: 1px solid #ddd
+		color: #9da0a4
+		+border-corner-radius(top, right, 5px)
+		+border-corner-radius(bottom, left, 5px)	
+
+@mixin hr
+	margin: $lineheight 0 $lineheight
+	border: 0
+	border-top: 1px solid #eeeeee
+	border-bottom: 1px solid #ffffff
+
+@mixin paragraph($marginBottom: 1em)
+	text-align: justify
+	margin: 0 0 $marginBottom
+
+@mixin strong($weight:bolder)
+	font-weight: $weight
+
+@mixin code($color: #d14)
+	padding: 0px 3px 0 3px
+	color: $color
+	display: inline-block
+	white-space: nowrap
+	background-color: #f7f7f9
+	border: 1px solid #e1e1e8	
+	+border-radius(3px)
+
+@mixin abbr
+	cursor: help
+	border-bottom: 1px dotted #a1a1a1
+
+@mixin smallFont($size: 90%)
+	font-size: $size
+
+@mixin blockquote($borderColor: #eee,$textAlign: left)
+	margin: 0 0 15px
+	p,ul,ol
+		margin-bottom: 0
+		color: #555	
+	small,em
+		+smallFont
+		color: #999	
+	@if $textAlign == left
+		padding: 0 0 0 15px	
+		border-left: 5px solid $borderColor
+	@if $textAlign == right
+		padding: 0 15px 0 0 
+		border-right: 5px solid $borderColor
+		p
+			text-align: right
+
+@mixin ullist($listStyle: disc,$listStyle2: circle)
+	margin: 0 0 1em 25px
+	list-style-type: $listStyle
+	ul,ol
+		margin: 0 0 1em 25px
+		list-style-type: $listStyle2
+
+@mixin dlList()
+	dt
+		margin-bottom: 0.5em
+		font-weight: bolder
+	dd
+		padding-left: 1.5em
+		margin-bottom: 1em
+		color: #555
+		&:before
+			display: inline-block
+			width: 1em
+			border-top: 1px solid #ccc
+			margin: 0.4em 0.5em 0.3em -1.5em
+			content: ""
+
+@mixin dlHorizontal($dtWidth: 100px,$gap: 10px)
+	margin-bottom: 1em
+	dt
+		float: left
+		clear: both
+		width: $dtWidth		
+		margin-right: $gap
+		font-weight: bolder
+		overflow: hidden
+		text-align: right
+		text-overflow: ellipsis
+		white-space: nowrap
+	dd
+		padding-left: $dtWidth + $gap
+
+@mixin atable($padding: 6px,$Color: #eee,$textAlign: left)
+	width: 100%
+	//border: 1px solid #dddddd	
+	border-left: none
+	border-bottom: none
+	border-collapse: separate	
+	+border-radius(5px)
+	th,td
+		text-align: $textAlign
+		padding: $padding
+		//border-left: 1px solid #dddddd
+		border-bottom: 1px solid #dddddd
+		border-collapse: collapse
+	thead
+		th
+			font-weight: bolder
+	tbody
+		tr
+			+atransition(background-color)
+			&:nth-child(odd)
+				background-color: lighten($Color,5%)
+			&:hover
+				background-color: $Color
+
+
+@mixin cubicButton($color: $defaultColorBlue,$leftWidth: 40px)
+	background-color: $color
+	color: #fff
+	position: relative
+	padding: 10px 20px
+	border-left: solid 1px darken($color,20%)
+	margin-left: $leftWidth
+	text-decoration: none
+	+border-top-right-radius(5px)
+	+border-bottom-right-radius(5px)
+	+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 5px 0px 0px darken($color,30%), 0px 10px 5px #999 )
+	+background-image(linear-gradient(lighten($color,5%), darken($color,10%)))
+	&:hover
+		top: 1px
+		+background-image(linear-gradient(darken($color,10%),lighten($color,5%)))
+		+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 4px 0px 0px darken($color,30%), 0px 5px 4px #999)
+		& > i
+			top: -2px
+	&:active
+		top: 3px
+		+background-image(linear-gradient(darken($color,20%),lighten($color,10%)))
+		+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 2px 0px 0px darken($color,30%), 0px 5px 3px #999)
+		& > i
+			top: -3px	
+	&>i
+		background-color: darken($color,20%)
+		width: $leftWidth
+		max-height: 29px
+		height: 100%
+		position: absolute
+		display: block
+		padding-top: 8px
+		bottom: 0px
+		left: -$leftWidth + 1px
+		font-weight: bold
+		color: $color
+		text-align: center
+		text-shadow: 1px 1px 0px darken($color,50%)
+		border-right: solid 1px darken($color,20%)		
+		z-index: 10
+		+border-top-left-radius(5px)
+		+border-bottom-left-radius(5px)
+		+box-shadow(inset 0px 1px 0px darken($color,30%), 0px 5px 0px 0px darken($color,40%), 0px 10px 5px #999)
+		+background-image(linear-gradient(darken($color,10%), darken($color,30%)))
+
+@mixin aForms($font-family: $fontFamily)
+	label
+		margin: 4px 4px 2px 0
+		display: block
+		font-family: $fontFamily
+	option		
+		outline: none	
+		font-family: $fontFamily
+	input, textarea,select
+		font-family: $fontFamily
+		background-color: #fcfcfc		
+		padding: 5px 6px
+		color: #777
+		outline: none
+		+box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.075))		
+	textarea,  select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+		border: 1px solid #cccccc
+		min-width: 200px
+		margin-bottom: 8px
+		+border-radius(2px)	
+		+atransition(+box-shadow)	
+		&:hover
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.00))	
+		&:focus,&:active
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.050),0 0 4px $defaultColorBlue)
+			background-color: #ffffff
+			border: 1px solid $defaultColorBlue
+@mixin aButton($color: $defaultColorBlue,$font-family: $fontFamily)
+	button, a.button
+		color: #555
+		border: 1px solid #aaa
+		font-family: $fontFamily
+		text-decoration: none
+		padding: 5px 12px
+		display: inline-block
+		margin-bottom: 0
+		text-align: center
+		line-height: $lineheight
+		+text-shadow(1 -1px 1px rgba(255, 255, 255, 0.75))
+		vertical-align: middle
+		cursor: pointer
+		+border-radius(4px)	
+		+box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05))
+		background: #e6e6e6
+		+atransition(+box-shadow +background-image(linear-gradient))
+		+background-image(linear-gradient(#ffffff, #e6e6e6))
+		&[type="submit"]
+			$darkenColor: saturate(darken($color, 10%),30%)
+			$lightenColor: saturate($color, 30%)
+			border: 1px solid $darkenColor
+			color: #fff			
+			background-color: $lightenColor
+			+background-image(linear-gradient($lightenColor, $darkenColor))
+			&:hover
+				background-color: $darkenColor
+				+background-image(linear-gradient(darken($lightenColor, 3%), darken($darkenColor, 3%)))
+		&:hover
+			background: #e6e6e6
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.30),0 1px 2px rgba(0, 0, 0, 0.05))
+		&:focus,&:active
+			+box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.60),0 1px 2px rgba(0, 0, 0, 0.05))	
+
+@mixin cabinet()
+	+single-box-shadow
+	margin-bottom: 15px
+	background: url($imagePath+"cabinet_top.png") top left repeat-x
+	padding-top: 35px
+	position: relative
+	&:after
+		content: url($imagePath+"cabinet_tl.png")
+		position: absolute
+		left: 0
+		top: 0
+	&:before
+		content: url($imagePath+"cabinet_tr.png")
+		position: absolute
+		right: 0
+		top: 0
+	ul
+		background: url($imagePath+"cabinet_left.png") top left repeat-y,url($imagePath+"cabinet_right.png") top right repeat-y,url($imagePath+"cabinet_mid.png")
+		padding: 0 20px 0 21px
+		overflow: hidden
+		text-align: center
+		li
+			height: 109px - 19px
+			padding-top: 19px
+			display: inline-block
+			margin: 0 10px 0 10px
+			img
+				+single-box-shadow
+				height: 80px
+				width: auto
+			//background: url($imagePath+"cabinet_mid.png") top left repeat-x
+
+@mixin imgStack()
+	img
+		padding: 8px

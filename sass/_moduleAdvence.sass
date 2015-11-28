@@ -1,0 +1,334 @@
+//advence
+@mixin webkitScrollbar
+	&:hover
+		&::-webkit-scrollbar-thumb
+			background-color: #777
+	&::-webkit-scrollbar
+		height: 10px
+		width: 10px
+		background-color: transparent
+	&::-webkit-scrollbar-thumb
+		background-color: rgba(#aaa,.3)
+		+border-radius(5px)
+	&::-webkit-scrollbar-track
+		background-color: transparent
+
+@mixin text-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+	text-shadow: $all
+@mixin box-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma)	
+	+box-shadow($all)
+
+@mixin Neon-text-shadow($color: #ff00de)
+	text-shadow: 0 0 5px white,0 0 10px white,0 0 15px white,0 0 40px $color,0 0 70px $color
+
+@mixin cabinet()
+	+single-box-shadow
+	margin-bottom: 15px
+	background: url($imagePath+"cabinet_top.png") top left repeat-x
+	padding-top: 35px
+	position: relative
+	&:after
+		content: url($imagePath+"cabinet_tl.png")
+		position: absolute
+		left: 0
+		top: 0
+	&:before
+		content: url($imagePath+"cabinet_tr.png")
+		position: absolute
+		right: 0
+		top: 0
+	ul
+		background: url($imagePath+"cabinet_left.png") top left repeat-y,url($imagePath+"cabinet_right.png") top right repeat-y,url($imagePath+"cabinet_mid.png")
+		padding: 0 20px 0 21px
+		+clearFix
+		text-align: center
+		li
+			height: 109px - 19px
+			padding-top: 19px
+			display: inline-block
+			margin: 0 10px 0 10px
+			img
+				+single-box-shadow
+				height: 80px
+				width: auto
+				+transition(all,0.5s)
+				&:hover
+					+transform(scale(2) translateY(-5px))
+					z-index: 10
+
+			//background: url($imagePath+"cabinet_mid.png") top left repeat-x
+
+@mixin sizeRelative($size: 10, $unit: vw) //vw(idth), vh(eight), vmin and vmax. 
+	width: $size#{$unit}
+	height: $size#{$unit}
+
+@mixin imgStack($style: rotated) //from http://inspectelement.com/demos/css3/stacks/
+	img
+		max-width: 100%
+		height: auto
+		border: 10px solid #fff
+		vertical-align: bottom
+		+border-radius(3px)
+		+box-shadow(0 1px 4px rgba(0, 0, 0, 0.4))
+		+box-sizing(border-box)
+	position: relative
+	z-index: 10
+	
+	&:before, &:after
+		content: " "
+		left: 0
+		height: 100%
+		width: 100%
+		border: 10px solid #fff
+		background-color: #Fff
+		position: absolute
+		+border-radius(3px)
+		+box-shadow(0 1px 4px rgba(0, 0, 0, 0.4))
+		+transition(all, 0.3s)
+		+box-sizing(border-box)
+	&:before
+		top: 2px
+		z-index: -1
+	&:after
+		top: 4px
+		z-index: -2
+	&:hover:before, &:hover:after
+		+transform(rotate(0deg))
+	@if $style == rotated
+		&:before
+			+transform-origin(bottom left)
+			+transform(rotate(4deg))
+		&:after
+			+transform-origin(bottom left)
+			+transform(rotate(8deg))
+	@if $style == twisted
+		&:before
+			+transform(rotate(6deg))
+		&:after
+			+transform(rotate(-6deg))
+	@if $style == rotated-left
+		&:before
+			+transform-origin(bottom left)
+			+transform(rotate(-4deg))
+		&:after
+			+transform-origin(bottom left)
+			+transform(rotate(-8deg))
+
+
+@mixin aMenu($color: $defaultColorBlue)
+	li	
+		width: 100%		
+		text-align: center	
+		margin-top: 10px
+		border: solid 1px darken($color,10%)
+		+box-sizing(border-box)
+		a
+			padding: 5% 1%
+			display: block
+			color: #fff
+			+transition(all,0.3s)
+			background-color: $color
+			&:hover,&:focus
+				background-color: darken($color,10%)
+
+@mixin turn180($zIndex: 10)
+	position: relative
+	+perspective(1000)		
+	.flipper
+		+transform-style(preserve-3d)
+		+transition(all 0.8s)
+		&:hover
+			+transform(rotateY(180deg))
+			&:first-child
+				z-index: $zIndex + 1
+				& + *
+					z-index: $zIndex + 2
+		& > *
+			position: absolute
+			top: 0
+			
+			+transform-style(preserve-3d)
+			&:first-child
+				z-index: $zIndex + 2
+				left: 0
+				+backface-visibility(hidden)
+				& + *
+					z-index: $zIndex + 1
+					right: 0
+					+transform(rotateY(180deg))
+					+backface-visibility(hidden)
+@mixin motionInput($widthS: 100px,$widthL: 200px,$color: $defaultColorBlue)
+	$darkenColor: saturate(darken($color, 10%),30%)
+	$lightenColor: saturate($color, 30%)
+	label
+		margin: 4px 4px 2px 0
+		display: block
+	option		
+		outline: none	
+	input, textarea,select
+		line-height: $lineheight
+		background-color: #fefefe
+		vertical-align: middle		
+		padding: 5px 6px 5px
+		color: #333
+		outline: none
+		+box-sizing(border-box)
+		+box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.075))		
+	textarea,  select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+		border: 1px solid #cccccc
+		//margin-bottom: 8px
+		+border-radius(2px)	
+		+atransition(+box-shadow)	
+		&:hover
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.00))	
+		&:focus,&:active
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.050),0 0 4px $color)
+			background-color: #ffffff
+			border: 1px solid $color
+	input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+		$darkenColor: saturate(darken($color, 10%),30%)
+		$lightenColor: saturate($color, 30%)
+		position: relative
+		width: $widthS
+		&:hover,&:focus
+			width: $widthL
+
+
+@mixin textureWove($className: textureWove,$btnFile: btn_blue,$borderPadding: 4px)	
+	$borderColor: #B3A1A1
+	$borderDashed: $borderColor dashed 1px
+	.#{$className}	
+		color: #ffc
+		margin-right: 8px	
+		margin-bottom: 8px	
+		padding: 12px	
+		display: inline-block
+		position: relative
+		z-index: 1
+		background: url($imagePath+$btnFile+".png") center
+		text-shadow: 1px 1px rgba(00,00,00, 0.6)
+		+border-radius
+		+single-box-shadow
+		+background-origin(8px)			
+		&:after
+			content: ""
+			border: $borderDashed
+			+border-radius
+			position: absolute
+			left: $borderPadding
+			top: $borderPadding
+			right: $borderPadding
+			bottom: $borderPadding
+
+@mixin ios7checkbox($className: ios7checkbox)
+	$className: ios7checkbox
+	$white: #fff
+	$green: #53d76a
+	$grey: #d3d3d3
+	.#{$className}
+		+appearance(none)
+		background-color: darken($white, 2%)
+		border: 1px solid $grey
+		border-radius: 26px		
+		cursor: pointer
+		height: 28px
+		position: relative
+		width: 44px
+		vertical-align: top
+		+box-shadow($grey 0 0 0 1px inset)
+		+transition(border .25s .15s,box-shadow .25s .3s,padding .25s)
+		&:after
+			content: ''
+			background-color: $white
+			border: 1px solid $grey
+			border-radius: 24px
+			+box-shadow(inset 0 -3px 3px rgba(0,0%,0%,.025),0 1px 4px rgba(0,0%,0%,.150), 4px 4px rgba(0,0%,0%,.1))
+			display: block
+			height: 24px
+			left: 0
+			position: absolute
+			right: 16px
+			top: 0
+			+transition(border .25s .15s,left .25s .1s,right .15s .175s)
+		&:checked
+			border-color: $green
+			+box-shadow(inset 0 0 0 13px $green)
+			padding-left: 18px
+			+transition(border .25s,box-shadow .25s,padding .25s .15s)
+			&:after 
+				border-color: $green
+				left: 16px
+				right: 0
+				+transition(border .25s,left .15s .25s,right .25s .175s)
+
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 10px
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+//jquery
+@mixin aBanner($width: 640px,$height: 360px,$overflow: hidden)
+	overflow: $overflow
+	background-color: #000
+	position: relative
+	width: $width
+	height: $height
+
+	.pre,.next
+		text-indent: -9999px
+		height: 100%
+		width: 60px
+		position: absolute
+		z-index: 100
+	.pre
+		left: 0
+	.next
+		right: 0
+	.wrap
+		position: relative
+	ul
+		position: absolute
+	li
+		width: $width
+		height: $height
+	.control
+		position: absolute
+		right: 60px
+		bottom: 10px
+		z-index: 50
+		a
+			display: inline-block
+			padding: 3px
+			margin: 0 3px
+			width: 16px
+			color: #fff
+			background: #000
+			text-align: center
+			font-size: 16px
+			text-decoration: none
+			+border-radius(3px)
+			&.on
+				font-weight: bold
+				z-index: 15
+				color: #f00

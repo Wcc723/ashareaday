@@ -1,0 +1,39 @@
+<div class="css">2013-summer</div>
+<p>CSS function語法<code>attr()</code></p>
+<p>參考資料 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr">https://developer.mozilla.org/en-US/docs/Web/CSS/attr</a></p>
+<h2>function語法 1. attr 範例</h2>
+<div class="d0819 demo">
+	<div class="test1" data-foo="這段是被抓的" > << 前面是被CSS插入的(這一段真的是範例)</div>
+</div>
+<pre>
+//html的code
+&lt;p class=&quot;test1&quot; data-foo=&quot;這段是被抓的&quot;&gt; &lt;&lt; 前面是被CSS插入的&lt;/p&gt;
+
+//sass的重點code
+&:before
+	content: attr(data-foo)""
+</pre>
+<p>很可惜的是雖然這功能相當的多，但目前都還不能使用...，僅有string可以使用。其他功能如color、url、number、length等，詳細還是請見 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr">這裡</a>。</p>
+<em><code>attr()</code>須ie8以上</em>
+
+<h2>function語法 2. calc 範例</h2>
+<p>簡單來說就是css具有運算的功能，包含了基本的加減陳除。<a href="http://devdocs.io/css/calc">詳細介紹</a></p>
+<div class="d0819 demo">
+	<div class="test2">這是一段範例，這段寬100% - 80px。</div>
+</div>
+<pre>
+//html的code
+&lt;p class=&quot;test2&quot; &gt; 這是一段範例，這段寬100% - 80px。&lt;/p&gt;
+
+//sass的重點code
+.test2
+	width: calc(100% - 80px)
+</pre>
+<p>用法就是這麼簡單，接下來看看其他範例。</p>
+<div class="d0819 demo">
+	<div class="test3">這是一段範例，這段寬100% / 6。</div>
+</div>
+<div class="d0819 demo">
+	<div class="test4"><span>這是一段範例，這段left: calc(10% + 20px)。</span></div>
+</div>
+<em><code>calc</code>須ie9以上</em>

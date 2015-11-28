@@ -1,0 +1,131 @@
+<div class="css">2013-winter</div>
+
+<p>Canvas好玩，但目前遇到了一些問題，就如同昨天所說的，canvas似乎沒有圖層，我就利用這個問題去搜尋解決的方法。撇除了利用canvas標籤重疊來作圖層的方式，我發現可以利用其他canvas framework，來達到類似的效果。</p>
+
+<p>而我找了許多套canvas framework，其中的重點當然是要我看得懂...，另外就是能不能達到我的需求，以下有一些我找到的canvas framework介紹。</p>
+
+
+<ul class="ollist">
+  <li><a href="http://www.icoding.co/2013/03/popular-html5-canvas-library">http://www.icoding.co/2013/03/popular-html5-canvas-library</a></li>
+  <li><a href="https://docs.google.com/spreadsheet/ccc?key=0Aqj_mVmuz3Y8dHNhUVFDYlRaaXlyX0xYSTVnalV5ZlE#gid=0">canvas framework 雲端硬碟資料表介紹</a></li>
+  <li><a href="http://www.backslash.gr/content/blog/webdevelopment/7-10-javascript-canvas-frameworks">外國介紹文章</a></li>
+  <li><a href="http://www.html5canvastutorials.com/">html5 Canvas教學(有用幾套Framework)</a></li>
+</ul>
+
+<p>我選擇<a href="http://kineticjs.com/">kineticjs</a>來先做嘗試，原因1.因為教程很好懂...，原因2.他的物件導向很簡單，原因3.他的互動DOM寫法幾乎和html DOM無異。而過程會參考上方的canvas教學文章。</p>
+
+<script src="/js/kinetic-v4.7.4.min.js"></script>
+
+
+<script >
+  var stage = new Kinetic.Stage({
+    container: 'canvas',
+    width: 578,
+    height: 200
+  });//先把一個canvas增加到場景內
+  var layer = new Kinetic.Layer();
+  //新增一個圖層
+
+  var rect = new Kinetic.Rect({
+    x: stage.getWidth() / 1.5,
+    y: stage.getHeight() / 2,
+    width: 100,
+    height: 50,
+    fill: 'green',
+    stroke: 'black',
+    strokeWidth: 4
+  });//新增一個方形，可以直接定義他的外觀
+
+  var circle = new Kinetic.Circle({
+    x: stage.getWidth() / 3,
+    y: stage.getHeight() / 2,
+    radius: 70,
+    fill: 'red',
+    stroke: 'black',
+    strokeWidth: 4,
+    draggable: true
+  });//新增一個圓形，並且設定可以拖曳draggable: true 
+
+  // 除了直接設定draggable外，還可以直接設定其他偵聽方式
+  circle.on('mouseover', function() {
+    document.body.style.cursor = 'pointer';
+  });
+  circle.on('mouseout', function() {
+    document.body.style.cursor = 'default';
+  });
+
+  // 將物件增加到圖層
+  layer.add(rect);
+  layer.add(circle);
+
+  // 將圖層增加到場景
+  stage.add(layer);
+
+
+
+  var _url = ''
+  document.getElementById('save').addEventListener('click', function(){ 
+    var _savebtn = this;
+
+    stage.toDataURL({
+      callback: function(dataUrl) {
+       console.log(_savebtn)
+       _savebtn.href = dataUrl
+       _savebtn.target = '_blank'
+      }
+    });
+    //利用toDataURL() 把canvas轉成data:image    
+    //再把href載入上面的Data:image
+  });
+</script>
+<h2>Demo</h2>
+<p>下方的紅色圓圈可以拖曳，而按照他們所提供的API，這些形狀完成是相當容易的。</p>
+<div id="canvas"></div>
+<!-- <a id="save" href="#" download="aShareaDay.png"  class="color-btn-green">Save Canvas</a> -->
+<pre>
+&lt;div id="canvas"&gt;&lt;/div&gt;
+</pre>
+<pre>
+var stage = new Kinetic.Stage({
+    container: 'canvas',
+    width: 578,
+    height: 200
+  });//先把一個canvas增加到場景內
+  var layer = new Kinetic.Layer();
+  //新增一個圖層
+
+  var rect = new Kinetic.Rect({
+    x: stage.getWidth() / 1.5,
+    y: stage.getHeight() / 2,
+    width: 100,
+    height: 50,
+    fill: 'green',
+    stroke: 'black',
+    strokeWidth: 4
+  });//新增一個方形，可以直接定義他的外觀
+
+  var circle = new Kinetic.Circle({
+    x: stage.getWidth() / 3,
+    y: stage.getHeight() / 2,
+    radius: 70,
+    fill: 'red',
+    stroke: 'black',
+    strokeWidth: 4,
+    draggable: true
+  });//新增一個圓形，並且設定可以拖曳draggable: true 
+
+  // 除了直接設定draggable外，還可以直接設定其他偵聽方式
+  circle.on('mouseover', function() {
+    document.body.style.cursor = 'pointer';
+  });
+  circle.on('mouseout', function() {
+    document.body.style.cursor = 'default';
+  });
+
+  // 將物件增加到圖層
+  layer.add(rect);
+  layer.add(circle);
+
+  // 將圖層增加到場景
+  stage.add(layer);
+</pre>

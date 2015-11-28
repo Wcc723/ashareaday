@@ -1,0 +1,119 @@
+<div class="css">2013-winter</div>
+<p>今天再新增一個調整筆刷的功能，超簡略的小畫家就要完成囉~。</p>
+
+<h2>調整顏色</h2>
+<p>首先，先新增三個input將type設定為range，min值爲0，max值爲255，這樣就能做出RGB的控制條。</p>
+<style>
+  input[type='range']{
+    width: 50%;
+  }
+</style>
+<pre>
+&lt;div class="color"&gt;
+    R&lt;input id="colorR" type="range" name="points" min="0" max="255" value="255"&gt;&lt;br&gt;
+    G&lt;input id="colorG" type="range" name="points" min="0" max="255" value="255"&gt;&lt;br&gt;
+    B&lt;input id="colorB" type="range" name="points" min="0" max="255" value="255"&gt;
+&lt;/div&gt; 
+</pre>
+<div class="color">
+R<input id="red" type="range" name="points" min="0" max="255" value="255"><br>
+G<input id="green" type="range" name="points" min="0" max="255" value="255"><br>
+B<input id="blue" type="range" name="points" min="0" max="255" value="255">
+</div>
+<div class="value">
+  R<input id="vred" type="text" value="255">
+  G<input id="vgreen" type="text" value="255">
+  B<input id="vblue" type="text" value="255">
+</div>
+<script>
+  var colors = {
+    red : 255,
+    green : 255,
+    blue : 255
+  }
+
+  $('.color input').change(function(){
+    r = $('#red').val();
+    g = $('#green').val();
+    b = $('#blue').val();
+    changeColor(r,g,b);
+  })
+  
+  function changeColor(r,g,b){
+    colors = {
+      red : r,
+      green : g,
+      blue : b
+    }
+    $.each(colors, function(_color, _value) {
+      $('#v'+_color).val(_value);
+    });
+    ctx.strokeStyle = "rgb("+r+","+g+","+b+")"     
+  };
+
+  var _canvas = document.getElementById('canvas');
+  var ctx = _canvas.getContext('2d');
+  var x = 0;
+  var y = 0;
+
+  canvas.addEventListener('mouseup', function() {
+    canvas.removeEventListener('mousemove', mouseMove, false);
+  }, false);
+
+  function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+  };
+
+  function mouseMove(evt) {
+    var mousePos = getMousePos(canvas, evt);
+    ctx.lineTo(mousePos.x, mousePos.y);
+    ctx.stroke();
+  };
+
+  canvas.addEventListener('mousedown', function(evt) {
+    var mousePos = getMousePos(canvas, evt);
+    evt.preventDefault();
+    ctx.beginPath();
+    ctx.moveTo(mousePos.x, mousePos.y);    
+    canvas.addEventListener('mousemove', mouseMove, false);
+  });
+
+  $('#save').on('click', function(){
+    var _url = _canvas.toDataURL();
+    //利用toDataURL() 把canvas轉成data:image
+    this.href = _url;
+    //再把href載入上面的Data:image
+  });
+</script>
+<style>
+  canvas{
+    margin: 20px auto;
+    border: 1px solid #E80C7A;
+  }
+</style>
+
+<canvas id="canvas" width="400" height="400">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+<p><a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a></p>
+<p>
+  
+</p>
+<pre>
+$('.color input').change(function(){
+    r = $('#red').val();
+    g = $('#green').val();
+    b = $('#blue').val();
+    changeColor(r,g,b);
+    //取出input中的數值
+  });
+
+function changeColor(r,g,b){
+  ctx.strokeStyle = "rgb("+r+","+g+","+b+")"  
+  //將數值寫入到 strokeStyle內即可
+};
+</pre>

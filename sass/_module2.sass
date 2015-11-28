@@ -1,0 +1,1101 @@
+@import compass/css3
+
+
+$fontSize: 13px
+$fontSizeL: $fontSize + 2px
+$lineheight: 22px
+$fontColor: #3a3a3a
+$defaultColorRed: #E60044
+$defaultColorBlue: #00A0E9
+$defaultColorGreen: #8FC31F
+$imagePath: "../images/"
+
+@mixin atransition($type,$duration: 0.5s)
+	+transition-property($type)
+	+transition-duration($duration)
+
+@mixin fontFace ($fontName: Muli-Regular)
+	$fontsPath: "fonts/"
+	@font-face
+		font-family: $fontName
+		src: url($fontsPath+$fontName+".ttf") 
+
+$fontFamily: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
+
+@mixin bg($name,$bg) 
+	background: url("#{$imgPath}#{$name}.#{$bg}")
+	width: image-width("../images/#{$name}.#{$bg}")
+	height: image-height("../images/#{$name}.#{$bg}")
+
+
+@mixin heading()
+	$fontSize: 13px
+	h1,h2,h3,h4,h5,h6
+		line-height: 1.2em
+		font-weight: bold
+		padding-top: 0.2em
+		padding-bottom: 0.5em
+		text-rendering: optimizeLegibility
+		&.subheader
+			color: #555
+		small
+			font-weight: normal
+			color: #666
+			font-size: 80%
+	h1
+		font-size: 2.8em
+		
+		padding-bottom: $lineheight*1
+	h2
+		font-size: 2.4em		
+		padding-bottom: $lineheight*1
+	h3
+		font-size: 2.2em
+		padding-bottom: $lineheight*0.8
+	h4
+		font-size: 1.6em
+		padding-bottom: $lineheight*0.8
+	h5
+		font-size: 1.4em
+		padding-bottom: $lineheight*0.8
+	h6
+		font-size: 1.4em
+		padding-bottom: $lineheight*0.8
+
+
+@mixin fluidGrid($maxWidth:1200px,$wrapWidth:100%,$wrapMargin:3%)
+	$wrapWidth: $wrapWidth + $wrapMargin
+	.row
+		width: $maxWidth
+		max-width: 100%	
+		margin-bottom: 15px		
+		[class*='col']
+			float: left
+			min-height: 1px
+			margin-bottom: 8px
+			margin-left: $wrapMargin
+			*margin-bottom: $wrapMargin //IE7	
+			zoom: 1
+			&:first-child
+				margin-left: 0
+		input[class*='col'],img[class*='col']
+			float: none
+			margin-left: 0
+		img[class*='col']	
+			height: auto
+	.row
+		@for $i from 1 through 12	
+			.col#{$i}
+				width: ($wrapWidth*($i/12))-$wrapMargin
+				max-width: ($wrapWidth*($i/12))-$wrapMargin					
+			img.col#{$i}
+				&.polaroid
+					width: ($wrapWidth*($i/12))-$wrapMargin - 20
+			.offset#{$i}
+				margin-left: ($wrapWidth*($i/12)) + $wrapMargin
+			.offset#{$i}:first-child
+				margin-left: ($wrapWidth*($i/12))
+	.container
+		width: $maxWidth
+		max-width: 100%		
+		margin: 0 auto
+	.row
+		margin-bottom: $wrapMargin/2
+		//display: table
+		overflow: hidden
+		clear: both
+		zoom: 1 //IE 7
+	@media (max-width: 1200px) 
+		.container
+			max-width: 100%	- $wrapMargin
+			padding: 0 $wrapMargin/2
+	@media (max-width: 767px)
+		.container
+			max-width: 100%	- $wrapMargin*2
+			padding: 0 $wrapMargin
+		.row
+			[class*='col']
+				margin-left: 0
+				width: 100%
+				max-width: 100%
+			[class*='offset']
+				margin-left: 0 !important
+
+
+@mixin grid($wrapWidth:1200px,$wrapMargin:25px)
+	.grid-row
+		@for $i from 1 through 12	
+			.col#{$i}
+				width: ($wrapWidth*($i/12))-$wrapMargin
+				max-width: ($wrapWidth*($i/12))-$wrapMargin
+				margin-left: $wrapMargin
+				*margin-bottom: $wrapMargin //IE7			
+			img.col#{$i}
+				&.polaroid
+					width: ($wrapWidth*($i/12))-$wrapMargin - 20
+			.offset#{$i}
+				margin-left: ($wrapWidth*($i/12)) + $wrapMargin
+	.grid-row	
+		margin-left: -$wrapMargin		
+		[class*="col"]
+			float: left
+			min-height: 1px
+			min-height: 20px //test
+			margin-bottom: 8px
+			background: #ccc //test
+			zoom: 1
+		input[class*="col"],img[class*="col"]
+			float: none
+			margin-left: 0
+		img[class*="col"]	
+			height: auto			
+	.container
+		width: $wrapWidth - $wrapMargin
+		max-width: 100%		
+		margin: 0 auto
+	.grid-row
+		margin-bottom: $wrapMargin / 2
+		//display: table
+		clear: both
+		zoom: 1 //IE 7
+	@media (max-width: 1200px) and (min-width: 960px)
+		$wrapWidth: 960px
+		.container
+			width: $wrapWidth - $wrapMargin
+		.grid-row
+			@for $i from 1 through 12	
+				.col#{$i}
+					width: ($wrapWidth*($i/12))-$wrapMargin
+					max-width: ($wrapWidth*($i/12))-$wrapMargin
+					margin-left: $wrapMargin
+					*margin-bottom: $wrapMargin //IE7			
+				img.col#{$i}
+					&.polaroid
+						width: ($wrapWidth*($i/12))-$wrapMargin - 20
+				.offset#{$i}
+					margin-left: ($wrapWidth*($i/12)) + $wrapMargin
+	@media (max-width: 965px) and (min-width: 768px)
+		$wrapWidth: 768px
+		.container
+			width: $wrapWidth - $wrapMargin
+		.grid-row
+			@for $i from 1 through 12	
+				.col#{$i}
+					width: ($wrapWidth*($i/12))-$wrapMargin
+					max-width: ($wrapWidth*($i/12))-$wrapMargin
+					margin-left: $wrapMargin
+					*margin-bottom: $wrapMargin //IE7			
+				img.col#{$i}
+					&.polaroid
+						width: ($wrapWidth*($i/12))-$wrapMargin - 20
+				.offset#{$i}
+					margin-left: ($wrapWidth*($i/12)) + $wrapMargin
+	@media (max-width: 767px)
+		$wrapMargin: 2%		
+		.container
+			width: 100%	- $wrapMargin*2
+			margin: 0 auto
+			//max-width: 100%	- $wrapMargin*2
+			//padding: $wrapMargin
+		.grid-row		
+			margin-left: 0
+			[class*='col']
+				margin-left: 0
+				width: 100%
+				max-width: 100%
+				float: none
+			[class*='offset']
+				margin-left: 0 !important
+				float: none
+
+@mixin container($marginTop: 20px)
+	margin: $marginTop auto
+
+@mixin clearFix()
+	*zoom: 1
+	*overflow: hidden
+	&:after
+		content: " "
+		display: table
+		clear: both
+		visibility: hidden
+
+@mixin exampleOrigin ($content: "Example")
+	position: relative
+	margin: 15px 0
+	padding: 39px 19px 16px
+	background-color: #fff
+	border: 1px solid #ddd
+	+border-radius(5px)
+	&:before
+		content: "Example"
+		position: absolute
+		top: -1px
+		left: -1px
+		padding: 1px 7px
+		font-size: 90%
+		background-color: #f5f5f5
+		border: 1px solid #ddd
+		color: #9da0a4
+		+border-corner-radius(top, left, 5px)
+		+border-corner-radius(bottom, right, 5px)
+	& + pre
+		margin-top: -20px
+		padding: 8px 18px 8px 18px 
+		margin-bottom: 30px
+		background-color: #f7f7f9
+		border: 1px solid #e1e1e8
+		color: #777
+		+border-radius(5px)
+
+@mixin example ($content: "Example")
+	position: relative
+	margin: 15px 0
+	padding: 39px 19px 16px 19px
+	background-color: #fff
+	//border: 1px solid #ddd
+	//+border-radius(5px)
+	+box-shadow(rgba(00,00,00,0.3)0 2px 5px inset)
+	&:hover
+		border-left: 3px solid $defaultColorBlue
+		padding: 39px 19px 16px 16px
+		+box-sizing(border-box)
+		&:hover:before
+			left: -3px
+		&:hover + pre
+			//padding: 8px 18px 8px 15px 
+			//border-left: 3px solid darken($defaultColorBlue, 10%)
+	&:before
+		content: "Example"
+		position: absolute
+		top: 0px
+		left: 0px
+		padding: 1px 7px
+		font-size: 90%
+		background-color: #f5f5f5
+		border: 1px solid #ddd
+		color: #9da0a4
+		//+border-corner-radius(top, left, 5px)
+		//+border-corner-radius(bottom, right, 5px)
+
+	& + pre ,& + pre + pre
+		margin-top: -20px
+		padding: 8px 18px 8px 18px 
+		margin-bottom: 20px
+		background-color: #f7f7f9
+		//border: 1px solid #e1e1e8
+		+box-shadow(rgba(00,00,00,0.2)0 -2px 5px inset)
+		color: #777
+		//+border-radius(5px)
+
+@mixin sassCode($content: "sassCode")
+	position: relative
+	color: #d14 !important
+	background-color: #f5f5f5
+	padding-right: 40px
+	&:before
+		content: $content
+		position: absolute
+		top: 0px
+		right: 0px
+		padding: 1px 7px
+		font-size: 90%
+		background-color: #f5f5f5
+		border: 1px solid #ddd
+		color: #9da0a4
+		//+border-corner-radius(top, right, 5px)
+		//+border-corner-radius(bottom, left, 5px)	
+
+@mixin hr
+	margin: $lineheight 0 $lineheight
+	border: 0
+	border-top: 1px solid #eeeeee
+	border-bottom: 1px solid #ffffff
+
+@mixin Paragraphs($linkColor: $defaultColorBlue)
+	p
+		text-align: justify
+		margin: 0 0 1em
+	strong,b
+		font-weight: bolder
+	em,i
+		font-style: italic
+		line-height: inherit
+	a
+		color: $linkColor
+		text-decoration: none
+		&:hover
+			color: darken($linkColor,15%)
+	sub,sup
+		font-size: smaller
+	sup
+		vertical-align: super
+	sub
+		vertical-align: sub
+	u
+		text-decoration: underline
+
+
+@mixin strong($weight:bolder)
+	font-weight: $weight
+
+@mixin code($color: #d14)
+	padding: 0px 3px 0 3px
+	color: $color
+	display: inline-block
+	white-space: nowrap
+	background-color: #f7f7f9
+	border: 1px solid #e1e1e8	
+	+border-radius(3px)
+
+@mixin abbr
+	cursor: help
+	border-bottom: 1px dotted #a1a1a1
+
+
+@mixin blockquote($borderColor: #eee,$textAlign: left)
+	margin: 0 0 15px
+	p,ul,ol
+		margin-bottom: 0
+		color: #555	
+	small,em
+		color: #999	
+	@if $textAlign == left
+		padding: 0 0 0 15px	
+		border-left: 5px solid $borderColor
+	@if $textAlign == right
+		padding: 0 15px 0 0 
+		border-right: 5px solid $borderColor
+		p
+			text-align: right
+
+@mixin ullist($listStyle: disc,$listStyle2: circle)	
+	margin: 0 0 1em 25px
+	list-style-type: $listStyle
+	ul,ol
+		margin: 0 0 1em 25px
+		list-style-type: $listStyle2
+
+@mixin dlList()
+	dt
+		margin-bottom: 0.5em
+		font-weight: bolder
+	dd
+		padding-left: 1.5em
+		margin-bottom: 1em
+		color: #555
+		&:before
+			display: inline-block
+			width: 1em
+			border-top: 1px solid #ccc
+			margin: 0.4em 0.5em 0.3em -1.5em
+			content: ""
+
+@mixin dlHorizontal($dtWidth: 100px,$gap: 10px)
+	margin-bottom: 1em
+	dt
+		float: left
+		clear: both
+		width: $dtWidth		
+		margin-right: $gap
+		font-weight: bolder
+		overflow: hidden
+		text-align: right
+		text-overflow: ellipsis
+		white-space: nowrap
+	dd
+		padding-left: $dtWidth + $gap
+
+@mixin navBar($ulWidth: 960px,$hoverColor: $defaultColorBlue,$vertical: false)
+	$color1: #fefefe
+	$color2: #eee
+	$color3: $hoverColor	
+	& > ul
+		+clearFix
+		background-color: $color2
+		max-width: $ulWidth
+		border-top: #ccc solid 1px		
+		margin: 0 auto
+		+background-image(linear-gradient($color2,$color1))
+		+box-shadow(#fff 0 1px 0 inset)		
+		border-bottom: $color2 solid 1px
+	li
+		position: relative
+		&:hover
+			+box-shadow(rgba(00,00,00, .2) 0 10px 35px inset)
+		& > a
+			display: block
+			text-shadow: 1px 1px 0 white
+			color: #555
+			line-height: 60px
+			height: 60px
+			+transition(all,.2s)
+
+			&:hover, &:focus,&.current
+				background-color: $color3
+				//border-left: darken($color3, 20%) 1px solid
+				//border-top: darken($color3, 20%) 1px solid
+				color: white
+				text-shadow: none
+				+box-shadow(rgba(00,00,00, .2) 0 10px 35px inset)
+				i.icon-black
+					background-image: url("../images/glyphicons-halflings-white.png")
+		&.right
+			float: right
+		&.light
+			a
+				color: #999	
+				font-weight: border
+				background: none
+				border-left: none
+				&:hover, &:focus,&.current	
+					+box-shadow(rgba(00,00,00, 0) 0 0 0 inset)
+					color: #777
+	ul ul
+		border: lighten($color3, 10%) 1px solid
+		display: none
+		position: absolute	
+		background-color: white
+	li:hover > ul
+		display: block
+	li li
+		&:first-child
+			border-top: lighten($color3, 10%) 2px solid
+		float: none
+		border-bottom: solid 1px #ddd
+		a		
+			display: block	
+			text-align: center
+			line-height: 1.6em
+			vertical-align: middle
+			height: auto
+			padding: 8px 5px 
+			&:hover
+				background-color: lighten($color3, 10%)
+	@if $vertical == false
+		width: 100%
+		li
+			float: left
+			& > a				
+				padding: 0 36px
+		ul ul
+			left: 0
+			right: 0
+			top: 60px		
+	@if $vertical == true
+		width: $ulWidth
+		li
+			float: none
+			& > a				
+				padding: 0 20px
+		ul ul
+			left: $ulWidth
+			top: 0
+			width: $ulWidth
+
+
+@mixin atableLight($padding: 6px,$Color: #eee,$textAlign: left)
+	width: 100%
+	//border: 1px solid #dddddd	
+	border-left: none
+	border-bottom: none
+	border-collapse: separate	
+	+border-radius(5px)
+	th,td
+		text-align: $textAlign
+		padding: $padding
+		//border-left: 1px solid #dddddd
+		border-bottom: 1px solid #dddddd
+		border-collapse: collapse
+	thead
+		th
+			font-weight: bolder
+	tbody
+		tr
+			+atransition(background-color)
+			&:nth-child(odd)
+				background-color: lighten($Color,5%)
+			&:hover
+				background-color: $Color
+
+
+@mixin cubicButton($color: $defaultColorBlue,$leftWidth: 40px)
+	background-color: $color
+	color: #fff
+	position: relative
+	padding: 10px 20px
+	border-left: solid 1px darken($color,20%)
+	margin-left: $leftWidth
+	text-decoration: none
+	+atransition(all,0.5s)
+	+border-top-right-radius(5px)
+	+border-bottom-right-radius(5px)
+	+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 5px 0px 0px darken($color,30%), 0px 10px 5px #999 )
+	+background-image(linear-gradient(lighten($color,5%), darken($color,10%)))
+	&:hover
+		//top: 1px
+		+background-image(linear-gradient(darken($color,10%),lighten($color,5%)))
+		+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 4px 0px 0px darken($color,30%), 0px 5px 4px #999)
+		color: #fff
+		& > i
+			//top: -2px
+	&:active
+		//top: 3px
+		+background-image(linear-gradient(darken($color,20%),lighten($color,10%)))
+		+box-shadow(inset 0px 1px 0px darken($color,10%), 0px 2px 0px 0px darken($color,30%), 0px 5px 3px #999)
+		& > i
+			//top: -3px	
+	&>i
+		background-color: darken($color,20%)
+		width: $leftWidth
+		max-height: 29px
+		height: 100%
+		position: absolute
+		display: block
+		padding-top: 8px
+		bottom: 0px
+		left: -$leftWidth + 1px
+		font-weight: bold
+		color: $color
+		text-align: center
+		text-shadow: 1px 1px 0px darken($color,50%)
+		border-right: solid 1px darken($color,20%)		
+		z-index: 10
+		+border-top-left-radius(5px)
+		+border-bottom-left-radius(5px)
+		+box-shadow(inset 0px 1px 0px darken($color,30%), 0px 5px 0px 0px darken($color,40%), 0px 10px 5px #999)
+		+background-image(linear-gradient(darken($color,10%), darken($color,30%)))
+
+@mixin aForms($color: $defaultColorBlue)
+	label
+		margin: 4px 4px 2px 0
+		display: block
+	option		
+		outline: none	
+	input, textarea,select
+		line-height: $lineheight
+		background-color: #fefefe
+		vertical-align: middle		
+		padding: 5px 6px
+		color: #333
+		outline: none
+		+box-sizing(border-box)
+		+box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.075))		
+	textarea,  select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+		border: 1px solid #cccccc
+		//min-width: 200px
+		//margin-bottom: 8px
+		+border-radius(2px)	
+		+atransition(+box-shadow)	
+		&:hover
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.00))	
+		&:focus,&:active
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.050),0 0 4px $color)
+			background-color: #ffffff
+			border: 1px solid $color
+@mixin aButton($color: $defaultColorBlue)
+	button, a.button, input[type="submit"],input[type="button"]
+		font-size: $fontSize
+		color: #333
+		border: 1px solid #aaa
+		text-decoration: none
+		padding: 4px 12px
+		display: inline-block
+		margin-bottom: 0
+		text-align: center
+		line-height: $lineheight
+		*line-height: $lineheight - 6px
+		overflow: visible
+		+text-shadow(1 -1px 1px rgba(255, 255, 255, 0.75))
+		vertical-align: middle
+		cursor: pointer
+		+border-radius(4px)	
+		+box-sizing(border-box)
+		+box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05))
+		background: #e6e6e6
+		+atransition(+box-shadow +background-image(linear-gradient))
+		+background-image(linear-gradient(#ffffff, #e6e6e6))
+		//&[type="submit"],&[type="button"]
+		$darkenColor: saturate(darken($color, 10%),30%)
+		$lightenColor: saturate($color, 30%)
+		border: 1px solid $darkenColor
+		color: #fff			
+		background-color: $lightenColor
+		+background-image(linear-gradient($lightenColor, $darkenColor))
+		&:hover
+			background-color: $darkenColor
+			color: #fff
+			+background-image(linear-gradient(darken($lightenColor, 3%), darken($darkenColor, 6%)))
+		//&:hover
+		//	background: #e6e6e6
+		//	+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.30),0 1px 2px rgba(0, 0, 0, 0.05))
+		&:focus,&:active
+			+box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.60),0 1px 2px rgba(0, 0, 0, 0.05))	
+
+@mixin atable($padding: 6px,$color1: #eeeeee,$color2: $defaultColorBlue,$textAlign: left)
+	$darkenColor: saturate(darken($color2, 10%),30%)
+	$lightenColor: saturate($color2, 30%)
+	width: 100%
+	border: 1px solid #dddddd	
+	border-left: none
+	border-bottom: none
+	border-collapse: separate	
+	+border-radius(5px)
+	overflow: hidden
+	th,td
+		text-align: $textAlign
+		padding: $padding
+		border-left: 1px solid #dddddd
+		border-bottom: 1px solid #dddddd
+		border-collapse: collapse
+	thead
+		th
+			font-weight: bolder
+			background-color: $darkenColor
+			+background-image(linear-gradient($darkenColor, $lightenColor))
+			text-align: center
+			color: #fff
+			font-size: $fontSizeL			
+	tbody
+		tr
+			color: #333
+			+atransition(background-color)
+			&:nth-child(odd)
+				background-color: lighten($color1,5%)
+			&:hover
+				background-color: $color1
+		th
+			background: $darkenColor
+			color: #fff
+			text-align: right
+			font-weight: bolder
+			padding-right: 15px
+
+@mixin tpl($color: $defaultColorBlue,$className: tpl)
+	$darkenColor: saturate(darken($color, 10%),30%)
+	$lightenColor: saturate($color, 30%)
+	.#{$className}
+		+aForms($color: $color)
+		+aButton($color: $color)
+		margin-bottom: 10px
+		font-size: $fontSize
+		em
+			font-weight: normal
+			color: #F00
+		cite,legend,label
+			color: #555
+		a
+			color: $color
+			text-decoration: none
+			&:hover
+				color: #FF0088
+
+	fieldset.#{$className},.#{$className} fieldset,.#{$className}fieldset
+		border: 1px #CCC dashed
+		padding: 10px
+		background: #ffffef
+	.#{$className}page
+		padding-top: 10px
+		text-align: center
+		a
+			border: 1px #EEE solid
+			color: $color
+			text-decoration: none
+			background: #fff
+			display: inline-block
+			margin: 5px
+			padding: 1px 5px 1px 5px
+			+transition(all,0.3s)
+			&:hover
+				background: $color
+				color: #FFF
+		span
+			border: 0
+			color: $color
+			display: inline-block
+			margin: 5px
+			padding: 1px 5px 1px 5px
+	table.#{$className}
+		margin-top: 10px
+		+atable($color2: $color)
+		input,button,select,textarea
+			margin: 0
+
+
+%buttonColor
+	//font-size: $fontSize
+	color: #333
+	text-shadow: -1px -1px rgba(00,00,00,0.3)
+	//border: 1px solid #aaa
+	text-decoration: none
+	padding: 3px 8px
+	display: inline-block
+	margin-bottom: 0
+	text-align: center
+	line-height: $lineheight
+	+text-shadow(1 -1px 1px rgba(255, 255, 255, 0.75))
+	vertical-align: middle
+	cursor: pointer
+	+border-radius(3px)	
+	+box-sizing(border-box)
+	+box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05))
+	//background: #e6e6e6
+	+transition(all,0.2s)
+	//+background-image(linear-gradient(#ffffff, #e6e6e6))
+	color: #fff	
+	&:hover
+		color: #fff
+	&:focus,&:active
+		+box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.60),0 1px 2px rgba(0, 0, 0, 0.05))		 		
+@mixin buttonColor($className: btn-orange,$color: orange)	
+	$darkenColor:  saturate(darken($color, 10%),15%)
+	$lightenColor: saturate($color, 2%)
+	.#{$className}	
+		@extend %buttonColor	
+		border: 1px solid $darkenColor 
+		background-color: $color
+		background-color: $lightenColor
+		margin: 1px
+		//+background-image(linear-gradient($lightenColor, $darkenColor))
+		&:hover
+			background-color: $darkenColor
+			//+background-image(linear-gradient($darkenColor, darken($lightenColor, 3%)))	
+
+
+
+
+
+//advence
+@mixin webkitScrollbar
+	&:hover
+		&::-webkit-scrollbar-thumb
+			background-color: #777
+	&::-webkit-scrollbar
+		height: 10px
+		width: 10px
+		background-color: transparent
+	&::-webkit-scrollbar-thumb
+		background-color: rgba(#aaa,.3)
+		+border-radius(5px)
+	&::-webkit-scrollbar-track
+		background-color: transparent
+
+@mixin text-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba($rgb,0.9/$i + 0.05)),comma)	
+	text-shadow: $all
+@mixin box-longShadow($lenght: 20,$rgb: #000)
+	$all: ()
+	@for $i from 1 through $lenght
+		$all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma)	
+	+box-shadow($all)
+
+@mixin Neon-text-shadow($color: #ff00de)
+	text-shadow: 0 0 5px white,0 0 10px white,0 0 15px white,0 0 40px $color,0 0 70px $color
+
+@mixin cabinet()
+	+single-box-shadow
+	margin-bottom: 15px
+	background: url($imagePath+"cabinet_top.png") top left repeat-x
+	padding-top: 35px
+	position: relative
+	&:after
+		content: url($imagePath+"cabinet_tl.png")
+		position: absolute
+		left: 0
+		top: 0
+	&:before
+		content: url($imagePath+"cabinet_tr.png")
+		position: absolute
+		right: 0
+		top: 0
+	ul
+		background: url($imagePath+"cabinet_left.png") top left repeat-y,url($imagePath+"cabinet_right.png") top right repeat-y,url($imagePath+"cabinet_mid.png")
+		padding: 0 20px 0 21px
+		+clearFix
+		text-align: center
+		li
+			height: 109px - 19px
+			padding-top: 19px
+			display: inline-block
+			margin: 0 10px 0 10px
+			img
+				+single-box-shadow
+				height: 80px
+				width: auto
+				+transition(all,0.5s)
+				&:hover
+					+transform(scale(2) translateY(-5px))
+					z-index: 10
+
+			//background: url($imagePath+"cabinet_mid.png") top left repeat-x
+
+@mixin sizeRelative($size: 10, $unit: vw) //vw(idth), vh(eight), vmin and vmax. 
+	width: $size#{$unit}
+	height: $size#{$unit}
+
+@mixin imgStack($style: rotated) //from http://inspectelement.com/demos/css3/stacks/
+	img
+		max-width: 100%
+		height: auto
+		border: 10px solid #fff
+		vertical-align: bottom
+		+border-radius(3px)
+		+box-shadow(0 1px 4px rgba(0, 0, 0, 0.4))
+		+box-sizing(border-box)
+	position: relative
+	z-index: 10
+	
+	&:before, &:after
+		content: " "
+		left: 0
+		height: 100%
+		width: 100%
+		border: 10px solid #fff
+		background-color: #Fff
+		position: absolute
+		+border-radius(3px)
+		+box-shadow(0 1px 4px rgba(0, 0, 0, 0.4))
+		+transition(all, 0.3s)
+		+box-sizing(border-box)
+	&:before
+		top: 2px
+		z-index: -1
+	&:after
+		top: 4px
+		z-index: -2
+	&:hover:before, &:hover:after
+		+transform(rotate(0deg))
+	@if $style == rotated
+		&:before
+			+transform-origin(bottom left)
+			+transform(rotate(4deg))
+		&:after
+			+transform-origin(bottom left)
+			+transform(rotate(8deg))
+	@if $style == twisted
+		&:before
+			+transform(rotate(6deg))
+		&:after
+			+transform(rotate(-6deg))
+	@if $style == rotated-left
+		&:before
+			+transform-origin(bottom left)
+			+transform(rotate(-4deg))
+		&:after
+			+transform-origin(bottom left)
+			+transform(rotate(-8deg))
+
+
+@mixin aMenu($color: $defaultColorBlue)
+	li	
+		width: 100%		
+		text-align: center	
+		margin-top: 10px
+		border: solid 1px darken($color,10%)
+		+box-sizing(border-box)
+		a
+			padding: 5% 1%
+			display: block
+			color: #fff
+			+transition(all,0.3s)
+			background-color: $color
+			&:hover,&:focus
+				background-color: darken($color,10%)
+
+@mixin turn180($zIndex: 10)
+	position: relative
+	+perspective(1000)		
+	.flipper
+		+transform-style(preserve-3d)
+		+transition(all,0.8s)
+		&:hover
+			+transform(rotateY(180deg))
+			&:first-child
+				z-index: $zIndex + 1
+				& + *
+					z-index: $zIndex + 2
+		& > *
+			position: absolute
+			top: 0
+			
+			+transform-style(preserve-3d)
+			&:first-child
+				z-index: $zIndex + 2
+				left: 0
+				+backface-visibility(hidden)
+				& + *
+					z-index: $zIndex + 1
+					right: 0
+					+transform(rotateY(180deg))
+					+backface-visibility(hidden)
+@mixin motionInput($widthS: 100px,$widthL: 200px,$color: $defaultColorBlue)
+	$darkenColor: saturate(darken($color, 10%),30%)
+	$lightenColor: saturate($color, 30%)
+	label
+		margin: 4px 4px 2px 0
+		display: block
+	option		
+		outline: none	
+	input, textarea,select
+		line-height: $lineheight
+		background-color: #fefefe
+		vertical-align: middle		
+		padding: 5px 6px 5px
+		color: #333
+		outline: none
+		+box-sizing(border-box)
+		+box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.075))		
+	textarea,  select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+		border: 1px solid #cccccc
+		//margin-bottom: 8px
+		+border-radius(2px)	
+		+atransition(+box-shadow)	
+		&:hover
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.00))	
+		&:focus,&:active
+			+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.050),0 0 4px $color)
+			background-color: #ffffff
+			border: 1px solid $color
+	input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+		$darkenColor: saturate(darken($color, 10%),30%)
+		$lightenColor: saturate($color, 30%)
+		position: relative
+		width: $widthS
+		&:hover,&:focus
+			width: $widthL
+
+
+@mixin textureWove($className: textureWove,$btnFile: btn_blue,$borderPadding: 4px)	
+	$borderColor: #B3A1A1
+	$borderDashed: $borderColor dashed 1px
+	.#{$className}	
+		color: #ffc
+		margin-right: 8px	
+		margin-bottom: 8px	
+		padding: 12px	
+		display: inline-block
+		position: relative
+		z-index: 1
+		background: url($imagePath+$btnFile+".png") center
+		text-shadow: 1px 1px rgba(00,00,00, 0.6)
+		+border-radius
+		+single-box-shadow
+		+background-origin(8px)			
+		&:after
+			content: ""
+			border: $borderDashed
+			+border-radius
+			position: absolute
+			left: $borderPadding
+			top: $borderPadding
+			right: $borderPadding
+			bottom: $borderPadding
+
+@mixin ios7checkbox($className: ios7checkbox)
+	$className: ios7checkbox
+	$white: #fff
+	$green: #53d76a
+	$grey: #d3d3d3
+	.#{$className}
+		+appearance(none)
+		background-color: darken($white, 2%)
+		border: 1px solid $grey
+		border-radius: 26px		
+		cursor: pointer
+		height: 28px
+		position: relative
+		width: 44px
+		vertical-align: top
+		+box-shadow($grey 0 0 0 1px inset)
+		+transition(border .25s .15s,box-shadow .25s .3s,padding .25s)
+		&:after
+			content: ''
+			background-color: $white
+			border: 1px solid $grey
+			border-radius: 24px
+			+box-shadow(inset 0 -3px 3px rgba(0,0%,0%,.025),0 1px 4px rgba(0,0%,0%,.150), 4px 4px rgba(0,0%,0%,.1))
+			display: block
+			height: 24px
+			left: 0
+			position: absolute
+			right: 16px
+			top: 0
+			+transition(border .25s .15s,left .25s .1s,right .15s .175s)
+		&:checked
+			border-color: $green
+			+box-shadow(inset 0 0 0 13px $green)
+			padding-left: 18px
+			+transition(border .25s,box-shadow .25s,padding .25s .15s)
+			&:after 
+				border-color: $green
+				left: 16px
+				right: 0
+				+transition(border .25s,left .15s .25s,right .25s .175s)
+
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 10px
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+//jquery
+@mixin aBanner($width: 640px,$height: 360px,$overflow: hidden)
+	overflow: $overflow
+	background-color: #000
+	position: relative
+	width: $width
+	height: $height
+
+	.pre,.next
+		text-indent: -9999px
+		height: 100%
+		width: 60px
+		position: absolute
+		z-index: 100
+	.pre
+		left: 0
+	.next
+		right: 0
+	.wrap
+		position: relative
+	ul
+		position: absolute
+	li
+		width: $width
+		height: $height
+	.control
+		position: absolute
+		right: 60px
+		bottom: 10px
+		z-index: 50
+		a
+			display: inline-block
+			padding: 3px
+			margin: 0 3px
+			width: 16px
+			color: #fff
+			background: #000
+			text-align: center
+			font-size: 16px
+			text-decoration: none
+			+border-radius(3px)
+			&.on
+				font-weight: bold
+				z-index: 15
+				color: #f00

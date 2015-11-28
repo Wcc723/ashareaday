@@ -1,0 +1,17 @@
+<div class="css">2013-summer</div>
+<div class="js">20130818</div>
+<p>目前本網站適用Ajax載入頁面，還在考慮是否使用其他樣板語言，如<code>.erb</code>、<code>jekyll</code>等，還在尋找適合的方式。</p>
+<hr>
+<p>今天要分享的是Jquery 重複click判斷。</p>
+<p>來源<a href="http://jsfiddle.net/visualidiot/WJEBr/" target="_blank">http://jsfiddle.net/visualidiot/WJEBr/</a></p>
+<div class="d0818 demo">
+	<a href="#" class="d0818click">點我</a>
+	<span class="old"></span>
+	<span class="new"></span>
+</div>
+<pre>$('.d0818click').click(function() {
+    $('.old').animate({left: '+=10'});
+    $('.new').is(':animated') || $('.new').animate({left: '+=10'});
+});	
+</pre>
+<p>這一篇的另一個功能就是...，測試ajax載入外部js。</p>

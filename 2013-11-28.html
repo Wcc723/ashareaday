@@ -1,0 +1,31 @@
+<div class="css">2013-winter</div>
+<p>transition可以把動作寫在不同的class上，再分別套用，如以下範例，由左至右分別是旋轉、模糊、放大。</p>
+<div class="demo d1128">
+	<div class="rotate transition">旋轉</div>
+	<div class="filter transition">模糊</div>
+	<div class="scale transition">放大</div>
+</div>
+<pre>
+//sass code
+.transition
+	+transition(all .5s)
+.scale
+	&:hover
+		+transform(scale(1.5))
+.rotate
+	&:hover
+		+transform(rotate(360deg))
+.filter
+	&:hover
+		+filter(blur(5px))
+</pre>
+<h2>Demo</h2>
+<p>模糊加旋轉。只要把rotate和filter加到同一個元素裡即可，這樣元素就可以達到模糊+旋轉的transition效果了。</p>
+<div class="demo d1128">
+	<div class="rotate filter transition">模糊+旋轉</div>
+</div>
+<p>而旋轉+放大都是屬於transform，所以在這邊只會有一種有效果。</p>
+<div class="demo d1128">
+	<div class="scale rotate transition">旋轉+放大</div>
+</div>
+

@@ -1,0 +1,216 @@
+<div class="css">2013-winter</div>
+<p>參考：<a href="http://blog.csdn.net/renfufei/article/details/9836317">http://blog.csdn.net/renfufei/article/details/9836317</a></p>
+
+<h2>上傳圖片</h2>
+<p>這次實作這一個效果，有一個很大的重點應該是在檔案的讀取，要不斷的利用console.log去了解目前檔案讀取的狀態。而這次的我除了參考上面那個連結外，也花了很多的時間在測試input上傳，這當中很大的問題當然就是file格式的轉換。</p>
+<pre>
+ &lt;div id="drop-target"&gt;請拖曳圖片到此範圍內(別用太大的圖片~ 我沒限制嘿)&lt;/div&gt; 
+ &lt;input id="file" type="file" multiple="multiple"&gt;
+</pre>
+<script>
+  var _canvas = document.getElementById('canvas');
+  var ctx = _canvas.getContext('2d');
+  var _colorR = $('#colorR').val();
+  var _colorG = $('#colorG').val();
+  var _colorB = $('#colorB').val();
+  var x = 0;
+  var y = 0;
+
+  var img = new Image();
+  function render(_src){
+     img.onload = function(){   
+      ctx.canvas.width = img.width
+      ctx.canvas.height = img.height    
+      draw(this,0,0);
+      //繪圖事件
+    }; 
+    img.src = _src
+  }
+  
+
+  function loadImage(src){
+    scr = src.dataTransfer
+    if(!src.type.match(/image.*/)){  
+      //file.type必須是圖片格
+        if(window.console){  
+          $('.template').find('.data').html('選取的文件類型不是圖片,'+src.type)
+        } else {  
+            window.confirm("只能使用圖片");  
+        }  
+        return;  
+    } 
+    var reader = new FileReader();
+    //利用上面的render函數來完成canvas渲染
+    reader.onload = function(e){  
+      // 調用前面的 render 函数  
+      render(e.target.result);
+    }; 
+
+    reader.readAsDataURL(src);
+    //讀取文件的內容
+  }
+
+
+
+init();
+function init(){          
+        var target = document.getElementById("drop-target");  
+        // 取得DOM目標對象
+        target.addEventListener("dragover", function(e){e.preventDefault();}, true);  
+        // 阻止 dragover(拖到DOM元素上方) 的事件
+        target.addEventListener("drop", function(e){  
+            e.preventDefault();              
+            console.log(e,e.dataTransfer.files[0]);
+            loadImage(e.dataTransfer.files[0]);  
+            //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+            //e:滑鼠事件
+            //e.target.files[0] 取用滑鼠事件中的dataTransfer的files[0]
+        }, true);   
+    }
+
+initInput();  
+function initInput(){
+  var target = document.getElementById("file")
+  target.addEventListener("change", function(e){  
+      // 调用前面的加载图像 函数，参数为dataTransfer对象的第一个文件 
+      console.log(e,e.target.files[0]) 
+      loadImage(e.target.files[0]); 
+      //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+      //e:input變換事件
+      //e.target.files[0] 直接取用變換事件中的target的file[0]
+      //file中的[0]就是canvas所需要的圖片資訊
+  });
+ };
+
+
+  $('.color').on('change','input',function(){
+    _colorR = $('#colorR').val()
+    _colorG = $('#colorG').val()
+    _colorB = $('#colorB').val()      
+  });
+  $('.color').on('mouseup',function(){
+      imgObj = img;
+      draw(imgObj);
+    });
+
+
+
+  function draw(imgObj,w,h){  
+    ctx.drawImage(imgObj,x,y);  
+    var imgData = ctx.getImageData(x, y, imgObj.width, imgObj.height);
+    var data = imgData.data;
+    for(var i = 0; i < data.length; i += 4) {
+      // red
+      data[i] = _colorR - (255 - data[i]);
+      // green
+      data[i + 1] = _colorG - (255 - data[i + 1]);
+      // blue
+      data[i + 2] = _colorB - (255 -data[i + 2]);
+    }
+    ctx.putImageData(imgData,0,0)
+  };
+
+  $('#save').on('click', function(){
+    var _url = _canvas.toDataURL();
+    //利用toDataURL() 把canvas轉成data:image
+    this.href = _url;
+    //再把href載入上面的Data:image
+  });
+
+</script>
+<pre>
+  var img = new Image();
+  function render(_src){
+     img.onload = function(){   
+      ctx.canvas.width = img.width
+      ctx.canvas.height = img.height    
+      draw(this,0,0);
+      //繪圖事件(和先前的一樣)
+    }; 
+    img.src = _src
+  }
+  
+
+  function loadImage(src){
+    scr = src.dataTransfer
+    if(!src.type.match(/image.*/)){  
+      //file.type必須是圖片格
+        if(window.console){  
+          $('.template').find('.data').html('選取的文件類型不是圖片,'+src.type)
+        } else {  
+            window.confirm("只能使用圖片");  
+        }  
+        return;  
+    } 
+    var reader = new FileReader();
+    //利用上面的render函數來完成canvas渲染
+    reader.onload = function(e){  
+      // 調用前面的 render 函数  
+      render(e.target.result);
+    }; 
+
+    reader.readAsDataURL(src);
+    //讀取文件的內容
+  }
+
+
+
+init();
+function init(){          
+        var target = document.getElementById("drop-target");  
+        // 取得DOM目標對象
+        target.addEventListener("dragover", function(e){e.preventDefault();}, true);  
+        // 阻止 dragover(拖到DOM元素上方) 的事件
+        target.addEventListener("drop", function(e){  
+            e.preventDefault();              
+            console.log(e,e.dataTransfer.files[0]);
+            loadImage(e.dataTransfer.files[0]);  
+            //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+            //e:滑鼠事件
+            //e.target.files[0] 取用滑鼠事件中的dataTransfer的files[0]
+        }, true);   
+    }
+
+initInput();  
+function initInput(){
+  var target = document.getElementById("file")
+  target.addEventListener("change", function(e){  
+      // 调用前面的加载图像 函数，参数为dataTransfer对象的第一个文件 
+      console.log(e,e.target.files[0]) 
+      loadImage(e.target.files[0]); 
+      //使用前面的 loadImage方訊，詳情內容可以參考console.log(e,e.target.files[0])
+      //e:input變換事件
+      //e.target.files[0] 直接取用變換事件中的target的file[0]
+      //file中的[0]就是canvas所需要的圖片資訊
+  });
+ };
+</pre>
+<h2>Demo</h2>
+<canvas id="canvas" width="30" height="30">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+<br>
+<div class="template">
+  <div class="data"></div>
+  <div class="status"></div>  
+</div>
+<div class="color">
+R<input id="colorR" type="range" name="points" min="0" max="255" value="255"><br>
+G<input id="colorG" type="range" name="points" min="0" max="255" value="255"><br>
+B<input id="colorB" type="range" name="points" min="0" max="255" value="255">
+</div>
+<div id="drop-target">請拖曳圖片到此範圍內(別用太大的圖片~ 我沒限制嘿)</div> 
+<style>
+#drop-target {
+  width:100%;height:200px;
+  border: rgba(255,255,255,.6) 1px solid;
+  background: rgba(255,255,255,.1);
+  cursor:pointer;
+}
+ input[type='range']{
+    width: 50%;
+  }
+</style>
+
+<p><input id="file" type="file" multiple="multiple" class="color-btn-blue">
+<a id="save" href="#" download="aShareaDay.png" class="color-btn-green">Save Canvas</a></p>

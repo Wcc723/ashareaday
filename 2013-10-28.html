@@ -1,0 +1,79 @@
+<div class="css">2013-winter</div>
+
+
+<p>承上篇，學會jQuery可以用較少的程式碼控制本身的元件(真的是write less, do more)，而本篇要分享給大家的是利用jquery控制其他物件，點擊一個按鈕讓其他地方動畫開始執行。</p>
+<script>
+$(document).ready(function() {
+  $('.btn-demo').click(function(_evt){
+  _evt.preventDefault();
+  $('.gradient').toggleClass('current');
+  });
+});
+</script>
+<h2>CSS建置</h2>
+<p>和上次一樣，要先準備好CSS元件，上次的按鈕及這次要旋轉的輪盤，把輪盤的元素繪製完成後，動畫的效果在另外做成一個class(如下範例)。</p>
+<pre>
+//sass code
++keyframes(ifinityCircles)
+  //動畫效果，這效果是旋轉~
+  from
+    +transform(rotate(0))
+  to
+    +transform(rotate(360deg))
+
+.gradient
+  //目標物件的預設樣式
+  ...
+
+.current
+  //js互動後的動畫效果
+  +animation(ifinityCircles 2s infinite linear)
+  //這是把上面的keyframe載入  
+</pre>
+
+<p>接下來再利用這個js，去控制這個輪盤元件。</p>
+<pre>
+&lt;script&gt;
+$(document).ready(function() {
+  $('.btn-demo').click(function(_evt){
+  _evt.preventDefault();
+  $('.gradient').toggleClass('current');
+  });
+});
+&lt;/script&gt;
+</pre>
+<p>接下來如果成功的話，點擊左方的按鈕，就會讓右邊的輪盤開始旋轉。</p>
+<div class="demo d1028" >
+  <a href="#" class="btn-demo">Click me!</a>
+ <div class="gradient"></div>
+</div>
+
+
+<h2>Script說明</h2>
+<p>大部分和上次一樣，主要不同的地方只有一行，就是.toggleClass前方的選取器內容換掉了，這可以替換成任何的目標物件，不過目標如果有10個，也會通通一起轉就是了...。</p>
+<pre>
+&lt;script&gt;
+//javascript需要放在script標籤內才會被執行
+
+$(document).ready(function() {
+//在文件完全載入後，執行這內部的function
+
+  $('.btn-demo').click(function(_evt){
+  //$('.btn-demo'):這是一個選取器，而裡面的值就直接用Css選取器的寫法即可，如.class或是#id
+  //.click : 這是一個點擊事件，只要這個按鈕被點擊，就會執行這內部的Function
+
+  _evt.preventDefault();
+  //不執行a這個標籤內的預設動作(href="#")
+
+  $('.gradient').toggleClass('current');
+  //$('.gradient'): 觸發事件的選取器，這邊可以換成任何的物件
+  //.toggleClass('current') : 切換current這一個Class
+
+  });
+});
+&lt;/script&gt;
+</pre>
+
+
+
+

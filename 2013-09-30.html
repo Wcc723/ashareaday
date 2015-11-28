@@ -1,0 +1,110 @@
+<div class="css">2013-autumn</div>
+<p>本篇CSS效果發表於<a href="http://ashareaday.wcc.tw/#2013-09-30">http://ashareaday.wcc.tw/#2013-09-30</a> (建議使用Chrome瀏覽器)</p>
+
+<p>鐵人賽終於到了15天了，再怎麼說也是30天的一半。今天要介紹的是box-shadow，簡單來說它是盒狀元素陰影，雖然他的設定值不多，但是要相信css是沒有極限的，再透過人們的思考他會有無止盡的變化。</p>
+<div class="demo d0930" data-demo="hover me!">
+	<div class="demo1"></div>
+</div>
+<pre>
+//CSS code
+box-shadow: 120px 0 0 rgba(255, 165, 0, 0.8), -120px 0 0 rgba(255, 165, 0, 0.5);
+</pre>
+<pre>
+box-shadow: x-位移 y-位移 blur-模糊的值 spread-擴散的值 color-顏色 inset-是否在內側
+</pre>
+<p>box-shadow簡單來說就是以本身的形狀，新增一個相同形狀的元素，並且可以設定該元素的位置、模糊、顏色等參數；所以如上範例，它所產生的陰影，其實和原本的元素形狀是相同的。</p>
+
+
+
+
+<div class="demo d0930" data-demo="hover me!">
+	<div class="demo2"></div>
+</div>
+<pre>
+/css
+box-shadow: 120px 0 8px 10px rgba(255, 165, 0, 0.8), -120px 0 8px 10px rgba(255, 165, 0, 0.5);
+</pre>
+<p>而他不只可以產生一個的陰影，只需要將每個參數中間以逗號隔開，就可以不斷的新增陰影，當然也可以設定每個陰影各自的擴散、位置、顏色等等。</p>
+
+
+<div class="demo d0930" data-demo="hover me!">
+	<div class="demo3"></div>
+</div>
+<pre>
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+</pre>
+<p>也可以不要移動陰影的位置，這樣就會出現相當普通的陰影。</p>
+
+
+
+<div class="demo d0930" data-demo="hover me!">
+	<div class="demo4"></div>
+</div>
+<pre>
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) inset;
+</pre>
+<p>而簡單的陰影參數，只要反轉到了內側，也可以變得很有質感。</p>
+
+<div class="demo d0930" data-demo="hover me 來看構造">
+	<div class="demo5">愛恨分明 二打六</div>
+</div>
+<div class="demo d0930" data-demo="hover me 來看構造">
+	<div class="demo6">愛恨分明 二打六</div>
+</div>
+<pre>
+//sass code
+%box
+	height: 150px
+	width: 100%
+	margin: 20px auto
+	position: relative
+	line-height: 150px
+	text-align: center
+	font-size: 2em
+	color: #555
+	+transition(all .5s)
+.demo
+	@extend %box
+	background: white
+	&:hover
+		background: rgba(white,.3)
+	&:after
+		content: ""
+		position: absolute
+		bottom: 0
+		left: 10px
+		right: 10px
+		top: 0
+		z-index: -1
+		+box-shadow(0 0 15px rgba(black,.3))
+		+border-radius(30%)
+</pre>
+<p>而我們只要再加上偽元素，一個只能做單純形狀的陰影又有了新的變化，透過偽元素我們可以重新定義他的範圍位置、大小、旋轉、圓弧等等，使得這個陰影變得更有質感。</p>
+
+<div class="demo d0930" data-demo="hover me 來看構造">
+	<div class="demo7">愛恨分明 二打六</div>
+</div>
+<pre>
+//sass @mixin
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		bottom: 6px
+		width: 50%
+		height: 20%
+		max-height: 20px
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+</pre>
+<p>在這邊也奉上類似紙陰影的sass @mixin，有安裝sass的使用者可以試試看喔～。</p>

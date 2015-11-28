@@ -1,0 +1,87 @@
+<div class="css">2013-winter</div>
+123
+
+<div class="demo d1223">
+	<div class="transform3d">
+		<span class="ez"><img src="/images/2013-12-23-lol-f.png" alt=""></span>
+		<span class="ziggs"><img src="/images/2013-12-23-lol-zig.png" alt=""></span>
+	</div>
+</div>
+<script>
+var cssPrefixString = {};
+var cssPrefix = function(propertie) {
+    if (cssPrefixString[propertie] || cssPrefixString[propertie] === '') return cssPrefixString[propertie] + propertie;
+    var e = document.createElement('div');
+    var prefixes = ['', 'Moz', 'Webkit', 'O', 'ms', 'Khtml']; // Various supports...
+    for (var i in prefixes) {
+        if (typeof e.style[prefixes[i] + propertie] !== 'undefined') {
+            cssPrefixString[propertie] = prefixes[i];
+            return prefixes[i] + propertie;
+        }
+    }
+    return false;
+};
+
+var cssTransform = cssPrefix('Transform'); // "MozTransform" or "WebkitTransform"
+// http://jsfiddle.net/molokoloco/f6Z3D/
+</script>
+
+
+<script>
+var jsarea = document.getElementById('jsarea');
+jsarea.addEventListener("mousemove", func, false);
+jsarea.addEventListener("mouseleave", funcOut, false);
+
+
+
+function func(e){
+	var rect = jsarea.getBoundingClientRect();
+	//getBoundingClientRect 取得物件完整座標資訊，包含寬高等
+	var mousePos = getMousePos(rect, e);
+	x = Math.abs(rect.width/2 - mousePos.x);
+	console.log(x)
+
+	moveLol(x/2)    
+}
+
+function funcOut() {
+	x = 0;
+	moveLol(x)
+}
+
+function getMousePos(rect, evt) {    
+   return {
+     x: evt.clientX - rect.left,
+     y: evt.clientY - rect.top
+   };   
+   //這個function將會傳回滑鼠在 jsarea上的座標
+ };
+
+
+function moveLol(x){
+	if (cssTransform) {
+    	var ezcssProp = {};
+    	var ziggscssProp = {};
+    	ezcssProp[cssPrefix('Transform')] = 'translateX(' + x + 'px)';
+    	ziggscssProp[cssPrefix('Transform')] = 'translateX(' + (- x) + 'px)';
+    	 $('#ez').css(ezcssProp);
+    	 $('#ziggs').css(ziggscssProp);
+    }
+
+}
+
+/*
+ function update() {
+  var prop = 'translateZ(' + z + 'px)';
+  el.style[prefix.prefixed('transform')] = prop + ' rotateY(60deg)';
+  css.innerText = 'transform: ' + prop;
+}*/
+
+</script>
+
+<div class="demo d1223">
+<div class="transformjs" id="jsarea">
+		<span id="ez" class="ez"><img src="/images/2013-12-23-lol-f.png" alt=""></span>
+		<span id="ziggs" class="ziggs"><img src="/images/2013-12-23-lol-zig.png" alt=""></span>
+	</div>
+</div>

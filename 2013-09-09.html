@@ -1,0 +1,159 @@
+<div class="css">2013-summer</div>
+
+<p>CSS並沒有類似javascript那麼豐富的互動語法，所以網頁上許多互動性的功能，都是利用javascript或是jQuery去完成。而其實html中有一種互動性的元件就是<code>checkbox</code>，在網頁上他有兩種互動屬性，未選取及被選取，而本篇會介紹如何使用checkbox製作互動性的效果。</p>
+<em>注意本篇分為上下兩篇</em>
+<h3>建立html</h3>
+<div class="d0909 demo">
+	<div class="test">
+		<div class="cover">
+			<div class="coverflow-list">
+				<input type="checkbox" name="cover-item" id="cover-1">
+				<div class="coverflow-item">
+					<label for="cover-1">
+						<figure class="album-cover">
+							<img src="/images/mayday/001.jpg" alt="">
+						</figure>
+						 <figcaption class="album-name">為愛而生</figcaption>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="controllor">
+			<label for="cover-1">遠端遙控器</label>
+		</div>
+	</div>
+</div>
+<pre>
+&lt;div class=&quot;cover&quot;&gt;
+	&lt;div class=&quot;coverflow-list&quot;&gt;
+		&lt;input type=&quot;checkbox&quot; name=&quot;cover-item&quot; id=&quot;cover-1&quot;&gt;
+		&lt;div class=&quot;coverflow-item&quot;&gt;
+			&lt;label for=&quot;cover-1&quot;&gt;
+			&lt;figure class=&quot;album-cover&quot;&gt;
+				&lt;img src=&quot;/images/mayday/001.jpg&quot; alt=&quot;&quot;&gt;
+			&lt;/figure&gt;
+				&lt;figcaption class=&quot;album-name&quot;&gt;為愛而生&lt;/figcaption&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;controllor&quot;&gt;
+&lt;label for=&quot;cover-1&quot;&gt;遠端遙控器&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+<p>首先準備好需要的html，有些重點可以讓大家了解。</p>
+<ol class="ollist">
+	<li>checkbox 中的id記得設定</li>
+	<li>id是唯一的</li>
+	<li>label中的<code>for</code>的值會對應到checkbox的<code>id</code></li>
+	<li>label可以重複使用，<code>for</code>的值對應相同ID即可</li>
+</ol>
+<h3>設定基本樣式</h3>
+<p>這一部分只是先設定基本樣式，就不多闡述了。</p>
+<div class="d0909 demo">
+	<div class="test1">
+		<div class="cover">
+			<div class="coverflow-list">
+				<input type="checkbox" name="cover-item" id="cover-1">
+				<div class="coverflow-item">
+					<label for="cover-1">
+						<figure class="album-cover">
+							<img src="/images/mayday/001.jpg" alt="">
+						</figure>
+						 <figcaption class="album-name">為愛而生</figcaption>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="controllor">
+			<label for="cover-1">遠端遙控器</label>
+		</div>
+	</div>
+</div>
+<pre>
+.coverflow-item
+	display: inline-block
+	position: relative
+	margin: 0 auto
+	text-align: center
+	.album-cover
+		height: 150px
+		width: 150px
+		img
+			opacity: 0.5
+	.album-name
+		text-align: center
+		display: block
+		color: #777
+	label
+		display: block
+</pre>
+
+<h3>設定3D樣式</h3>
+<p>3D樣式中有許多特別的設定值，在原始碼中有介紹。</p>
+<div class="d0909 demo">
+	<div class="test2">
+		<div class="cover">
+			<div class="coverflow-list">
+				<input type="checkbox" name="cover-item" id="cover-1">
+				<div class="coverflow-item">
+					<label for="cover-1">
+						<figure class="album-cover">
+							<img src="/images/mayday/001.jpg" alt="">
+						</figure>
+						 <figcaption class="album-name">為愛而生</figcaption>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="controllor">
+			<label for="cover-1">遠端遙控器</label>
+		</div>
+	</div>
+</div>
+<pre>
+.coverflow-list
+	+perspective(900px) //設定3D景深距離
+	+transform-style(preserve-3d)
+	+perspective-origin(100% 30%) //3D x軸 y軸起始點
+	.coverflow-item
+		+transition(all .3s ease) //動畫語法
+		+transform(rotateY(45deg)) //y軸旋轉45度
+</pre>
+
+<h3>套用checkbox效果</h3>
+<p>這步驟有兩個重點一個是<code>checked</code>(被選取)另一個則是<code>+</code>(相鄰)，所以要進行變化的元素必須緊貼著<code>checkbox</code>元素。</p>
+<div class="d0909 demo">
+	<div class="test3">
+		<div class="cover">
+			<div class="coverflow-list">
+				<input type="checkbox" name="cover-item" id="cover-2">
+				<div class="coverflow-item">
+					<label for="cover-2">
+						<figure class="album-cover">
+							<img src="/images/mayday/001.jpg" alt="">
+						</figure>
+						 <figcaption class="album-name">為愛而生</figcaption>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="controllor">
+			<label for="cover-2">遠端遙控器</label>
+		</div>
+	</div>
+</div>
+<pre>
+input[type="checkbox"]
+	display: none //隱藏checkbox
+	&:checked //如果再被選取時的效果
+		&+.coverflow-item //如果再被選取時 和他相鄰元件效果
+			+transition(all .3s ease)
+			+transform(rotateY(0.1deg))
+			margin: 0 auto
+			img
+				opacity: 1
+			.album-name
+				color: #333
+</pre>
+<p>由最後的結果可以測試出，label和checkbox的互動關係，就算是在不同的區域的label只要id對應的到就可以產生互動，接下來一篇會介紹這功能的運用。</p>

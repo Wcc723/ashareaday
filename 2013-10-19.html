@@ -1,0 +1,62 @@
+<div class="css">2013-winter</div>
+
+<p>和其他屬性一樣，animation有許多屬性可以設定，當然也可以用一個animation涵蓋全部，以下幾張會分別介紹以下屬性的用途。</p>
+
+<em>來源：<a href="http://css.doyoe.com/">http://css.doyoe.com/</a></em>
+<ol class="ollist">
+  <li><del>[ animation-name ]：設置物件所應用的動畫名稱(必填)</del></li>
+  <li><del>[ animation-duration ]：檢索或設置對象動畫的持續時間(必填)</del></li>
+  <li><del>[ animation-timing-function ]：檢索或設置物件動畫的過渡類型</del></li>
+  <li>[ animation-delay ]：檢索或設置對象動畫延遲的時間</li>
+  <li>[ animation-iteration-count ]：檢索或設置物件動畫的迴圈次數</li>
+  <li>[ animation-direction ]：檢索或設置物件動畫在迴圈中是否反向運動</li>
+</ol>
+
+<p>前三個已經介紹過了，今天要介紹剩下的三個，而以下範例都是用相同的keyframes作介紹，僅調整animation的屬性。</p>
+<pre>
++keyframes(ifinityCircles)
+  from
+    +transform(rotate(0))
+  to
+    +transform(rotate(360deg))
+</pre>
+
+
+<h2>Delay</h2>
+<p>如同字義的意思，就是延遲撥放動畫，有些時候可以用這效果讓多個動畫做出層次感。</p>
+<pre>
++animation(ifinityCircles 3s) //沒有delay
++animation(ifinityCircles 3s 1.5s) //第二個秒數設定，會被判定為delay
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a5">
+  <label class="box5" for="a5"></label>
+  <label class="box6" for="a5"></label>
+</div>
+
+
+<h2>Iteration-count</h2>
+<p>動畫重複的次數，預設值是1次，如果要多次直接輸入次數即可，而無限次數就要輸入infinite。</p>
+<pre>
++animation(ifinityCircles 1.5s 2) //重複2次
++animation(ifinityCircles 1.5s infinite) //重複無限次
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a6">
+  <label class="box7" for="a6"></label>
+  <label class="box8" for="a6"></label>
+</div>
+
+<h2>Direction</h2>
+<p>決定動畫順轉或是逆轉的模式，這邊的範例用無限次撥放比較好說明。</p>
+<pre>
++animation(ifinityCircles 1.5s reverse infinite) //一直保持逆轉的模式
++animation(ifinityCircles 1.5s alternate-reverse infinite) //先逆轉，然後再順轉回去
++animation(ifinityCircles 1.5s alternate infinite) //首先是順轉，會在逆轉回去
+</pre>
+<div class="demo d1018" data-demo="click me">
+  <input type="checkbox" id="a7">
+  <label class="box9" for="a7"></label>
+  <label class="box10" for="a7"></label>
+  <label class="box11" for="a7"></label>
+</div>

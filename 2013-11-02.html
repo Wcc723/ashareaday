@@ -1,0 +1,82 @@
+<div class="css">2013-winter</div>
+<p>假日就是要簡單些，所以今天要介紹有按壓效果的按鈕，這邊提供兩種方式。</p>
+
+<h2>基本型</h2>
+<div class="demo d1102">
+  <a href="#" class="demo0"> 沒深度按鈕</a>
+</div>
+<p>首先這是原始的樣式，也先定義一個變數，方便等等使用。</p>
+<pre>
+$color: #40CB90
+</pre>
+<pre>
+.btn
+    padding: .6em 1.2em
+    background: $color
+    color: white    
+    display: block
+    text-align: center
+    +border-radius(3px)
+</pre>
+
+
+<h2>利用border</h2>
+<div class="demo d1102">
+  <a href="#" class="demo1"> 深度按鈕</a>
+</div>
+<p>這是第一種方式，先定義兩個變數一個是突起的高度，另一個是壓下去的後的高度。</p>
+<pre>
+$color: #40CB90
+$on: 6px  //突起的高度
+$press: 1px //按下去的高度
+</pre>
+<pre>
+.btn
+  @extend %btn
+  border: 1px solid darken($color, 35%)
+  border-bottom: $on solid darken($color, 20%) 
+  //利用border-bottom的寬度，來表現突起的效果
+  margin: $press auto $on auto
+  //而margin是要調回border所造成的位移
+  +transition(all .5s)
+  &:hover
+    margin: $on auto 
+    border-bottom: $press solid darken($color, 15%)
+    //按下去後只有1px寬度的border，這樣就會有按下的視覺感
+    +box-shadow(0 0 1em darken($color, 15%) inset)
+    //增加一些內陰影的效果
+</pre>
+<p>而這樣在轉換時，會有些錯位的感覺，因為瀏覽器同時運算了margin和border的值。</p>
+
+<h2>利用box-shadow</h2>
+<p>box-shadow並不會占用實體的空間，如果不喜歡border的問題，可以試試看用box-shadow。</p>
+
+
+
+<div class="demo d1102">
+  <a href="#" class="demo2"> 深度按鈕</a>
+</div>
+<p>變數和剛剛一樣，只是border換成只有1px，按鈕的深度用box-shadow表現。</p>
+<pre>
+$color: #40CB90
+$on: 6px  //突起的高度
+$press: 1px //按下去的高度
+</pre>
+<pre>
+.btn
+  border: 1px solid darken($color, 15%)
+  border-bottom: 1px solid lighten($color, 5%)
+  //上面兩個border只是外觀用的
+  margin: $press auto $on auto
+  //margin 設定和剛剛相同，雖然box-shadow不會佔用空間，
+  //但在視覺上，上方的按鈕還是需要向下位移的感覺
+
+  +box-shadow(0 0 1em darken($color, 10%) inset,0 $on 0 darken($color, 25%))
+  //Y軸向下6px的深度陰影
+  +transition(all .5s)
+  &:hover
+    margin: $on auto $press auto
+    //margin用來做面向下壓的感覺
+    +box-shadow(0 0 1em darken($color, 25%) inset,0 $press 0 darken($color, 25%))
+    //Y軸向下6px改為向下為1px的陰影
+</pre>

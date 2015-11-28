@@ -1,0 +1,43 @@
+<div class="css">2013-winter</div>
+<p>http://ashareaday.wcc.tw/</p>
+<p>A share a day目測已經超過70天了，而其中有45天在IT幫度過。原本只是想說鐵人賽參加個三十天就好，在結束前隔壁棚寫sass的說他要寫45天，我也就繼續寫了下去...。</p>
+
+
+
+<h2>對於鐵人賽的建議</h2>
+<p>如果真的要說就是....編輯器換一下吧....，如果不方便讓人做Demo也讓人插個iframe，讓發文者可以在codepen等各種工具做好範例轉貼過來，這樣參賽者就不用拍片上傳了><。</p>
+
+<h2>技術要學到什麼程度</h2>
+<p>技術要學到什麼樣的程度才夠呢？對我來說應該是對技術"熱愛"到什麼程度，如果喜歡金庸小說，就不會只看天龍八部，而是整套看完，當然技術是不可能通通學完啦...。大約在三十天前，我打算以CSS為主力，全力衝刺CSS3的技術，但是到了最近，我發現許多更有趣的技術的實作方式(canvas、SVG等)，雖然還沒有開始，但在近期內應該就會出現在這網站上，所以要說是學到什麼程度，就是看自己熱愛到什麼程度。</p>
+
+<h2>學習技術要有開始</h2>
+<p>如果對於技術有了一點點興趣，就找機會投入吧！萬事起頭難，但是只要開始了就沒那麼困難了。只要每天學一點點、實作一點點效果一定大於一次學習。</p>
+<p><a href="http://jenniferdewalt.com/" target="_blank">http://jenniferdewalt.com/</a></p>
+<p>我是受到上面這個網站影響而製作A share a day，他的目標是要挑戰100天的不同網站，不需要說明什麼，就是每天一點點的做下去就可以，當時我是看到100天左右
+，而他現在已經完成180天了；從他的第一天開始看到最後的幾天，可以知道他技術進步的非常非常多。A share a day也是一樣，這當中讓我學會許多看的到的CSS技術，還有一般人看不到的技術(網站架構調整、SEO等等)...。</p>
+
+
+<h2>技術學習要適可而止</h2>
+<p>雖然很多技術是那麼的吸引人，或許每一項技術都很有趣也很有發展性，但有時也需要考慮現實面，畢竟每個人的時間是有限的，如果決定要往哪一個方向，就儘量學習那一個方向的技術，別隨意的跨領域學習，那將會消耗非常多的時間。</p>
+
+
+
+<h2>未完成的SEO</h2>
+<p>本網站一直有個不舒服的點，就是用ajax來切換頁面，這樣讓搜尋引擎搜尋不到內容，最近找到可能的解決方式(至少現在選單內容有被蒐尋到了...)，就是利用js的<code>pushState</code>。</p>
+<pre>
+//coffee script
+function = (evt)->
+  if(history.pushState)
+    state = 
+      title: $('title').html(),
+      url: location.href,
+      _other: other    
+    window.history.pushState(state, document.title, state.href)
+
+window.addEventListener('popstate',(evt) ->
+  if (history.state)
+    state = evt.state;
+    #do something(state.url, state.title);
+, false)
+</pre>
+<p>javascript不是我的強項，所以目前還在持續調整中...。</p>

@@ -1,0 +1,109 @@
+
+<p>git <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">http://git-scm.com/book/en/Getting-Started-Installing-Git</a></p>
+<p>安裝git <a href="http://git-scm.com/download">http://git-scm.com/download</a></p>
+
+
+
+
+<h2>本機</h2>
+
+<ol>
+	<li>創建git目錄</li>
+	<li>建立 _config.yml</li>
+	<li>_layouts</li>
+	<li>建立模板</li>
+</ol>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+　　&lt;meta http-equiv="content-type" content="text/html; charset=utf-8" /&gt;
+　　&lt;title&gt;{{ page.title }}&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+　　{{ content }}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Jekyll使用Liquid模板语言，{{ page.title }}表示文章标题，{{ content }}表示文章内容，更多模板变量请参考 <a href="https://github.com/mojombo/jekyll/wiki/Template-Data">官方文档</a>。</p>
+
+<ol>
+	<li>寫文章 html格式，后缀名为html；如果采用markdown格式，后缀名为md （注意，行首不能有空格）</li>
+</ol>
+<pre>
+每篇文章的头部，必须有一个yaml文件头，用来设置一些元数据。它用三根短划线"---"，标记开始和结束，里面每一行设置一种元数据。"layout:default"，表示该文章的模板使用_layouts目录下的default.html文件；"title: 你好，世界"，表示该文章的标题是"你好，世界"，如果不设置这个值，默认使用嵌入文件名的标题，即"hello world"。
+在yaml文件头后面，就是文章的正式内容，里面可以使用模板变量。{{ page.title }}就是文件头中设置的"你好，世界"，{{ page.date }}则是嵌入文件名的日期（也可以在文件头重新定义date变量），"| date_to_string"表示将page.date变量转化成人类可读的格式。
+</pre>
+Description
+<ol>
+	<li>創一個首頁 index.html</li>
+</ol>
+
+
+
+
+<h2>jekyll in Windows</h2>
+<p>ruby <a href="https://www.ruby-lang.org/zh_tw/">https://www.ruby-lang.org/zh_tw/</a></p>
+<pre>
+
+gem update --system
+</pre>
+http://www.cnblogs.com/yevon/p/3308158.html
+<pre>
+//ruby
+cd devkit
+ruby dk.rb init
+ruby dk.rb install
+gem install jekyll
+</pre>
+<pre>
+jekyll -v //查看版本
+
+$ jekyll serve
+</pre>
+
+<pre>
+E:\Ruby200\lib\ruby\gems\2.0.0\gems\jekyll-1.0.3\lib\jekyll 目錄下的convertible.rb
+原
+self.content = File.read_with_options(File.join(base, name),
+                                      merged_file_read_opts(opts))
+改為
+self.content = File.read(File.join(base, name),:encoding=>"utf-8")
+</pre>
+
+<pre>
+no such file or directory -/bin/sh ...錯誤
+gem install pygments.rb --version "=0.5.0"
+gem uninstall pygments.rb --version "=0.5.2"
+</pre>
+
+<pre>
+功能參考
+http://truongtx.me/tags.html#jekyll-ref
+</pre>
+
+<pre>
+(這是1.4.0的bug) <a href="https://github.com/jekyll/jekyll/issues/1794">critical bug </a>
+錯誤 undefined method `published'
+gem update jekyll
+
+更新到 jekyll 1.41
+
+然後
+\lib\ruby\gems\2.0.0\gems\jekyll-1.4.1\lib\jekyll 目錄下的convertible.rb
+一樣要將
+self.content = File.read_with_options(File.join(base, name),
+                                      merged_file_read_opts(opts))
+改為
+self.content = File.read(File.join(base, name),:encoding=>"utf-8")
+</pre>
+
+
+
+
+
+
+
+-------------------
+

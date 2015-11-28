@@ -1,0 +1,76 @@
+
+<p>canvas挺有趣的，之前就想試試看，而網路上也有相當多的library，但是在使用lib前還是先簡單了解一下canvas的運作吧。</p>
+<p>參考：<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial/Basic_usage">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial/Basic_usage</a></p>
+<h2>必要 Canvas元素</h2>
+<p>裡面的字當然是不必要的，只是瀏覽器不支援canvas的話就會顯示，而canvas標籤是繪製canvas必要的元素，和img元素不同，他必須要結尾的標籤。</p>
+<pre>
+&lt;canvas id="canvas" width="300" height="300"&gt;
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+&lt;/canvas&gt;
+</pre>
+
+
+<h2>必要 rendering context</h2>
+<p>這是指渲染的方式，而就我所參考的範例，將會用2D呈現，當然也是能夠有3D的渲染方式(看瀏覽器支援程度)。</p>
+<p>參考：<a href="http://www.w3school.com.cn/htmldom/met_canvas_getcontext.asp">http://www.w3school.com.cn/htmldom/met_canvas_getcontext.asp</a></p>
+<pre>
+var _canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+</pre>
+
+<h2>Canvas</h2>
+<p>接下來就可以利用js把canvas繪製入&lt;canvas&gt;內了。</p>
+<pre>
+ var _canvas = document.getElementById('canvas');
+  
+  if (_canvas.getContext) { //判斷是否支援
+    var ctx = canvas.getContext('2d');
+    //宣告ctx渲染方式
+
+    draw();
+    //執行draw function
+
+  }else {
+    alert('your browser not support canvas')
+    //如果不支援
+  };
+
+  function draw(){
+    //利用ctx開始繪製
+    ctx.fillStyle = "rgb(200,0,0)";
+    //fillStyle:定義用於繪畫的顏色填充模式
+
+    ctx.fillRect (10, 10, 55, 50);
+    //fillRect:繪製被填充的矩形
+
+    ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+    ctx.fillRect (30, 30, 55, 50);
+    //同上
+  }
+</pre>
+<script>
+  var _canvas = document.getElementById('canvas');
+  
+  if (_canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    draw();
+  }else {
+    alert('your browser not support canvas')
+  };
+
+  function draw(){
+    ctx.fillStyle = "rgb(200,0,0)";
+    ctx.fillRect (10, 10, 55, 50);
+
+    ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+    ctx.fillRect (30, 30, 55, 50);
+  }
+</script>
+<style>
+  canvas{
+    border: 1px rgba(255,255,255,.5) solid;
+  }
+</style>
+<canvas id="canvas" width="300" height="300">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>

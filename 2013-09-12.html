@@ -1,0 +1,69 @@
+<div class="css">2013-summer</div>
+<p>CSS3 新的文字單位</p>
+<p>大多數網站在文字的單位都是使用<code>px</code>，尤其在台灣多數使用者都是用windows系統，不管是什麼瀏覽器，在windows下都是以單數px是較為清楚的，如13xp．15px等，而px在建立網站時也是較為方便及準確的，但他的彈性是比較差的。</p>
+<div class="demo d0912">
+	<div class="f12px">font-size:12px</div>
+	<div class="f13px">font-size:13px</div>
+	<div class="f14px">font-size:14px</div>		
+	<div class="f15px">font-size:15px</div>		
+</div>
+<p>彈性差的部分就來做一個實驗，就是將他們的外層在增加一個放大的文字屬性。</p>
+<div class="demo d0912">
+<div class="fLarge">font-size: large
+	<div class="f12px">font-size:12px</div>
+	<div class="f13px">font-size:13px</div>
+	<div class="f14px">font-size:14px</div>		
+	<div class="f15px">font-size:15px</div>	</div>	
+</div>
+<h2>EM</h2>
+<p>而用另一個文字單位<code>em</code>，em隨著外圍的文字大小調整，當然這是他的優點，也是他的缺點。</p>
+<em>本站預設為13px。</em>
+<div class="demo d0912">
+	<div class="f1em">font-size:1.1em</div>
+	<div class="f2em">font-size:1.2em</div>
+	<div class="f3em">font-size:1.3em</div>		
+	<div class="f4em">font-size:1.4em</div>		
+</div>
+<p>我們可以調整外圍的<code>font-size</code>，就可以影響到內部的文字大小，但是要注意，如果外層也有設定<code>em</code>他也會繼承下去(GG)。</p>
+<div class="demo d0912">
+	<div class="f15px">font-size: 15px
+	<div class="f1em">font-size:1.1em</div>
+	<div class="f2em">font-size:1.2em</div>
+	<div class="f3em">font-size:1.3em</div>		
+	<div class="f4em">font-size:1.4em</div>
+	</div>	
+	<div class="f4em">font-size: 1.4em
+	<div class="f1em">font-size:1.1em</div>
+	<div class="f2em">font-size:1.2em</div>
+	<div class="f3em">font-size:1.3em</div>		
+	<div class="f4em">font-size:1.4em</div>
+	<div class="f4em">font-size: 1.4em
+	<div class="f1em">font-size:1.1em</div>
+	<div class="f2em">font-size:1.2em</div>
+	<div class="f3em">font-size:1.3em</div>		
+	<div class="f4em">font-size:1.4em</div>
+	</div>	
+	</div>				
+</div>
+
+<p>由上面的範例可得知，一不小心還是會失控的。</p>
+<h2>REM</h2>
+<p><code>rem</code>是新的文字單位，他和em用法類似，但是他不會繼承，只會受最根部的單位影響，html的font-size(優點是ie需要9以上才支援)。</p>
+<div class="demo d0912">
+<div class="f4em">font-size: 1.4em
+	<div class="f1rem">font-size:1.1rem</div>
+	<div class="f2rem">font-size:1.2rem</div>
+	<div class="f3rem">font-size:1.3rem</div>		
+	<div class="f4rem">font-size:1.4rem</div></div>
+	<div><div class="f1em">font-size:1.1em</div>
+	<div class="f2em">font-size:1.2em</div>
+	<div class="f3em">font-size:1.3em</div>		
+	<div class="f4em">font-size:1.4em</div>	</div>		
+</div>
+<p>注意在使用時，它只會受html的font-size影響，body以下的都不會影響。</p>
+
+
+
+
+
+

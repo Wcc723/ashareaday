@@ -1,0 +1,69 @@
+<p>大家都是用mac啦....，其實Toshiba也是很可愛的。</p>
+<p>Compass and Sass已經會了，如果是說能夠學會<code>.erb</code>等，今天就算划算(最可惜的是今天怎不是和多本人!?)。</p>
+<img src="images/20130817.jpg" alt="">
+<h3>1.<code>.erb</code> code介紹</h3>
+<p><code>.erb</code>的好處就是相容html，所以容易上手，配合<code>ruby</code>語法快速產生版型</p>
+<pre>
+<%= lorem_sentence %>
+//英文假字
+<%= zh_lorem_sentence %>
+//一段假字 如果有"zh_"就是中文
+
+<% 5.times do %>
+<% end %>
+//重複5次
+
+<% (4+rand(4) %>
+//數字4加隨機4
+
+<%= zh_lorem_words(4+rand(4)) %>
+//產生中文假字 且基本4字加上隨機4字
+
+<%= lorem_image("640x360") %>
+//假image 真的很假
+</pre>
+<p>看了以上簡單的範例，可以確定<code>.erb</code>可以稱為標案高手!?</p>
+
+<h3>2.<code>.erb</code> Template介紹 <small>Bug技能</small></h3>
+<ol class="ollist">
+	<li>建立_layout.html.erb</li>
+	<li>要作為content的區域 輸入 <code><%= yield %></code></li>
+	<li>作為content的檔案，直接就會被匯入，不需要輸入什麼雜七雜八的</li>
+</ol>
+
+<h3>3.<code>.erb</code> partial介紹 <small>Bug技能2</small></h3>
+<p>一個主板不夠用的時候就可以用partial，類似<code>php</code>的<code>include</code>。</p>
+<ol class="ollist">
+	<li>建立要作為partial的檔案，檔名為<code>_XXX.html.erb</code></li>
+	<li>需要外部載入的區域輸入<code><%= render :partial => "head" %></code></li>
+</ol>
+
+<h3>4.<code>.erb</code> 例外Template介紹 </h3>
+<ol class="ollist">
+	<li>建立_sp_layout.html，(這是一個template)</li>
+	<li>建立index.html.layout，內容輸入<code>_sp_layout.html.erb</code>，用這來作為例外檔案的索引</li>
+	<li>index.html.erb將會依據相對應的.layout，來使用例外版來套版。</li>
+</ol>
+
+<h3>5. 利用if 來進行某頁才能顯示 某資料... </h3>
+<p>_layout.html.erb 中...</p>
+<pre>
+<% if content_for? :sp_ad %>
+<%= yield :sp_ad %>
+<% else %>
+   如果沒有符合條件，就會用這段內容。
+<% end %>
+//如果content_for == :sp_ad 就會載入
+</pre>
+<p>page.html.erb 中...</p>
+<pre>
+<% content_for :sp_ad do %>
+  現在content_for就是 :sp_ad，所以請載入
+<% end %>
+//利用這判斷方法，來進行部分頁面載入例外內容
+</pre>
+
+
+<h3>6. Sass 介紹 顏色控制~</h3>
+<a href="http://sassme.arc90.com/">http://sassme.arc90.com/</a>
+<p>恩... 先這樣結束了</p>

@@ -1,0 +1,50 @@
+<div class="css">2013-winter</div>
+
+<p>CSS的Animation分為兩個部分，一個是決定動畫該如何跑的Keyframe，另一個是將動畫載入元素的Animation。簡單來說，就是先製作一個keyframe來決定動畫的影格動作，在將動作載入元素，而這兩個都是必要的。</p>
+
+<h2>Keyframe</h2> 
+<p>目前的keyframe的前輟詞都是必須的，如果不想打前輟詞請參考上一章節animation的<code>mixin</code>。</p>
+<p>Keyframe在設定上也很容易，我們直接看下面的demo就可以了。</p>
+<h3>keyframe設定</h3>
+<pre>
+//sass code
+//我們製作兩款keyframe樣式，一款是from to，另一款就是百分比。
+//這一款from to 其實就是0%~100%的意思
++keyframes(ifinityCircles)
+  from
+    +transform(rotate(0))
+    //不管事百分比或是from to，都可以直接在這邊設定每個階段的動作
+  to
+    +transform(rotate(360deg))
+
+//如果另外設定百分比，就可以設定更細節的設定
++keyframes(ifinityCircles2)
+  0%
+    +transform(rotate(0))
+  50%
+    +transform(translateX(-100%) rotate(180deg))
+  100%
+    +transform(translateX(100%) rotate(360deg))
+</pre>
+<h3>元素的animation設定</h3>
+<pre>
+.box
+  +animation(ifinityCircles 3s infinite linear)
+  //這邊可以就可以直接引用剛剛的keyframe
+  //ifinityCircles : keyframe自訂義名稱
+  //3s : 持續時間
+  //infinite : 反覆次數(無限)
+  //linear : 動畫曲線(速率一致就對了)
+</pre>
+<div class="d1017 demo">
+  <div class="box"></div>
+</div>
+<pre>
+.box1
+  +animation(ifinityCircles2 3s infinite linear alternate)
+  //alternate : 動畫在結束時，會反轉回去
+</pre>
+
+<div class="d1017 demo">
+  <div class="box1"></div>
+</div>

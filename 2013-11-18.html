@@ -1,0 +1,47 @@
+
+<p>今天原本是要做圖片上傳轉canvas，在實驗的過程中發現與html5 file api有很大的關聯，雖然不會存取到資料庫，但在解析的過程中就讓我搞不清楚了...。</p>
+
+<p>參考：<a href="http://www.dotblogs.com.tw/regionbbs/archive/2012/06/28/html5.file.api.aspx">http://www.dotblogs.com.tw/regionbbs/archive/2012/06/28/html5.file.api.aspx</a></p>
+<h2>File Api</h2>
+<p>範例請麻煩點最下面那一個藍色的input，可以嘗試多個檔案。</p>
+<pre>
+$("#file").on("change", function (event) {
+  //在上傳的input有改變時，就執行以下方訊
+  
+  if (event.target.files.length > 0) {//如果有檔案，就開始吧
+    for (var i = 0; i &lt; event.target.files.length; i++) {
+      //input的multiple="multiple" 可以將檔案多重上傳，這邊可以同時解析大量的檔案  
+      var file = event.target.files[i];
+      $(".filesList").find('ul').append('&lt;li&gt;檔案名稱：'+ file.name +'&lt;/br&gt;檔案大小：'+ file.size + '&lt;/br&gt;檔案類型：'+ file.type +'&lt;/br&gt;最後修改時間：'+ file.lastModifiedDate +'&lt;/li&gt;');
+      //將檔案的資訊顯示出來
+    };     
+  }else {
+     $(".filesList").find('ul').empty();
+     //沒有就清空
+  };  
+});
+</pre>
+<p>input如果設定了 multiple="multiple"就可以一次上傳大量檔案。</p>
+<pre>&lt;input id="file" type="file" multiple="multiple" class="color-btn-blue"&gt;</pre>
+<script>
+$("#file").on("change", function (event) {
+  //在上傳的input有改變時，就執行以下方訊
+  
+  if (event.target.files.length > 0) {//如果有檔案，就開始吧
+    for (var i = 0; i < event.target.files.length; i++) {
+      //input的multiple="multiple" 可以將檔案多重上傳，這邊可以同時解析大量的檔案  
+      var file = event.target.files[i];
+      $(".filesList").find('ul').append('<li>檔案名稱：'+ file.name +'</br>檔案大小：'+ file.size + '</br>檔案類型：'+ file.type +'</br>最後修改時間：'+ file.lastModifiedDate +'</li>');
+      //將檔案的資訊顯示出來
+    };     
+  }else {
+     $(".filesList").find('ul').empty();
+  };  
+});
+
+</script>
+<input id="file" type="file" multiple="multiple" class="color-btn-blue">
+<br>
+<div class="filesList">
+  <ul class="ollist"></ul>
+</div>

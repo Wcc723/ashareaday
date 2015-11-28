@@ -1,0 +1,100 @@
+<div class="css">2013-summer</div>
+<p>box-shadow類似紙的陰影</p>
+<pre>Demo</pre>
+<p>大家應該都有注意到，在本站<code>pre</code>標籤的下方，有一個左右對稱的陰影，這樣的陰影，很類似紙張在桌面上，略為翹起所形成，本篇就要介紹如何使用box-shadow及偽元素所製作的陰影。</p>
+
+<h3>直接看<code>Div</code>下面的構造</h3>
+<div class="d0905 test1">
+	
+</div>
+<p>陰影上方的顏色打淡後，其實可以看到下方是左右兩片長方形，旋轉之後再增加陰影；而左右兩側的長方形，正是利用偽元素所繪製的。</p>
+<p>接下來就來一步一步製作陰影吧。</p>
+<h4>1.先來個偽元素</h4>
+<div class="d0905 test2">
+	
+</div>
+<pre>
+div
+	padding: 10px
+	min-height: 1em
+	background: rgba(rgba(00,00,00,0.2)
+	margin-bottom: 10px
+	//這個部分是教學用的屬性，並不是必要屬性
+	position: relative
+	//而稍後會用absolute定位
+	&:after
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 20%
+		//這個部份產生一個偽元素，並且放置接近下方的位置
+		//這邊需要注意目前的偽元素在標籤的"前面"
+</pre>
+<h4>2.調整偽元素</h4>
+<div class="d0905 test3">
+	
+</div>
+<pre>
+div
+	&:after
+		z-index: -1 //移動到標籤的後方
+		right: 5px //靠右
+		left: auto
+		+rotate(2deg) //旋轉一點點
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+		//增加陰影
+</pre>
+<h4>3.標籤調整顏色測試</h4>
+<div class="d0905 test4">
+	這個步驟已經接近完成了，只需要再增加另一邊即可。
+</div>
+<h4>4.完成</h4>
+<pre></pre>
+<pre>
+div
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 20%
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+	//最後完成時，我們可以把共通屬性寫在一起，避免過多的程式碼
+</pre>
+<h3>送一個@mixin</h3>
+<p>這樣的效果，完成後也不要浪費，做成<code>@mixin</code>，之後想要就抓出來用。</p>
+<pre>
+@mixin paperShadow()
+	position: relative
+	display: block
+	&:after,&:before
+		content: ""
+		position: absolute
+		background: rgba(00,00,00,0.2)
+		opacity: 0.9
+		bottom: 6px
+		width: 50%
+		height: 20%
+		z-index: -1
+		+box-shadow(rgba(00,00,00,0.6) 0 0 15px)
+	&:after
+		right: 5px
+		left: auto
+		+rotate(2deg)
+	&:before
+		left: 5px
+		+rotate(-2deg)
+</pre>

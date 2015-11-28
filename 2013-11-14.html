@@ -1,0 +1,116 @@
+<div class="css">2013-winter</div>
+<p>利用上次的反轉顏色，再加入一些控制元素，就可以做出類似photoshop的影像調整工具(簡易版...)，說實在還挺有趣的。</p>
+
+<h2>調整顏色</h2>
+<p>首先，先新增三個input將type設定為range，min值爲0，max值爲255，這樣就能做出RGB的控制條。</p>
+<style>
+  input[type='range']{
+    width: 50%;
+  }
+</style>
+<pre>
+&lt;div class="color"&gt;
+    R&lt;input id="colorR" type="range" name="points" min="0" max="255" value="255"&gt;&lt;br&gt;
+    G&lt;input id="colorG" type="range" name="points" min="0" max="255" value="0"&gt;&lt;br&gt;
+    B&lt;input id="colorB" type="range" name="points" min="0" max="255" value="0"&gt;
+&lt;/div&gt; 
+</pre>
+<div class="color">
+R<input id="colorR" type="range" name="points" min="0" max="255" value="255"><br>
+G<input id="colorG" type="range" name="points" min="0" max="255" value="0"><br>
+B<input id="colorB" type="range" name="points" min="0" max="255" value="0">
+</div>
+<script>
+  var _canvas = document.getElementById('canvas');
+  var ctx = _canvas.getContext('2d');
+  var _colorR = $('#colorR').val();
+  var _colorG = $('#colorG').val();
+  var _colorB = $('#colorB').val();
+  var x = 0;
+  var y = 0;
+
+  var img = new Image();
+  img.onload = function(){   
+    ctx.canvas.width = img.width
+    ctx.canvas.height = img.height    
+    draw(this,0,0);
+  };
+  img.src = 'images/2013-winter/cd2.jpg';
+
+  $('.color').on('change','input',function(){
+    _colorR = $('#colorR').val()
+    _colorG = $('#colorG').val()
+    _colorB = $('#colorB').val()
+    imgObj = img;
+    draw(imgObj);
+  });
+
+  function draw(imgObj,w,h){  
+    ctx.drawImage(imgObj,x,y);  
+    var imgData = ctx.getImageData(x, y, imgObj.width, imgObj.height);
+    var data = imgData.data;
+    for(var i = 0; i < data.length; i += 4) {
+      // red
+      data[i] = _colorR - (255 - data[i]);
+      // green
+      data[i + 1] = _colorG - (255 - data[i + 1]);
+      // blue
+      data[i + 2] = _colorB - (255 -data[i + 2]);
+    }
+    ctx.putImageData(imgData,0,0)
+  }
+
+</script>
+
+<canvas id="canvas" width="30" height="30">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+<p>
+  
+</p>
+<pre>
+  var _canvas = document.getElementById('canvas');
+  var ctx = _canvas.getContext('2d');
+  var _colorR = $('#colorR').val();
+  var _colorG = $('#colorG').val();
+  var _colorB = $('#colorB').val();
+  var x = 0;
+  var y = 0;
+
+  var img = new Image();
+  img.onload = function(){   
+    ctx.canvas.width = img.width
+    ctx.canvas.height = img.height    
+    draw(this,0,0);
+  };
+  img.src = 'images/2013-winter/cd2.jpg';
+  //以上和上次接近，只是將幾個不太會改變的變數改成全域變數
+
+  $('.color').on('change','input',function(){
+  //多一個on change的function，去監控這次加入的input
+  //只要他改變，就會執行這個function
+
+    _colorR = $('#colorR').val()
+    _colorG = $('#colorG').val()
+    _colorB = $('#colorB').val()
+    //重新取得input的 RGB的值
+    imgObj = img;
+    draw(imgObj);
+  });
+
+  function draw(imgObj,w,h){  
+    ctx.drawImage(imgObj,x,y);  
+    var imgData = ctx.getImageData(x, y, imgObj.width, imgObj.height);    
+    var data = imgData.data;
+    for(var i = 0; i < data.length; i += 4) {
+      // 這邊以下將會套用新的RGB色彩
+      // red
+      data[i] = _colorR - (255 - data[i]);
+      // green
+      data[i + 1] = _colorG - (255 - data[i + 1]);
+      // blue
+      data[i + 2] = _colorB - (255 -data[i + 2]);
+    }
+    ctx.putImageData(imgData,0,0)
+  }
+</pre>
